@@ -6,7 +6,7 @@ import {WpConfig} from "./config.service";
 import {WpHelper} from "./helper.service";
 
 /*
- * WpCollection Service
+ * WpCollection Service: Get collection from WP API
  */
 
 @Injectable()

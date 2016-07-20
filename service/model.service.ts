@@ -5,6 +5,10 @@ import {Observable} from "rxjs/Observable";
 import {WpConfig} from "./config.service";
 import {WpHelper} from "./helper.service";
 
+/*
+ * WpModel Service: Get/Add/Update/Delete single from WP API
+ */
+
 @Injectable()
 export class WpModel {
 

@@ -5,6 +5,7 @@ import {WpConfig} from './config.service';
 /*
  *    Common functions for WordPress service.
  */
+
 export module WpHelper {
 
   /** default endpoints */

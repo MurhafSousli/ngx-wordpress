@@ -14,11 +14,11 @@ export interface IPost {
   ping_status:boolean;
   sticky:boolean;
   format:string;
-  title;
-  content;
-  excerpt;
-  author;
-  _embedded;
+  title:any;
+  content:any;
+  excerpt:any;
+  author:any;
+  _embedded:any;
 }
 
 export class Post {
