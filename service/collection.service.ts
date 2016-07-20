@@ -12,16 +12,16 @@ import {WpHelper} from "./helper.service";
 @Injectable()
 export class WpCollection {
 
+  /** collection pagination properties */
+  public currentPage:number = 1;
+  public totalPages:number = 1;
+  public totalObjects:number = 0;
+  
   /** WP query args */
   private args:any;
 
   /** The final request URL */
   private actionUrl:string;
-
-  /** collection pagination properties */
-  public currentPage:number = 1;
-  public totalPages:number = 1;
-  public totalObjects:number = 0;
 
   constructor(private http:Http, private config:WpConfig) {
   }
@@ -65,7 +65,9 @@ export class WpCollection {
    */
 
   private fetch():Observable<any>{
-    return this.http.get(WpHelper.generateUrl(this.actionUrl, this.args)).map(
+    let url = WpHelper.generateUrl(this.actionUrl, this.args);
+    let h =  WpHelper.getHeaders(this.config);
+    return this.http.get(url, {headers: h}).map(
       res => {
         /** set totalObject and totalPages from response's headers */ 
         this.totalObjects = +res.headers.get('X-WP-Total');

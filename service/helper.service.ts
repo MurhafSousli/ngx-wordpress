@@ -33,18 +33,16 @@ export module WpHelper {
     return headers;
   }
 
-
-
-  /** WP generate URL functions */
-  export function generateUrl(baseURL: string, args:any):string {
+  /** generateUrl: generate URL for argument parameters */
+  export function generateUrl(actionUrl: string, args:any):string {
     if (args) {
-      //add args to baseURL
-      baseURL += '?' + serialize(args);
-      //assign currentPage to args.page otherwise to 1
+      /** add args to actionUrl */
+      actionUrl += '?' + serialize(args);
+      /** assign currentPage to args.page otherwise to 1 */
       this.currentPage = (args.page) ? +args.page : 1;
     }
-    console.log('[WPService]: ' + baseURL);
-    return baseURL;
+    console.log('[WPService]: ' + actionUrl);
+    return actionUrl;
   }
 
   /** serialize: serialize wp query args object */
