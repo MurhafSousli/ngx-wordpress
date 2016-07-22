@@ -1,12 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, Response} from '@angular/http';
 import {Observable} from "rxjs/Observable";
 
 import {WpConfig} from "./config.service";
 import {WpHelper} from "./helper.service";
 
-import 'core-js/es6/promise';
-import 'core-js/es6/map';
 /*
  * WpCollection Service: Get collection from WP API
  */
@@ -37,7 +35,7 @@ export class WpCollection {
    * get() : get collection
    */
 
-  public get(args?:any):Observable<any> {
+  public get(args?:any):Observable<Response>  {
     this.args = args;
     return this.fetch();
   }
@@ -46,7 +44,7 @@ export class WpCollection {
    * more() : get the next page if available
    */
 
-  public more():Observable<any> {
+  public more():Observable<Response>  {
     if (this.hasMore()) {
       /** increment currentPage then set page argument */
       this.args.page = ++this.currentPage;
@@ -66,7 +64,7 @@ export class WpCollection {
    * fetch() : request the final url
    */
 
-  private fetch():Observable<any>{
+  private fetch():Observable<Response> {
     let url = WpHelper.generateUrl(this.actionUrl, this.args);
     let h =  WpHelper.getHeaders(this.config);
     return this.http.get(url, {headers: h}).map(

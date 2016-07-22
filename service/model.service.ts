@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, Response} from '@angular/http';
 import {Observable} from "rxjs/Observable";
 
 import {WpConfig} from "./config.service";
 import {WpHelper} from "./helper.service";
-import 'core-js/es6/map';
 
 /*
  * WpModel Service: Get/Add/Update/Delete single from WP API
@@ -24,22 +23,22 @@ export class WpModel {
     this.actionUrl = this.config.baseUrl + endpoint;
   }
 
-  public get = (id:number):Observable<any>  => {
+  public get = (id:number):Observable<Response>  => {
     let h = WpHelper.getHeaders(this.config);
     return this.http.get(this.actionUrl + id, {headers: h}).map(res => res.json());
   }
 
-  public add = (body):Observable<any>  => {
+  public add = (body):Observable<Response>  => {
     let h = WpHelper.getHeaders(this.config);
     return this.http.post(this.actionUrl, body, {headers: h}).map(res =>  res.json());
   }
 
-  public update = (id:number, body):Observable<any>  => {
+  public update = (id:number, body):Observable<Response>  => {
     let h = WpHelper.getHeaders(this.config);
     return this.http.put(this.actionUrl + id, body, {headers: h}).map(res => res.json());
   }
 
-  public delete = (id:number):Observable<any>  => {
+  public delete = (id:number):Observable<Response>  => {
     let h = WpHelper.getHeaders(this.config);
     return this.http.delete(this.actionUrl + id + "?force=true", {headers: h});
   }
