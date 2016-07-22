@@ -52,9 +52,14 @@ export class App {
 
 Now the `baseUrl` is set in `WpConfig`, we can use the services `WpModel`, `WpCollection` in any component, However contrary to what we did with `WpConfig`, Every component uses WordPress service (`WpModel` and `WpCollection`) must has its own instance of the service, therefore we must inject the service within each component uses the service.
 
-Before requesting any data from the service, we must choose the endpoint, set it using `service.SetEndpoint()` and pass it as a string or using `WpHelper.Endpoint` 
+Before requesting any data from the service, we must choose the endpoint, set it using `service.SetEndpoint($endpoint)` and pass it as a string or using `WpHelper.Endpoint` 
 
 #### Getting Single Example
+
+The following example demonstrates how to get a single post by id, this applies on other endpoints as well (pages, categories, tags, media, ... etc)
+We set the QueryArgs embed to true, to display the post featured image using the function `post.featuredImageUrl($size)`
+
+*PS: when embed is set to true, you will get featured image, categories, tags and author with the response.*
 
 ```
 import {WpModel, WpHelper, Post, QueryArgs} from "ng2-wp-api/ng2-wp-api";
@@ -112,6 +117,9 @@ export class TestSingle {
 ```
 
 #### Getting Collection Example
+
+In the following example, we fetch a collection of posts from WP API, then displays it with a "Load more" button to load the next available page.
+we also set the QueryArgs for the request to get embedded posts and filter the results to 6 posts per page
 
 ```
 import {WpCollection, WpHelper, QueryArgs} from 'ng2-wp-api/ng2-wp-api';
@@ -178,7 +186,7 @@ export class TestSingle {
 
 ## Authentication
 
-To use Add/Update/Delete functions, user must be authenticated. Encode and store the user credentials using `WpConfig.setAuthKeys`.
+To use Add/Update/Delete functions, user must be authenticated. Encode and store the user credentials using `WpConfig.setAuthKeys($username, $password)`.
 This will add the user credentials to the headers of any request.
 
 ```
@@ -199,11 +207,11 @@ export class App {
 }
 ```
 
-##Issues
+## Issues
 
 If you identify any errors in this service, or have an idea for an improvement, please open an [issue](https://github.com/MurhafSousli/ng2-wp-api/issues). I am excited to see what the community thinks of this project, andIwe would love your input!
 
-##License
+## License
 
 [MIT](/LICENSE)
 
