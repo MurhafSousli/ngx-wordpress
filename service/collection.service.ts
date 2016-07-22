@@ -27,7 +27,7 @@ export class WpCollection {
   }
 
   /** must be set before making a request */
-  public setEndpoint(endpoint:string) {
+  public setEndpoint = (endpoint:string | WpHelper.Endpoint):void => {
     this.actionUrl = this.config.baseUrl + endpoint;
   }
 
@@ -35,7 +35,7 @@ export class WpCollection {
    * get() : get collection
    */
 
-  public get(args?:any):Observable<Response>  {
+  public get = (args?:any):Observable<Response> => {
     this.args = args;
     return this.fetch();
   }
@@ -44,7 +44,7 @@ export class WpCollection {
    * more() : get the next page if available
    */
 
-  public more():Observable<Response>  {
+  public more = ():Observable<Response> => {
     if (this.hasMore()) {
       /** increment currentPage then set page argument */
       this.args.page = ++this.currentPage;
@@ -56,7 +56,7 @@ export class WpCollection {
    *  hasMore() : check if the next page available
    */
 
-  public hasMore():boolean {
+  public hasMore = ():boolean => {
     return this.currentPage < this.totalPages;
   }
 
@@ -64,7 +64,7 @@ export class WpCollection {
    * fetch() : request the final url
    */
 
-  private fetch():Observable<Response> {
+  private fetch = ():Observable<Response> => {
     let url = WpHelper.generateUrl(this.actionUrl, this.args);
     let h =  WpHelper.getHeaders(this.config);
     return this.http.get(url, {headers: h}).map(

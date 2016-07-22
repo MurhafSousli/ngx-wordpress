@@ -25,42 +25,51 @@ export class Post {
 
   constructor(public post) {
   }
-  id(){
-    return this.post.id;
-  }
-  title() {
-    return this.post.title.rendered;
+
+  id():string{
+    if(this.post.id) return this.post.id;
   }
 
-  content() {
-    return this.post.content.rendered;
+  title():string {
+    if(this.post.title) return this.post.title.rendered;
   }
-  date(){
-    return this.post.date;
+
+  content():string {
+    if(this.post.content) return this.post.content.rendered;
   }
-  categories() {
+
+  date():string{
+    if(this.post.date) return this.post.date;
+  }
+
+  categories():any {
     if (this.post._embedded && this.post._embedded['wp:term'][0])
       return this.post._embedded['wp:term'][0];
   }
 
-  tags() {
+  tags():any {
     if (this.post._embedded && this.post._embedded['wp:term'][1])
       return this.post._embedded['wp:term'][1];
   }
 
   excerpt():string {
-    return this.post.excerpt.rendered;
+    if(this.post.excerpt) return this.post.excerpt.rendered;
   }
 
   author():User {
-    return <User>this.post._embedded.author;
+    if(this.post._embedded)  return <User>this.post._embedded.author;
   }
 
-  featuredMedia() {
-    return +this.post.featured_media;
+  /** featuredMedia(): check if has featured image, return false | number */
+  featuredMedia():boolean | number {
+    if(this.post.featured_media)  return +this.post.featured_media;
   }
 
-  featuredImageUrl(size) {
+  /**
+   * get post featured image url
+   * @params {string} size - 
+   */
+  featuredImageUrl(size:string):string {
     if (this.featuredMedia() && this.post._embedded) {
 
       var featuredImage = this.post._embedded['wp:featuredmedia'][0];
@@ -69,19 +78,13 @@ export class Post {
           return featuredImage.media_details.sizes[size].source_url;
         }
         else {
-          return featuredImage.media_details.sizes[thumbnailSize.Full].source_url;
+          /** if the desired size was not found, return the full size */
+          return featuredImage.media_details.sizes["full"].source_url;
         }
       }
     }
   }
 
-}
-
-export enum thumbnailSize{
-  Large = <any>"large",
-  Medium = <any>"medium",
-  Small = <any> "small",
-  Full = <any>'full'
 }
 
 interface thumbnail {

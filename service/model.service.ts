@@ -19,21 +19,22 @@ export class WpModel {
   }
 
   /** must be set before making a request */
-  public setEndpoint(endpoint:string) {
+  public setEndpoint = (endpoint:string | WpHelper.Endpoint):void => {
     this.actionUrl = this.config.baseUrl + endpoint;
   }
 
-  public get = (id:number):Observable<Response>  => {
+  public get = (id, args?):Observable<Response> => {
+    let url = WpHelper.generateUrl(this.actionUrl + id, args);
     let h = WpHelper.getHeaders(this.config);
-    return this.http.get(this.actionUrl + id, {headers: h}).map(res => res.json());
+    return this.http.get(url, {headers: h}).map(res => res.json());
   }
 
-  public add = (body):Observable<Response>  => {
+  public add = (body):Observable<Response> => {
     let h = WpHelper.getHeaders(this.config);
     return this.http.post(this.actionUrl, body, {headers: h}).map(res =>  res.json());
   }
 
-  public update = (id:number, body):Observable<Response>  => {
+  public update = (id:number, body):Observable<Response> => {
     let h = WpHelper.getHeaders(this.config);
     return this.http.put(this.actionUrl + id, body, {headers: h}).map(res => res.json());
   }

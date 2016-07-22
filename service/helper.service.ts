@@ -10,17 +10,16 @@ export module WpHelper {
 
   /** default endpoints */
   export enum Endpoint{
-    Posts = <any>'/wp/v2/posts/',
-    Users = <any> '/wp/v2/users/',
-    Categories = <any>'/wp/v2/categories/',
-    Tags = <any>'wp/v2/tags',
-    Pages = <any>'/wp/v2/pages/',
-    Comments = <any>'/wp/v2/comments/',
-    Media = <any>'/wp/v2/media/',
-    Statuses = <any>'/wp/v2/statuses/',
-    Taxonomies = <any>'/wp/v2/taxonomies/',
-    Types = <any>'/wp/v2/types/',
-    Authentication = <any>'/jwt-auth/v1/token/'
+    Posts = <any>'/wp-json/wp/v2/posts/',
+    Users = <any> '/wp-json/wp/v2/users/',
+    Categories = <any>'/wp-json/wp/v2/categories/',
+    Tags = <any>'/wp-json/wp/v2/tags',
+    Pages = <any>'/wp-json/wp/v2/pages/',
+    Comments = <any>'/wp-json/wp/v2/comments/',
+    Media = <any>'/wp-json/wp/v2/media/',
+    Statuses = <any>'/wp-json/wp/v2/statuses/',
+    Taxonomies = <any>'/wp-json/wp/v2/taxonomies/',
+    Types = <any>'/wp-json/wp/v2/types/'
   }
 
   /** getHeaders() : returns headers for user authentication */
