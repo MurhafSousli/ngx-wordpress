@@ -5,4 +5,4 @@ node_js:
   - "5.11"
   - "0.6"
   - "iojs"
-script: prepublish
+script: npm run prepublish

@@ -1,8 +1,6 @@
 # Angular2 WordPress API Service
 
-[![npm version](https://badge.fury.io/js/ng2-wp-api.svg)](https://badge.fury.io/js/ng2-wp-api)
-
-[![Build Status](https://travis-ci.org/MurhafSousli/ng2-wp-api.svg?branch=master)](https://travis-ci.org/MurhafSousli/ng2-wp-api)
+[![npm version](https://badge.fury.io/js/ng2-wp-api.svg)](https://badge.fury.io/js/ng2-wp-api) [![Build Status](https://travis-ci.org/MurhafSousli/ng2-wp-api.svg?branch=master)](https://travis-ci.org/MurhafSousli/ng2-wp-api)
 
 ![Alt text](/assets/logo.png?raw=true "Optional Title")
 
@@ -10,17 +8,13 @@
 
 This library is designed to make it easy for your Angular2 application to request specific resources from a WordPress install. it returns the API server's response to your application as an `Observable<Response>` object.
 
-## Getting Started
-
-
-
 ## Requirments
 
 Wordpress site and WP API v2 plugin activated.
 
 ## Installing
 
-Install with npm
+Install it with npm
 
 `npm install ng2-wp-api --save`
 
@@ -28,14 +22,11 @@ Install with npm
 
 ### Configuration
 
-First of all, we will set our WordPress configuration using the service `WpConfig`
-
-`WpConfig` will hold the target address, we will only set it once in the root component.
+First of all, we must set our WordPress configuration using the class (service) `WpConfig` which holds the target address, set it only once within the root component.
 
 `WpConfig.baseUrl = 'YourWordPressBaseUrl' `
 
-
-Inject `WORDPRESS_PROVIDERS` in the root component provider or directly in bootstrap.
+Inject `WORDPRESS_PROVIDERS` in the root component provider or directly in bootstrap, because we only want one global instance of `WpConfig`.
 
 #### Setup WordPress Configuration Example:
 
@@ -52,14 +43,16 @@ import {WORDPRESS_PROVIDERS, WpConfig} from "ng2-wp-api/ng2-wp-api";
 export class App {
 
     constructor(wpConfig: WpConfig){
-        wpConfig.baseUrl = " http://example.com";
+        wpConfig.baseUrl = "http://example.com";
     }
 }
 ```
 
-### 2 - Use the service in your component
+### Using the service in your component
 
-Now after the baseUrl is sat in WpConfig, we can use the services `WpModel`, `WpCollection` in any component
+Now the `baseUrl` is set in `WpConfig`, we can use the services `WpModel`, `WpCollection` in any component, However contrary to what we did with `WpConfig`, Every component uses WordPress service (`WpModel` and `WpCollection`) must has its own instance of the service, therefore we must inject the service within the component provider.
+
+We have to tell the service which endpoint we want to use before requesting the data, you can set the endpoint using `service.SetEndpoint()` and pass it as a string or using `WpHelper.Endpoint` 
 
 #### Getting Single Example
 
@@ -183,12 +176,13 @@ export class TestSingle {
 }
 ```
 
+## Authentication
 
-To use Add/Update/Delete functions, encode and store user credentials in `WpConfig.authKeys` using the `encodeKeys()` function in `WpHelper`.
+To use Add/Update/Delete functions, user must be authenticated. Encode and store the user credentials using `WpConfig.setAuthKeys`.
 This will add the user credentials to the headers of any request.
 
 ```
-import {WORDPRESS_PROVIDERS, WpConfig, WpHelper} from "ng2-wp-api/ng2-wp-api";
+import {WORDPRESS_PROVIDERS, WpConfig} from "ng2-wp-api/ng2-wp-api";
 
 @Component({
   selector: 'app',
@@ -198,9 +192,9 @@ import {WORDPRESS_PROVIDERS, WpConfig, WpHelper} from "ng2-wp-api/ng2-wp-api";
 
 export class App {
 
-    constructor(wpConfig: WpConfig, wpHelper: WpHelper){
-        wpConfig.baseUrl = " http://example.com";
-        wpConfig.authKeys = wpHelper.encodeKeys("username", "password");
+    constructor(wpConfig: WpConfig){
+        wpConfig.baseUrl = "http://example.com";
+        wpConfig.setAuthKeys("username", "password");
     }
 }
 ```
