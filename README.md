@@ -50,9 +50,9 @@ export class App {
 
 ### Using the service in your component
 
-Now the `baseUrl` is set in `WpConfig`, we can use the services `WpModel`, `WpCollection` in any component, However contrary to what we did with `WpConfig`, Every component uses WordPress service (`WpModel` and `WpCollection`) must has its own instance of the service, therefore we must inject the service within the component provider.
+Now the `baseUrl` is set in `WpConfig`, we can use the services `WpModel`, `WpCollection` in any component, However contrary to what we did with `WpConfig`, Every component uses WordPress service (`WpModel` and `WpCollection`) must has its own instance of the service, therefore we must inject the service within each component uses the service.
 
-We have to tell the service which endpoint we want to use before requesting the data, you can set the endpoint using `service.SetEndpoint()` and pass it as a string or using `WpHelper.Endpoint` 
+Before requesting any data from the service, we must choose the endpoint, set it using `service.SetEndpoint()` and pass it as a string or using `WpHelper.Endpoint` 
 
 #### Getting Single Example
 
@@ -205,6 +205,6 @@ If you identify any errors in this service, or have an idea for an improvement, 
 
 ##License
 
-[MIT](/License)
+[MIT](/LICENSE)
 
 
