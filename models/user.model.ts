@@ -9,16 +9,11 @@ export interface User {
     48:string,
     96:string
   };
+  
+/**  Those properties cannot be accessed by default */
+  roles:string[];
+  email:string[];
+  registered:string[];
+  username:string;
 }
 
-
-/**
- * 
- * Some of properties cannot be accessed by default like
-
-   roles:string[];
-   email:string[];
-   registered:string[];
-   username:string,
-
- */

@@ -5,6 +5,8 @@ import {Observable} from "rxjs/Observable";
 import {WpConfig} from "./config.service";
 import {WpHelper} from "./helper.service";
 
+import 'core-js/es6/promise';
+import 'core-js/es6/map';
 /*
  * WpCollection Service: Get collection from WP API
  */

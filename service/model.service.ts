@@ -4,6 +4,7 @@ import {Observable} from "rxjs/Observable";
 
 import {WpConfig} from "./config.service";
 import {WpHelper} from "./helper.service";
+import 'core-js/es6/map';
 
 /*
  * WpModel Service: Get/Add/Update/Delete single from WP API
