@@ -58,9 +58,6 @@ The library offers the following services:
 ### Initialization
 
 First of all, we must initialize the library's configuration in `WpState` service, set the `baseUrl` to the wordpress host address (should be used within the root component).
-
-`WpState.setBaseUrl('YourWordPressBaseUrl')`
-
 Inject `WORDPRESS_PROVIDERS` in the root component provider or directly in bootstrap, because we only want one global instance of `WpState`.
 
 
@@ -77,7 +74,7 @@ export class App {
     }
 }
 ```
-[Initilizing WP Service example](/examples/Initilizing WP Service.ts)
+[Initilizing the library example](/examples/Initilizing WP Service.ts)
 
 ### Using the service in your component
 
@@ -117,7 +114,7 @@ fetchPosts(){
     );
 }
 ```
-[Getting Single Post example](/examples/Getting Collection.ts)
+[Getting a collection of posts example](/examples/Getting Collection.ts)
 
 #### Getting a single post by ID
 
@@ -150,7 +147,7 @@ fetchPost() {
     );
 }
 ```
-[Getting Single Post example](/examples/Getting Single.ts)
+[Getting a single post by id example](/examples/Getting Single.ts)
 
 
 *PS: when embed is set to true, you will get featured image, categories, tags and author with the response.*
@@ -172,7 +169,7 @@ export class App {
     }
 }
 ```
-[Initializing WpService example](/examples/Initilizing WP Service.ts)
+[Initilizing the library example](/examples/Initilizing WP Service.ts)
 
 ## Issues
 
