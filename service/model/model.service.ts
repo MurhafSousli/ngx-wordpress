@@ -10,7 +10,8 @@ import {WpState} from "../state/state.service";
 
 @Injectable()
 export class WpModel {
- private service;
+
+  private service;
 
   constructor(private http: Http, private state: WpState) { }
 

@@ -1,3 +1,7 @@
+/*
+ * In the following example, we fetch a collection of posts from WP API, the template displays the posts and a "Load more" button to load the next available page.
+ * we also set the QueryArgs for the request to get embedded posts and filter the results to 6 posts per page
+ */
 import {Component} from '@angular/core';
 
 import {WpCollection, QueryArgs} from 'ng2-wp-api/ng2-wp-api';

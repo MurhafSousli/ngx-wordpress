@@ -1,4 +1,7 @@
-
+/*
+ *  The following example demonstrates how to get a single post by id
+ *  We set the QueryArgs embed to true, to display the post featured image using the function `post.featuredImageUrl($size)`
+ */
 import {Component} from '@angular/core';
 
 import {WpModel, Post, QueryArgs} from "ng2-wp-api/ng2-wp-api";
