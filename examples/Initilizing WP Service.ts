@@ -21,7 +21,7 @@ export class App {
     constructor(wpState: WpState){
         wpState.setBaseUrl("http://yourWordPressDomain.com");
         /*
-         * Setting up Authentication Keys is necessory if you want to make Add/Update/Delete requests,
+         * Setting up authentication keys is required to make Add/Update/Delete requests,
          * Pass your wordpress username and password in `setAuthKeys($username, $password)`
          */
         wpState.setAuthKeys("yourUsername", "yourPassword");

@@ -26,7 +26,7 @@ The library offers the following services:
 
  - `WpCollection` Service to get a collection of objects.
  - `WpModel` Service to get a single object.
- - `WpState` Service to get and set the library's configurations.
+ - `WpState` Service to get and set library's configurations such as Wordpress base address and authentication
 
 ```
     WpCollection
@@ -52,7 +52,7 @@ The library offers the following services:
 
 ```
 
-**Default Endpoints** are : `Posts, Pages, Users, Categories, Tags, Taxonomies, Statuses, Comments, Media`
+**Default Endpoints** are : `Posts`, `Pages`, `Users`, `Categories`, `Tags`, `Taxonomies`, `Statuses`, `Comments`, `Media`
 
 
 ### Initialization
@@ -81,14 +81,11 @@ export class App {
 
 ### Using the service in your component
 
-Now the service is initialized, the services `WpModel`, `WpCollection` become ready in any component, note that contrary to what we did with `WpState`, Every component uses the services (`WpModel` or `WpCollection`) must has its own instance of the service, therefore we must inject the service within each component uses the service.
-
+Now the library is initialized, the services `WpModel` and `WpCollection` become ready to use in any component, note that contrary to what we did with `WpState`, Every component uses one of these services must has its own instance of the service, so we must inject the service within each component.
 
 ### Examples:
 
-#### Getting Collection
-
-Getting a collection of posts
+#### Getting a collection of posts
 
 ```
 args: QueryArgs;
@@ -122,11 +119,7 @@ fetchPosts(){
 ```
 [Getting Single Post example](/examples/Getting Collection.ts)
 
-#### Getting Single Post
-
-Getting a single post by ID
-
-*PS: when embed is set to true, you will get featured image, categories, tags and author with the response.*
+#### Getting a single post by ID
 
 ```
 id: string;
@@ -159,13 +152,12 @@ fetchPost() {
 ```
 [Getting Single Post example](/examples/Getting Single.ts)
 
-Note that before requesting any data from the service, Pass the endpoint to the service `service.setEndpoint($endpoint: string | WpHelpler.Endpoint)`, endpoint can be type of `string` or `WpHelper.Endpoint`.
-For **Custom Routes** pass the endpoint as string e.g. `service.setEndpoint("myplugin/v1") `
+
+*PS: when embed is set to true, you will get featured image, categories, tags and author with the response.*
 
 ## Authentication
 
-To use Add/Update/Delete functions, user must be authenticated. Encode and store the user credentials using `WpState.setAuthKeys($username, $password)`.
-This will add the user credentials to the headers of any request.
+In order to use Add/Update/Delete functions, user must be authenticated. use `WpState.setAuthKeys($username, $password)` to store user credentials.
 
 ```
 @Component({
