@@ -15,7 +15,7 @@ export class WpCollection {
 
   constructor(private http: Http, private state: WpState) { }
 
-  Endpoint(endpoint: string) {
+  Endpoint(endpoint: string): Collection {
     if (!this.service) {
       this.service = new Collection(this.http, this.state, endpoint);
     }

@@ -15,7 +15,7 @@ export class WpModel {
 
   constructor(private http: Http, private state: WpState) { }
 
-  Endpoint(endpoint: string) {
+  Endpoint(endpoint: string): Model {
     if (!this.service) {
       this.service = new Model(this.http, this.state, endpoint);
     }
