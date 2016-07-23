@@ -1,17 +1,9 @@
 import 'rxjs/add/operator/map';
 
-export * from './service/collection.service';
-export * from './service/model.service';
-export * from './service/helper.service';
-export * from './service/config.service';
+export * from './service';
+export * from './models';
 
-export * from './models/args.model';
-export * from './models/post.model';
-export * from './models/user.model';
-
-import {WpCollection} from './service/collection.service';
-import {WpModel} from './service/model.service';
-import {WpConfig} from './service/config.service';
+import {WpCollection, WpModel, WpState} from './service';
 /**
  * Collection of wordpress services providers.
  */
@@ -23,8 +15,9 @@ export const WORDPRESS_PROVIDERS:any[] = [
      * 
      * I recommended to inject WpModel and WpCollection services in their components,
      * and WpConfig in the root component or on bootstrap
+     * 
      */
   //WpModel,
   //WpCollection,
-  WpConfig
+  WpState
 ];

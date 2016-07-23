@@ -11,7 +11,10 @@
         "ng2-wp-api.ts"
     ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "examples",
+        "assets",
+        "typings"
     ],
     "typings": "./ng2-wp-api.d.ts"
 }

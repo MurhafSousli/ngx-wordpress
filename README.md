@@ -20,41 +20,121 @@ Install it with npm
 
 ## Usage
 
+The library offers `WpCollection`   main services to access WP API and a helper module for common functions
+
+```
+    WpCollection
+     ├── currentPage: number
+     ├── totalPages: number
+     ├── totalObjects: number
+     |
+     ├── setEndpoint(args: string | WpHelper.Endpoint): void
+     ├── get(args: any): Observable<Response>
+     ├── more(): Observable<Response>
+     ├── hasMore(): boolean
+
+    WpModel
+     ├── setEndpoint(args: string | WpHelper.Endpoint): void
+     ├── get(id: number, args?: any): Observable<Response>
+     ├── add(body): Observable<Response>
+     ├── update(id: number, body): Observable<Response>
+     ├── delete(id: number): Observable<Response>
+
+     /*
+      *     WpState service holds the variables which will be used in the library's requests headers requests
+      */
+
+     WpState
+     ├── getBaseUrl(): string
+     ├── setBaseUrl(url: string): void
+     ├── getAuthKeys(): string
+     ├── setAuthKeys(username: string, password: string): void
+
+     /*
+      *     WpHelper is not a service, it is a module for common functions
+      */
+
+     WpHelper
+     ├── getBaseUrl(): string
+     ├── setBaseUrl(url: string): void
+     ├── getAuthKeys(): string
+     ├── setAuthKeys(username: string, password: string): void
+
+
+```
+
 ### Configuration
 
-First of all, we must set our WordPress configuration using the class (service) `WpConfig` which holds the target address, set it only once within the root component.
+First of all, we must set the base address to our the remote wordpress site using the class (service) `WpState` which holds the target address, set it only once within the root component.
 
-`WpConfig.baseUrl = 'YourWordPressBaseUrl' `
+`WpState.baseUrl = 'YourWordPressBaseUrl' `
 
-Inject `WORDPRESS_PROVIDERS` in the root component provider or directly in bootstrap, because we only want one global instance of `WpConfig`.
+Inject `WORDPRESS_PROVIDERS` in the root component provider or directly in bootstrap, because we only want one global instance of `WpState`.
 
 #### Setup WordPress Configuration Example:
 
-app.component.ts:
+in App component (root):
 ```
-import {WORDPRESS_PROVIDERS, WpConfig} from "ng2-wp-api/ng2-wp-api";
-
-@Component({
-  selector: 'app',
-  providers:[WORDPRESS_PROVIDERS],
-  ...
-})
-
-export class App {
-
-    constructor(wpConfig: WpConfig){
-        wpConfig.baseUrl = "http://example.com";
+    @Component({
+        selector: 'app',
+        providers:[WORDPRESS_PROVIDERS],
+        ...
+    })
+    export class App {
+        constructor(wpState: WpState){
+            wpState.setBaseUrl("http://yourWordPressDomain.com");
+        }
     }
-}
 ```
+[Getting Single Post example](/examples/Initilizing WP Service.ts)
 
 ### Using the service in your component
 
-Now the `baseUrl` is set in `WpConfig`, we can use the services `WpModel`, `WpCollection` in any component, However contrary to what we did with `WpConfig`, Every component uses WordPress service (`WpModel` and `WpCollection`) must has its own instance of the service, therefore we must inject the service within each component uses the service.
+Now the `baseUrl` is set in `WpState`, we can use the services `WpModel`, `WpCollection` in any component, However contrary to what we did with `WpState`, Every component uses WordPress service (`WpModel` and `WpCollection`) must has its own instance of the service, therefore we must inject the service within each component uses the service.
 
-Before requesting any data from the service, we must choose the endpoint, set it using `service.SetEndpoint($endpoint)` and pass it as a string or using `WpHelper.Endpoint` 
 
-#### Getting Single Example
+### Examples:
+
+#### Getting Collection
+
+In the following example, we fetch a collection of posts from WP API, then displays it with a "Load more" button to load the next available page.
+we also set the QueryArgs for the request to get embedded posts and filter the results to 6 posts per page
+
+```
+    args: QueryArgs;
+
+    constructor(private service:WpCollection) { 
+
+    }
+
+    ngOnInit(){
+
+        /** Filtering Collections, more info https://codex.wordpress.org/Class_Reference/WP_Query#Parameters */
+        this.args = new QueryArgs();
+
+        /** Get 6 posts per page */
+        this.args.per_page = 6; 
+        this.args._embed = true;
+        this.fetchPosts();
+    }
+
+    fetchPosts(){
+        this.service.Posts().get(this.args).subscribe(
+            (res) => {
+                this.posts = res;
+            },
+            err => {
+                /** handle errors */
+                console.log(err)
+            }
+        );
+    }
+    
+
+```
+[Getting Single Post example](/examples/Getting Collection.ts)
+
+#### Getting Single Post
 
 The following example demonstrates how to get a single post by id, this applies on other endpoints as well (pages, categories, tags, media, ... etc)
 We set the QueryArgs embed to true, to display the post featured image using the function `post.featuredImageUrl($size)`
@@ -62,27 +142,6 @@ We set the QueryArgs embed to true, to display the post featured image using the
 *PS: when embed is set to true, you will get featured image, categories, tags and author with the response.*
 
 ```
-import {WpModel, WpHelper, Post, QueryArgs} from "ng2-wp-api/ng2-wp-api";
-
-@Component({
-    providers: [WpModel],
-    selector: 'test-single',
-    template: `
-        <div class="post">
-            <div class="post-title"> {{post.title()}} </div>
-            <div class="post-image">
-                <img [src]="post.featuredImageUrl('large')"/>
-            </div>
-            <div class="post-content" [innerHtml]="post.content()">
-            <ul class="post-categories">
-                <li *ngFor="let cat of post.categories()"> {{cat.name}} </li>
-            </ul>
-        </div>
-    `
-})
-
-export class TestSingle {
-
     id: string;
     args: QueryArgs;
     post: Post;
@@ -92,9 +151,6 @@ export class TestSingle {
     }
 
     ngOnInit(){
-        /** Choose the service the endpoint you are interested in */
-        this.service.setEndpoint(WpHelper.Endpoint.Posts);
-
         /** Assume we already have the post ID */
         this.id = 7;
 
@@ -105,7 +161,7 @@ export class TestSingle {
     }
 
     fetchPost() {
-        this.service.get(this.id, this.args).subscribe(
+        this.service.Posts().get(this.id, this.args).subscribe(
             (res) => {
                 this.post = new Post(res);
             },
@@ -113,99 +169,32 @@ export class TestSingle {
             err => console.log(err)
         );
     }
-}
 ```
+[Getting Single Post example](/examples/Getting Single.ts)
 
-#### Getting Collection Example
-
-In the following example, we fetch a collection of posts from WP API, then displays it with a "Load more" button to load the next available page.
-we also set the QueryArgs for the request to get embedded posts and filter the results to 6 posts per page
-
-```
-import {WpCollection, WpHelper, QueryArgs} from 'ng2-wp-api/ng2-wp-api';
-
-@Component({
-    providers: [WpCollection],
-    selector: 'test-collection',
-    template: `
-        <ul class="list">
-            <li class="post-item" *ngFor="let post of posts"></li>
-                <div class="post-title"> {{post.title()}} </div>
-                 <div class="post-image">
-                    <img [src]="post.featuredImageUrl('small')"/>
-                </div>
-                <div class="post-excerpt" [innerHtml]="post.excerpt()">
-            <li>
-        </ul>
-        <p>Page: {{service.currentPage}} / {{service.totalPages}} </p><span> - Total Posts: {{service.totalObjects}}</span>
-        <button *ngIf="service.hasMore()" (click)="fetchMore()"> Load more</button>
-    `
-})
-
-export class TestSingle {
-
-    args: QueryArgs;
-    posts;
-
-    constructor(private service:WpCollection) {
-
-    }
-
-    ngOnInit(){
-        /** Choose the service the endpoint you are interested in */
-        this.service.setEndpoint(WpHelper.Endpoint.Posts);
-
-        /** Filtering Collections, more info https://codex.wordpress.org/Class_Reference/WP_Query#Parameters */
-        this.args = new QueryArgs();
-
-        /** Get 6 posts in each page */
-        this.args.per_page = 6; 
-        this.args._embed = true;
-        this.fetchPosts();
-    }
-
-    fetchPosts() {
-        this.service.get(this.args).subscribe(
-            (res) => {
-                this.posts = res;
-            },
-            err => console.log(err)
-        );
-    }
-
-    fetchMore() {
-        this.service.more().subscribe(
-            res => {
-                this.posts = this.posts.concat(res);
-            },
-            err => console.log(err)
-        );
-    }
-}
-```
+Note that before requesting any data from the service, Pass the endpoint to the service `service.setEndpoint($endpoint: string | WpHelpler.Endpoint)`, endpoint can be type of `string` or `WpHelper.Endpoint`.
+For **Custom Routes** pass the endpoint as string e.g. `service.setEndpoint("myplugin/v1") `
 
 ## Authentication
 
-To use Add/Update/Delete functions, user must be authenticated. Encode and store the user credentials using `WpConfig.setAuthKeys($username, $password)`.
+To use Add/Update/Delete functions, user must be authenticated. Encode and store the user credentials using `WpState.setAuthKeys($username, $password)`.
 This will add the user credentials to the headers of any request.
 
 ```
-import {WORDPRESS_PROVIDERS, WpConfig} from "ng2-wp-api/ng2-wp-api";
-
-@Component({
-  selector: 'app',
-  providers:[WORDPRESS_PROVIDERS],
-  ...
-})
-
-export class App {
-
-    constructor(wpConfig: WpConfig){
-        wpConfig.baseUrl = "http://example.com";
-        wpConfig.setAuthKeys("username", "password");
+    @Component({
+        selector: 'app',
+        providers:[WORDPRESS_PROVIDERS],
+        ...
+    })
+    export class App {
+        constructor(wpState: WpState){
+            wpState.setBaseUrl("http://yourWordPressDomain.com");
+            wpState.setAuthKeys("yourUsername", "yourPassword");
+        }
     }
-}
+   
 ```
+[Initializing WpService example](/examples/Initilizing WP Service.ts)
 
 ## Issues
 
