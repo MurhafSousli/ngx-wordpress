@@ -53,6 +53,11 @@ The library offers:
      - `User`            Interface for User response.
      - `QueryArgs`       Class for creating query arguments
 
+    Helper:
+     - `Endpoint`        Default endpoints.   
+
+**Default Endpoints** are : `Posts`, `Pages`, `Users`, `Categories`, `Tags`, `Taxonomies`, `Statuses`, `Comments`, `Media`     
+
 ```
     WpCollection
      ├── currentPage: number
@@ -75,9 +80,10 @@ The library offers:
      ├── getAuthKeys(): string
      ├── setAuthKeys(username: string, password: string): void
 
-```
+    WpHelper 
+     ├── Endpoint: enum
 
-**Default Endpoints** are : `Posts`, `Pages`, `Users`, `Categories`, `Tags`, `Taxonomies`, `Statuses`, `Comments`, `Media`
+```
 
 <a name="usage"/>
 ## Usage
