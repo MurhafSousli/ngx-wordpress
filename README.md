@@ -269,7 +269,7 @@ export class TestModel {
 }
 ```
 
-[Getting model by id - full example](/examples/Model using the component.ts)
+[Getting model using the component - full example](/examples/Model using the component.ts)
 
 <a name="modelSrv"/>
 **METHOD 2:** The service way
@@ -320,7 +320,7 @@ export class TestModel {
     }
 }
 ```
-[Getting model by id - full example](/examples/Model using the service.ts)
+[Getting model using the service - full example](/examples/Model using the service.ts)
 
 *PS: when embed is set to true, you will get featured image, categories, tags and author with the response.*
 
