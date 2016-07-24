@@ -25,7 +25,7 @@ import {Collection, WpHelper, QueryArgs} from 'ng2-wp-api/ng2-wp-api';
 
     <div class="pagination">    
         <p>Page: {{response.currentPage}} / {{response.totalPages}} </p><span> - Total Posts: {{response.totalObjects}}</span>
-        <button *ngIf="collection.hasMore()" (click)="fetchMore()"> Load more</button>
+        <button *ngIf="collection.hasMore()" (click)="morePosts()"> Load more</button>
     </div>
   `,
   directives: [Collection]

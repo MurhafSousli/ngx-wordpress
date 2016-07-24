@@ -16,7 +16,7 @@ import {WpCollection, QueryArgs} from 'ng2-wp-api/ng2-wp-api';
         
         <div class="pagination">    
             <p>Page: {{wpCollection.service.currentPage}} / {{wpCollection.service.totalPages}} </p><span> - Total Posts: {{wpCollection.service.totalObjects}}</span>
-            <button *ngIf="wpCollection.service.hasMore()" (click)="fetchMore()"> Load more</button>
+            <button *ngIf="wpCollection.service.hasMore()" (click)="morePosts()"> Load more</button>
         </div>
     `
 })
@@ -53,7 +53,7 @@ export class TestCollection {
         );
     }
 
-    fetchMore() {
+    morePosts() {
         this.wpCollection.Posts().more().subscribe(
             res => {
                 this.posts = this.posts.concat(res);

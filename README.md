@@ -67,6 +67,7 @@ The library offers:
 ### Initialization
 
 First of all, we must initialize the library's configuration in `WpState` service, set the `baseUrl` to the wordpress host address (must be done within the root component).
+
 Inject `WORDPRESS_PROVIDERS` in the root component provider or directly in bootstrap, because we only want one global instance of `WpState`.
 
 
@@ -99,39 +100,44 @@ import {Collection, WpHelper, QueryArgs} from 'ng2-wp-api/ng2-wp-api';
   selector: 'test-collection',
   template: `
     <collection [args]="args" [endpoint]="endpoint" (response)="postsData($event)">
-        <ul class="list">
-            <li class="item" *ngFor="let post of posts"> {{post.title}} </li>
-        </ul>    
+        <item *ngFor="let post of response.objects" [data]="post"></item>
     </collection>
-    `,
-    directives: [Collection]
+
+    <div class="pagination">    
+        <p>Page: {{response.currentPage}} / {{response.totalPages}} </p><span> - Total Posts: {{response.totalObjects}}</span>
+        <button *ngIf="collection.hasMore()" (click)="morePosts()"> Load more</button>
+    </div>
+  `,
+  directives: [Collection]
 })
+
 export class TestCollection {
 
-/** set the endpoint of collection */
+    /** set the endpoint of collection */
   endpoint = WpHelper.Endpoint.Posts;
   args:QueryArgs;
-  posts;
 
-/** reference for Collection, so we can use its functions */
+  response;
+
+  /** reference for Collection, so we can use its functions */
   @ViewChild(Collection) collection:Collection;
 
-/** collection output */
+  /** collection output */
   postsData(event) {
     if (event.error) {
       /** handle collection request error */
       console.log(event.error);
     }
     else {
-      this.posts = event.objects;
+      this.response = event;
     }
   }
 
-/** get more posts */
+  /** get more posts */
   morePosts(){
       this.collection.more();
   }
-
+}
 ```
 [Getting collection using the component - full example](/examples/Getting Collection.ts)
 
@@ -143,19 +149,43 @@ import {WpCollection, QueryArgs} from 'ng2-wp-api/ng2-wp-api';
 @Component({
     providers: [WpCollection],
     selector: 'test-collection',
-    template: ` ... `
+    template: `
+        <div class="collection">
+            <item *ngFor="let post of posts" [data]="post"></item>
+        </div>
+        
+        <div class="pagination">    
+            <p>Page: {{wpCollection.service.currentPage}} / {{wpCollection.service.totalPages}} </p><span> - Total Posts: {{wpCollection.service.totalObjects}}</span>
+            <button *ngIf="wpCollection.service.hasMore()" (click)="morePosts()"> Load more</button>
+        </div>
+    `
 })
+
 export class TestCollection {
 
     args: QueryArgs;
+    posts;
 
-    constructor(private service:WpCollection) { 
+    constructor(private wpCollection: WpCollection) {
+
     }
 
-    fetchPosts(){
-        this.service.Posts().get(this.args).subscribe(
+    fetchPosts() {
+        this.wpCollection.Posts().get(this.args).subscribe(
             (res) => {
                 this.posts = res;
+            },
+            err => {
+                /** handle errors */
+                console.log(err)
+            }
+        );
+    }
+
+    morePosts() {
+        this.wpCollection.Posts().more().subscribe(
+            res => {
+                this.posts = this.posts.concat(res);
             },
             err => {
                 /** handle errors */
@@ -207,7 +237,6 @@ export class TestModel {
     }
   }
 }
-
 ```
 
 [Getting model by id - full example](/examples/Model using the component.ts)
@@ -215,32 +244,54 @@ export class TestModel {
 **METHOD 2:** The service way
 
 ```
-id: string;
-args: QueryArgs;
-post: Post;
+import {WpModel, Post, QueryArgs} from "ng2-wp-api/ng2-wp-api";
 
-constructor(private service:WpModel) {
+@Component({
+    providers: [WpModel],
+    selector: 'test-model',
+    template: `
+        <div class="post">
+            <div class="post-title"> {{post.title()}} </div>
+            <div class="post-image">
+                <img [src]="post.featuredImageUrl('large')"/>
+            </div>
+            <div class="post-content" [innerHtml]="post.content()">
+            <ul class="post-categories">
+                <li *ngFor="let cat of post.categories()"> {{cat.name}} </li>
+            </ul>
+        </div>
+    `
+})
 
-}
+export class TestModel {
 
-ngOnInit(){
-    /** Assume we already have the post ID */
-    this.id = 7;
+    id: string;
+    args: QueryArgs;
+    post: Post;
 
-    /** Set the query arguments, more info https://codex.wordpress.org/Class_Reference/WP_Query#Parameters */
-    this.args = new QueryArgs();
-    this.args._embed = true;
-    this.fetchPost();
-}
+    constructor(private service:WpModel) {
 
-fetchPost() {
-    this.service.Posts().get(this.id, this.args).subscribe(
-        (res) => {
-            this.post = new Post(res);
-        },
-        /** Handle request error */
-        err => console.log(err)
-    );
+    }
+
+    ngOnInit(){
+        /** Assume we already have the post ID */
+        this.id = 7;
+
+        /** Set the query arguments, more info https://codex.wordpress.org/Class_Reference/WP_Query#Parameters */
+        this.args = new QueryArgs();
+        this.args._embed = true;
+        this.fetchPost();
+    }
+
+    fetchPost() {
+        this.service.Posts().get(this.id, this.args).subscribe(
+            (res) => {
+                this.post = new Post(res);
+            },
+            /** Handle request error */
+            err => console.log(err)
+        );
+    }
 }
 ```
 [Getting model by id - full example](/examples/Model using the service.ts)
