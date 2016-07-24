@@ -20,18 +20,18 @@ Install it with npm
 
 ## Table of Contents
  
- - [Abstract](#abstract)  
- - [Usage](#usage)
-    - [Initilizing](#initializing)
-    - [Getting Collection](#collection)
-        - [Getting Collection using component](#collectionCmp) 
-        - [Getting Collection using service](#collectionSrv)
-    - [Getting Model](#model)
-        - [Getting Model using component](#modelCmp)
-        - [Getting Model using service](#modelSrv)
- - [Authentication](#authentication)    
- - [Issues](#issues)   
- - [License](#license)   
+ - ###[Abstract](#abstract)  
+ - ###[Usage](#usage)
+    - ####[Initilizing](#initializing)
+    - ####[Getting Collection](#collection)
+        - [Method 1: using component](#collectionCmp) 
+        - [Method 2: using service](#collectionSrv)
+    - ####[Getting Model](#model)
+        - [Method 1: using component](#modelCmp)
+        - [Method 2: using service](#modelSrv)
+ - ###[Authentication](#authentication)    
+ - ###[Issues](#issues)   
+ - ###[License](#license)   
 
 
 <a name="abstract"/>
