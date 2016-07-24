@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable} from "rxjs/Observable";
-import * as Rx from 'rxjs/rx';
+import * as Rx from 'rxjs/Rx';
 
 import {WpState} from "../state/state.service";
 
