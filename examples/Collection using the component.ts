@@ -28,7 +28,7 @@ import {Collection, WpHelper, QueryArgs} from 'ng2-wp-api/ng2-wp-api';
         <button *ngIf="collection.hasMore()" (click)="morePosts()"> Load more</button>
     </div>
   `,
-  directives: [Collection]
+  directives: [Collection, Item]
 })
 
 export class TestCollection {
@@ -72,37 +72,37 @@ export class TestCollection {
 * you may have noticed that we didn't call collection.fetch($args)
 * because the collection component gets the posts automatically when the `@Input args` value changes.
 * 
-* but we definitly need to call `collection.more()` to get more Posts.
+* Use `collection.more()` to get more Posts.
 * 
 * Some might be interested to check if the service has more collection to get, use `hasMore()`
 */
 
 
-/* This is optional if you want to make use of Post class.
- * Create a view component for post item.
- * Create Post class from the `@Input data`.
- */
+/** Optional component to use Post class */ 
+
 import {Post} from 'ng2-wp-api/ng2-wp-api';
 
 @Component({
   selector: 'item',
   template: `
-    <div class="post-title"> {{post.title()}} </div>
+    <div class="post">
+      <div class="post-title"> {{response.title()}} </div>
         <div class="post-image">
-            <img [src]="post.featuredImageUrl('small')"/>
+          <img [src]="response.featuredImageUrl('small')"/>
         </div>
-    <div class="post-excerpt" [innerHtml]="post.excerpt()">
+      <div class="post-excerpt" [innerHtml]="response.excerpt()">
+    </div>
   `,
-  directives: [Collection]
 })
 
 export class Item {
 
   @Input() data;
-  post: Post;
+  post: response;
 
   ngOnInit() {
-    this.post = new Post(this.data);
+     /* Create Post class from the `@Input data`. */
+    this.response = new Post(this.data);
   }
 }
 

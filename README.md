@@ -1,4 +1,4 @@
-# Angular2 WordPress API Service
+# Angular2 WordPress API Service Beta
 
 [![npm version](https://badge.fury.io/js/ng2-wp-api.svg)](https://badge.fury.io/js/ng2-wp-api) [![Build Status](https://travis-ci.org/MurhafSousli/ng2-wp-api.svg?branch=master)](https://travis-ci.org/MurhafSousli/ng2-wp-api)
 
@@ -125,53 +125,54 @@ Now the library is initialized, the services `WpModel` and `WpCollection` are re
 <a name="collectionCmp"/>
 ### **METHOD 1:** The component way
 
+The basic usage is to get to display a collection of posts 
+
 ```
-import {Collection, WpHelper, QueryArgs} from 'ng2-wp-api/ng2-wp-api';
-
-@Component({
-  selector: 'test-collection',
-  template: `
-    <collection [args]="args" [endpoint]="endpoint" (response)="postsData($event)">
-        <item *ngFor="let post of response.objects" [data]="post"></item>
-    </collection>
-
-    <div class="pagination">    
-        <p>Page: {{response.currentPage}} / {{response.totalPages}} </p><span> - Total Posts: {{response.totalObjects}}</span>
-        <button *ngIf="collection.hasMore()" (click)="morePosts()"> Load more</button>
+<collection [args]="args" [endpoint]="endpoint" (response)="postsData($event)">
+    <!-- your custom view -->
+    <div class="post" *ngFor="let post of response.objects">
+        <h1>{{post.title}}</h1>
+        <p [innerHtml]="post.content"></p>
     </div>
+</collection>
+<div class="pagination">    
+    <p>Page: {{response.currentPage}} / {{response.totalPages}} </p><span> - Total Posts: {{response.totalObjects}}</span>
+</div>
+```
+
+It's recommended to create item component for each post item
+
+```
+@Component({
+  selector: 'item',
+  template: `
+    <div class="post-title"> {{post.title()}} </div>
+        <div class="post-image">
+            <img [src]="post.featuredImageUrl('small')"/>
+        </div>
+    <div class="post-excerpt" [innerHtml]="post.excerpt()">
   `,
   directives: [Collection]
 })
 
-export class TestCollection {
+export class Item {
 
-    /** set the endpoint of collection */
-  endpoint = WpHelper.Endpoint.Posts;
-  args:QueryArgs;
+  @Input() data;
+  post: Post;
 
-  response;
-
-  /** reference for Collection, so we can use its functions */
-  @ViewChild(Collection) collection:Collection;
-
-  /** collection output */
-  postsData(event) {
-    if (event.error) {
-      /** handle collection request error */
-      console.log(event.error);
-    }
-    else {
-      this.response = event;
-    }
-  }
-
-  /** get more posts */
-  morePosts(){
-      this.collection.more();
+  ngOnInit() {
+    this.post = new Post(this.data);
   }
 }
 ```
-[Getting collection using the component - full example](/examples/Getting Collection.ts)
+in parent component
+```
+<collection [args]="args" [endpoint]="endpoint" (response)="postsData($event)">
+    <item *ngFor="let post of response.objects" [data]="post"></item>
+</collection>
+```
+
+[Getting collection using the component - full example](/examples/Collection using the component.ts)
 
 <a name="collectionSrv"/>
 ### **METHOD 2:** The service way
@@ -239,45 +240,55 @@ Note that contrary to what we did with `WpState`, Every component uses one of th
 ### **METHOD 1:** The component way
 
 ```
-import {Model, WpHelper, Post} from 'ng2-wp-api/ng2-wp-api';
+<model [endpoint]="endpoint" [id]="id" (response)="pageData($event)">
+    <div class="post>
+        <div class="post-title"> {{response.title()}} </div>
+        <div class="post-image">
+            <img [src]="response.featuredImageUrl('large')"/>
+        </div>
+        <div class="post-content" [innerHtml]="response.content()">
+        <ul class="post-categories">
+            <li *ngFor="let cat of response.categories()"> {{cat.name}} </li>
+        </ul>
+    <div>
+</model>
+```
+It's recommended to create view component to display the post
+
+```
+import {Post} from 'ng2-wp-api/ng2-wp-api';
 
 @Component({
-  selector: 'test-model',
+  selector: 'single',
   template: `
-    <model [endpoint]="endpoint" [id]="id" (response)="pageData($event)">
+    <div class="post">
       <div class="post-title"> {{response.title()}} </div>
       <div class="post-image">
-          <img [src]="response.featuredImageUrl('large')"/>
+        <img [src]="response.featuredImageUrl('large')"/>
       </div>
       <div class="post-content" [innerHtml]="response.content()">
       <ul class="post-categories">
-          <li *ngFor="let cat of response.categories()"> {{cat.name}} </li>
+        <li *ngFor="let cat of response.categories()"> {{cat.name}} </li>
       </ul>
-    </model>
+    </div>
   `,
-  directives: [Model]
 })
-export class TestModel {
+export class Single {
 
-  endpoint = WpHelper.Endpoint.Pages;
-  id;
-  response;
+  @Input() data;
+  post: response;
 
   ngOnInit() {
-    /** get page where id = 123 */
-    this.id = 123;
-  }
-
-  pageData(event) {
-    if (event.error) {
-      /** handle model request error */
-      console.log(event.error);
-    }
-    else {
-      this.response = new Post(event.object);
-    }
+    /* Create Post class from the `@Input data`. */
+    this.response = new Post(this.data);
   }
 }
+```
+in parent component
+```
+<model [endpoint]="endpoint" [id]="id" (response)="pageData($event)">
+    <single [data]="response"></single>
+</model>
 ```
 
 [Getting model using the component - full example](/examples/Model using the component.ts)
@@ -358,7 +369,7 @@ export class App {
 <a name="issues"/>
 # Issues
 
-If you identify any errors in this service, or have an idea for an improvement, please open an [issue](https://github.com/MurhafSousli/ng2-wp-api/issues). I am excited to see what the community thinks of this project, and I would love your input!
+The library is still in beta, if you identify any errors in this service, or have an idea for an improvement, please open an [issue](https://github.com/MurhafSousli/ng2-wp-api/issues). I am excited to see what the community thinks of this project, and I would love your input!
 
 <a name="license"/>
 # License
