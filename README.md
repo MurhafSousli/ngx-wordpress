@@ -22,7 +22,7 @@ Install it with npm
  
  - [Abstract](#abstract)  
  - [Usage](#usage)
-    - [Initilizing](#initializing)
+    - [Initialization](#Initialization)
     - [Getting Collection](#collection)
         - [Method 1: using component](#collectionCmp) 
         - [Method 2: using service](#collectionSrv)
@@ -88,7 +88,7 @@ The library offers:
 <a name="usage"/>
 ## Usage
 
-<a name="initializing"/>
+<a name="Initialization"/>
 ### Initialization
 
 First of all, we must initialize the library's configuration in `WpState` service, set the `baseUrl` to the wordpress host address (must be done within the root component).
