@@ -8,7 +8,7 @@ import {WpModel, Post, QueryArgs} from "ng2-wp-api/ng2-wp-api";
 
 @Component({
     providers: [WpModel],
-    selector: 'test-single',
+    selector: 'test-model',
     template: `
         <div class="post">
             <div class="post-title"> {{post.title()}} </div>
@@ -23,7 +23,7 @@ import {WpModel, Post, QueryArgs} from "ng2-wp-api/ng2-wp-api";
     `
 })
 
-export class TestSingle {
+export class TestModel {
 
     id: string;
     args: QueryArgs;

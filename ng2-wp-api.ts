@@ -2,6 +2,7 @@ import 'rxjs/add/operator/map';
 
 export * from './service';
 export * from './models';
+export * from './components';
 
 import {WpCollection, WpModel, WpState} from './service';
 /**

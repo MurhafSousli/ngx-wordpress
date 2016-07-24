@@ -18,6 +18,7 @@ export class WpState {
     constructor() {
     }
 
+    /** functions to use in components */
     getBaseUrl = () => {
         return this.baseUrl;
     }
@@ -32,6 +33,7 @@ export class WpState {
         return this.authKeys;
     }
 
+    /** Those function are used within the library */
     getOptions = (): any => {
         return { headers: WpHelper.getHeaders(this.authKeys) };
     }
