@@ -10,7 +10,7 @@ This library is designed to make it easy for your Angular2 application to reques
 
 # Requirments
 
-Wordpress site and WP API v2 plugin activated.
+**Wordpress** installation and **WP API v2** plugin activated.
 
 # Installing
 
@@ -88,12 +88,16 @@ The library offers:
 <a name="usage"/>
 # Usage
 
+After installing the library, set your WordPress base address
+
 <a name="Initialization"/>
 ## Initialization
 
-First of all, we must initialize the library's configuration in `WpState` service, set the `baseUrl` to the wordpress host address (must be done within the root component).
+To initialize the library's configuration
 
-Inject `WORDPRESS_PROVIDERS` in the root component provider or directly in bootstrap, because we only want one global instance of `WpState`.
+1 - import `WpState` service in your root component, then set the `baseUrl` to your WordPress host address
+
+2 - Inject `WORDPRESS_PROVIDERS` in the root component provider or directly in bootstrap.
 
 
 in App component (root):
@@ -105,12 +109,13 @@ in App component (root):
 })
 export class App {
     constructor(wpState: WpState){
-        wpState.setBaseUrl("http://yourWordPressDomain.com");
+        wpState.setBaseUrl("http://yourWordPressSite.com");
     }
 }
 ```
 [Initilizing the library example](/examples/Initilizing WP Service.ts)
 
+`WpState` *is a global service where other services can acquire information.*
 
 Now the library is initialized, the services `WpModel` and `WpCollection` are ready to use in any component.
 
