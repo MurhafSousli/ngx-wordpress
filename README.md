@@ -18,25 +18,23 @@ Install it with npm
 
 `npm install ng2-wp-api --save`
 
-## Usage
-
-### Abstract
+## Abstract
 
 The library offers:
 
     Components:
-        - `Collection`      Component to consume WpCollection service.
-        - `Model`           Component to consume WpModel service.
+     - `Collection`      Component to consume WpCollection service.
+     - `Model`           Component to consume WpModel service.
 
     Services:    
-        - `WpCollection`    Service to get a collection of endpoint type.
-        - `WpModel`         Service to get a single object of endpoint type by id.
-        - `WpState`         Service to get and set library's configurations such as Wordpress base address and authentication.
+     - `WpCollection`    Service to get a collection of endpoint type.
+     - `WpModel`         Service to get a single object of endpoint type by id.
+     - `WpState`         Global service to get and set library's configurations e.g. base address and user credentials.
 
     Classes:  
-        - `Post`            Class for Post/Page contains helper functions (e.g. functions for accessing embedded properties).
-        - `User`            Interface for User response.
-        - `QueryArgs`       Class for creating query arguments
+     - `Post`            Class for Post/Page contains helper functions (e.g. functions for accessing embedded properties).
+     - `User`            Interface for User response.
+     - `QueryArgs`       Class for creating query arguments
 
 ```
     WpCollection
@@ -64,6 +62,7 @@ The library offers:
 
 **Default Endpoints** are : `Posts`, `Pages`, `Users`, `Categories`, `Tags`, `Taxonomies`, `Statuses`, `Comments`, `Media`
 
+## Usage
 
 ### Initialization
 
@@ -86,13 +85,12 @@ export class App {
 ```
 [Initilizing the library example](/examples/Initilizing WP Service.ts)
 
-### Using the service in your component
 
 Now the library is initialized, the services `WpModel` and `WpCollection` become ready to use in any component.
 
 ### Getting a collection of posts
 
-#### METHOD 1: The component way
+**METHOD 1:** The component way
 
 ```
 import {Component, ViewChild} from '@angular/core';
@@ -135,7 +133,7 @@ export class TestCollection {
 ```
 [Getting collection using the component - full example](/examples/Getting Collection.ts)
 
-#### METHOD 2: The service way
+**METHOD 2:** The service way
 
 ```
 args: QueryArgs;
@@ -161,7 +159,7 @@ Note that contrary to what we did with `WpState`, Every component uses one of th
 
 ### Getting a single post by ID
 
-#### METHOD 1: The component way
+**METHOD 1:** The component way
 
 ```
 import {Model, WpHelper, Post} from 'ng2-wp-api/ng2-wp-api';
@@ -202,7 +200,7 @@ export class TestModel {
 
 [Getting model by id - full example](/examples/Model using the component.ts)
 
-#### METHOD 2: The service way
+**METHOD 2:** The service way
 
 ```
 id: string;
