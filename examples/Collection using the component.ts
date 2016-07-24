@@ -20,8 +20,13 @@ import {Collection, WpHelper, QueryArgs} from 'ng2-wp-api/ng2-wp-api';
   selector: 'test-collection',
   template: `
     <collection [args]="args" [endpoint]="endpoint" (response)="postsData($event)">
-        <item *ngFor="let post of posts" [data]="post"></item>
+        <item *ngFor="let post of response.objects" [data]="post"></item>
     </collection>
+
+    <div class="pagination">    
+        <p>Page: {{response.currentPage}} / {{response.totalPages}} </p><span> - Total Posts: {{response.totalObjects}}</span>
+        <button *ngIf="collection.hasMore()" (click)="fetchMore()"> Load more</button>
+    </div>
   `,
   directives: [Collection]
 })
@@ -31,7 +36,8 @@ export class TestCollection {
     /** set the endpoint of collection */
   endpoint = WpHelper.Endpoint.Posts;
   args:QueryArgs;
-  posts;
+
+  response;
 
   /** reference for Collection, so we can use its functions */
   @ViewChild(Collection) collection:Collection;
@@ -51,7 +57,7 @@ export class TestCollection {
       console.log(event.error);
     }
     else {
-      this.posts = event.objects;
+      this.response = event;
     }
   }
 

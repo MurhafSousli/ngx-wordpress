@@ -86,14 +86,13 @@ export class App {
 [Initilizing the library example](/examples/Initilizing WP Service.ts)
 
 
-Now the library is initialized, the services `WpModel` and `WpCollection` become ready to use in any component.
+Now the library is initialized, the services `WpModel` and `WpCollection` are ready to use in any component.
 
 ### Getting a collection of posts
 
 **METHOD 1:** The component way
 
 ```
-import {Component, ViewChild} from '@angular/core';
 import {Collection, WpHelper, QueryArgs} from 'ng2-wp-api/ng2-wp-api';
 
 @Component({
@@ -113,6 +112,9 @@ export class TestCollection {
   endpoint = WpHelper.Endpoint.Posts;
   args:QueryArgs;
   posts;
+
+/** reference for Collection, so we can use its functions */
+  @ViewChild(Collection) collection:Collection;
 
 /** collection output */
   postsData(event) {
@@ -136,21 +138,31 @@ export class TestCollection {
 **METHOD 2:** The service way
 
 ```
-args: QueryArgs;
+import {WpCollection, QueryArgs} from 'ng2-wp-api/ng2-wp-api';
 
-constructor(private service:WpCollection) { 
-}
+@Component({
+    providers: [WpCollection],
+    selector: 'test-collection',
+    template: ` ... `
+})
+export class TestCollection {
 
-fetchPosts(){
-    this.service.Posts().get(this.args).subscribe(
-        (res) => {
-            this.posts = res;
-        },
-        err => {
-            /** handle errors */
-            console.log(err)
-        }
-    );
+    args: QueryArgs;
+
+    constructor(private service:WpCollection) { 
+    }
+
+    fetchPosts(){
+        this.service.Posts().get(this.args).subscribe(
+            (res) => {
+                this.posts = res;
+            },
+            err => {
+                /** handle errors */
+                console.log(err)
+            }
+        );
+    }
 }
 ```
 Note that contrary to what we did with `WpState`, Every component uses one of these services must has its own instance of the service, so we must inject the service within each component.
@@ -168,20 +180,20 @@ import {Model, WpHelper, Post} from 'ng2-wp-api/ng2-wp-api';
   selector: 'test-model',
   template: `
     <model [endpoint]="endpoint" [id]="id" (response)="pageData($event)">
-      <div class="post-content" [innerHtml]="page.content()">
+      <div class="post-content" [innerHtml]="response.content()">
       </div>
     </model>
-  `
+  `,
   directives: [Model]
 })
 export class TestModel {
 
   endpoint = WpHelper.Endpoint.Pages;
   id;
-  page;
+  response;
 
   ngOnInit() {
-    /** Get page where id = 123 */
+    /** get page where id = 123 */
     this.id = 123;
   }
 
@@ -191,7 +203,7 @@ export class TestModel {
       console.log(event.error);
     }
     else {
-      this.page = new Post(event.object);
+      this.response = new Post(event.object);
     }
   }
 }

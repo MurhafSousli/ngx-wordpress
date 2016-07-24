@@ -5,17 +5,17 @@ import {Model, WpHelper, Post} from 'ng2-wp-api/ng2-wp-api';
   selector: 'test-model',
   template: `
     <model [endpoint]="endpoint" [id]="id" (response)="pageData($event)">
-      <div class="post-content" [innerHtml]="page.content()">
+      <div class="post-content" [innerHtml]="response.content()">
       </div>
     </model>
-  `
+  `,
   directives: [Model]
 })
 export class TestModel {
 
   endpoint = WpHelper.Endpoint.Pages;
   id;
-  page;
+  response;
 
   ngOnInit() {
     /** get page where id = 123 */
@@ -28,7 +28,7 @@ export class TestModel {
       console.log(event.error);
     }
     else {
-      this.page = new Post(event.object);
+      this.response = new Post(event.object);
     }
   }
 }

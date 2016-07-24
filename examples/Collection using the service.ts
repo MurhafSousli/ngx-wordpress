@@ -10,17 +10,14 @@ import {WpCollection, QueryArgs} from 'ng2-wp-api/ng2-wp-api';
     providers: [WpCollection],
     selector: 'test-collection',
     template: `
-        <ul class="list">
-            <li class="post-item" *ngFor="let post of posts"></li>
-                <div class="post-title"> {{post.title()}} </div>
-                 <div class="post-image">
-                    <img [src]="post.featuredImageUrl('small')"/>
-                </div>
-                <div class="post-excerpt" [innerHtml]="post.excerpt()">
-            <li>
-        </ul>
-        <p>Page: {{service.currentPage}} / {{service.totalPages}} </p><span> - Total Posts: {{service.totalObjects}}</span>
-        <button *ngIf="service.hasMore()" (click)="fetchMore()"> Load more</button>
+        <div class="collection">
+            <item *ngFor="let post of posts" [data]="post"></item>
+        </div>
+        
+        <div class="pagination">    
+            <p>Page: {{wpCollection.service.currentPage}} / {{wpCollection.service.totalPages}} </p><span> - Total Posts: {{wpCollection.service.totalObjects}}</span>
+            <button *ngIf="wpCollection.service.hasMore()" (click)="fetchMore()"> Load more</button>
+        </div>
     `
 })
 
@@ -29,23 +26,23 @@ export class TestCollection {
     args: QueryArgs;
     posts;
 
-    constructor(private service:WpCollection) {
+    constructor(private wpCollection: WpCollection) {
 
     }
 
-    ngOnInit(){
+    ngOnInit() {
 
         /** Filtering Collections, more info https://codex.wordpress.org/Class_Reference/WP_Query#Parameters */
         this.args = new QueryArgs();
 
         /** Get 6 posts in each page */
-        this.args.per_page = 6; 
+        this.args.per_page = 6;
         this.args._embed = true;
         this.fetchPosts();
     }
 
     fetchPosts() {
-        this.service.Posts().get(this.args).subscribe(
+        this.wpCollection.Posts().get(this.args).subscribe(
             (res) => {
                 this.posts = res;
             },
@@ -57,7 +54,7 @@ export class TestCollection {
     }
 
     fetchMore() {
-        this.service.Posts().more().subscribe(
+        this.wpCollection.Posts().more().subscribe(
             res => {
                 this.posts = this.posts.concat(res);
             },
@@ -66,5 +63,33 @@ export class TestCollection {
                 console.log(err)
             }
         );
+    }
+}
+
+/* This is optional if you want to make use of Post class.
+ * Create a view component for post item.
+ * Create Post class from the `@Input data`.
+ */
+import {Post} from 'ng2-wp-api/ng2-wp-api';
+
+@Component({
+    selector: 'item',
+    template: `
+    <div class="post-title"> {{post.title()}} </div>
+        <div class="post-image">
+            <img [src]="post.featuredImageUrl('small')"/>
+        </div>
+    <div class="post-excerpt" [innerHtml]="post.excerpt()">
+  `,
+    directives: [Collection]
+})
+
+export class Item {
+
+    @Input() data;
+    post: Post;
+
+    ngOnInit() {
+        this.post = new Post(this.data);
     }
 }
