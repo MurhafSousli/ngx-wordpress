@@ -18,6 +18,23 @@ Install it with npm
 
 `npm install ng2-wp-api --save`
 
+## Table of Contents
+ 
+ - [Abstract](#abstract)  
+ - [Usage](#usage)
+    - [Initilizing](#initializing)
+    - [Getting Collection](#collection)
+        - [Getting Collection using component](#collectionCmp) 
+        - [Getting Collection using service](#collectionSrv)
+    - [Getting Model](#model)
+        - [Getting Model using component](#modelCmp)
+        - [Getting Model using service](#modelSrv)
+ - [Authentication](#authentication)    
+ - [Issues](#issues)   
+ - [License](#license)   
+
+
+<a name="abstract"/>
 ## Abstract
 
 The library offers:
@@ -62,8 +79,10 @@ The library offers:
 
 **Default Endpoints** are : `Posts`, `Pages`, `Users`, `Categories`, `Tags`, `Taxonomies`, `Statuses`, `Comments`, `Media`
 
+<a name="usage"/>
 ## Usage
 
+<a name="initializing"/>
 ### Initialization
 
 First of all, we must initialize the library's configuration in `WpState` service, set the `baseUrl` to the wordpress host address (must be done within the root component).
@@ -89,8 +108,10 @@ export class App {
 
 Now the library is initialized, the services `WpModel` and `WpCollection` are ready to use in any component.
 
+<a name="collection"/>
 ### Getting a collection of posts
 
+<a name="collectionCmp"/>
 **METHOD 1:** The component way
 
 ```
@@ -141,6 +162,7 @@ export class TestCollection {
 ```
 [Getting collection using the component - full example](/examples/Getting Collection.ts)
 
+<a name="collectionSrv"/>
 **METHOD 2:** The service way
 
 ```
@@ -199,8 +221,10 @@ Note that contrary to what we did with `WpState`, Every component uses one of th
 
 [Getting collection using the service - full example](/examples/Collection using the service.ts)
 
+<a name="model"/>
 ### Getting a single post by ID
 
+<a name="modelCmp"/>
 **METHOD 1:** The component way
 
 ```
@@ -247,6 +271,7 @@ export class TestModel {
 
 [Getting model by id - full example](/examples/Model using the component.ts)
 
+<a name="modelSrv"/>
 **METHOD 2:** The service way
 
 ```
@@ -299,6 +324,7 @@ export class TestModel {
 
 *PS: when embed is set to true, you will get featured image, categories, tags and author with the response.*
 
+<a name="authentication"/>
 ## Authentication
 
 In order to use Add/Update/Delete functions, user must be authenticated. use `WpState.setAuthKeys($username, $password)` to store user credentials.
@@ -318,10 +344,12 @@ export class App {
 ```
 [Initilizing the library example](/examples/Initilizing WP Service.ts)
 
+<a name="issues"/>
 ## Issues
 
 If you identify any errors in this service, or have an idea for an improvement, please open an [issue](https://github.com/MurhafSousli/ng2-wp-api/issues). I am excited to see what the community thinks of this project, and I would love your input!
 
+<a name="license"/>
 ## License
 
 [![npm](https://img.shields.io/npm/l/express.svg?maxAge=2592000)](/LICENSE)
