@@ -12,7 +12,7 @@ export class Collection {
 
   /** Inputs for api endpoint and query arguments */
   @Input() endpoint;
-  @Input() args;
+  @Input() args = {};
 
   /** Output for the response */
   @Output() response = new EventEmitter();

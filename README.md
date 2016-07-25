@@ -37,12 +37,7 @@ Install it with npm
 <a name="abstract"/>
 # Abstract
 
-The library offers two easy ways to get the data from WP API
 
- 1 - using the components
- 2 - using the service directly
-
- 
     Components:
      - `Collection`      Component to consume WpCollection service.
      - `Model`           Component to consume WpModel service.
