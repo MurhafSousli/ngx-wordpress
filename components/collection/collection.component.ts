@@ -1,6 +1,6 @@
 import {Component, Input, Output, EventEmitter, SimpleChange} from '@angular/core';
 
-import {WpCollection} from '../../service';
+import {WpCollection} from 'ng2-wp-api/ng2-wp-api';
 
 @Component({
   selector: 'collection',
@@ -12,7 +12,7 @@ export class Collection {
 
   /** Inputs for api endpoint and query arguments */
   @Input() endpoint;
-  @Input() args = {};
+  @Input() args;
 
   /** Output for the response */
   @Output() response = new EventEmitter();
@@ -31,7 +31,7 @@ export class Collection {
     }
   }
 
- /** Get collection of endpoint type */
+  /** Get collection of endpoint type */
   fetch(args) {
     this.wpCollection.Endpoint(this.endpoint).get(args).subscribe(
       (res) => {
@@ -49,7 +49,7 @@ export class Collection {
     );
   }
 
- /** Get more collection if available */
+  /** Get more collection if available */
   more() {
     this.wpCollection.Endpoint(this.endpoint).more().subscribe(
       (res) => {

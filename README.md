@@ -39,13 +39,13 @@ Install it with npm
 
 
     Components:
-     - `Collection`      Component to consume WpCollection service.
-     - `Model`           Component to consume WpModel service.
+     - `Collection`      Inputs: args, endpoint - Output: collection response.
+     - `Model`           Inputs: id, args, endpoint - Output: model response.
 
     Services:    
      - `WpCollection`    Service to get a collection of endpoint type.
      - `WpModel`         Service to get a single object of endpoint type by id.
-     - `WpState`         Global service to get and set library's configurations e.g. base address and user credentials.
+     - `WpState`         Class to configure the library base url and user credentials.
 
     Classes:  
      - `Post`            Class for Post/Page contains helper functions (e.g. functions for accessing embedded properties).
@@ -94,7 +94,7 @@ After installing the library, set your WordPress base address
 
 To initialize the library's configuration
 
-1 - import `WpState` service in your root component, then set the `baseUrl` to your WordPress host address
+1 - import `WpState` class in your root component, then set the `baseUrl` to your WordPress host address
 
 2 - Inject `WORDPRESS_PROVIDERS` in the root component provider or directly in bootstrap.
 
@@ -112,7 +112,7 @@ export class App {
     }
 }
 ```
-[Initilizing the library example](/examples/Initilizing WP Service.ts)
+[Initilizing the library - full example](/examples/Initilizing WP Service.ts)
 
 `WpState` *is a global service where other services can acquire information.*
 
@@ -122,9 +122,7 @@ Now the library is initialized, the services `WpModel` and `WpCollection` are re
 ## Getting a collection of posts
 
 <a name="collectionCmp"/>
-### **METHOD 1:** The component way
-
-The basic usage is to get to display a collection of posts 
+### **METHOD 1:** Using `Collection` component
 
 ```
 <collection [args]="args" [endpoint]="endpoint" (response)="postsData($event)">
@@ -174,7 +172,7 @@ in parent component
 [Getting collection using the component - full example](/examples/Collection using the component.ts)
 
 <a name="collectionSrv"/>
-### **METHOD 2:** The service way
+### **METHOD 2:** Using `Collection` Service
 
 ```
 import {WpCollection, QueryArgs} from 'ng2-wp-api/ng2-wp-api';
@@ -228,7 +226,7 @@ export class TestCollection {
     }
 }
 ```
-Note that contrary to what we did with `WpState`, Every component uses one of these services must has its own instance of the service, so we must inject the service within each component.
+Note that contrary to what we did with `WpState`, Any component uses one of these services must has its own instance of the service, so we must inject the service within each component.
 
 [Getting collection using the service - full example](/examples/Collection using the service.ts)
 
@@ -236,7 +234,7 @@ Note that contrary to what we did with `WpState`, Every component uses one of th
 ## Getting a single post by ID
 
 <a name="modelCmp"/>
-### **METHOD 1:** The component way
+### **METHOD 1:** Using `Model` component
 
 ```
 <model [endpoint]="endpoint" [id]="id" (response)="pageData($event)">
@@ -293,7 +291,7 @@ in parent component
 [Getting model using the component - full example](/examples/Model using the component.ts)
 
 <a name="modelSrv"/>
-### **METHOD 2:** The service way
+### **METHOD 2:** Using `WpModel` service
 
 ```
 import {WpModel, Post, QueryArgs} from "ng2-wp-api/ng2-wp-api";
@@ -363,7 +361,7 @@ export class App {
     }
 }
 ```
-[Initilizing the library example](/examples/Initilizing WP Service.ts)
+[Initilizing the library - full example](/examples/Initilizing WP Service.ts)
 
 <a name="issues"/>
 # Issues
