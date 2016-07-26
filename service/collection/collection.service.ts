@@ -7,6 +7,9 @@ import {WpState} from "../state/state.service";
 
 /*
  * WpCollection Service: Get collection from WP API
+ * 
+ * In this class each function represent default endpoint and returns the CollectionService.
+ * 
  */
 
 @Injectable()

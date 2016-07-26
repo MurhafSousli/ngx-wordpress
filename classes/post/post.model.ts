@@ -53,7 +53,7 @@ export class Post {
   }
 
   excerpt():string {
-    if(this.post.excerpt) return this.post.excerpt.rendered;
+    if(this.post.excerpt) return (<string>this.post.excerpt.rendered).replace(/<a\b[^>]*>(.*?)<\/a>/i,"");
   }
 
   author():User {
