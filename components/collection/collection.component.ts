@@ -27,7 +27,7 @@ export class Collection {
     let prevArgs = changes['args'].previousValue;
     let newArgs = changes['args'].currentValue;
     if (prevArgs != newArgs) {
-      setTimeout(() => this.fetch(newArgs));
+      this.fetch(newArgs);
     }
   }
 
