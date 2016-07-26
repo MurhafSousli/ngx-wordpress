@@ -41,21 +41,21 @@ You can either use the components or services to get the data from WordPress api
 
 ### Components:
 
-    - `Collection`      Inputs: args, endpoint - Output: collection response.
-    - `Model`           Inputs: id, args, endpoint - Output: model response.
+ - `Collection`      Inputs: args, endpoint - Output: collection response.
+ - `Model`           Inputs: id, args, endpoint - Output: model response.
 
 ### Services:    
 
-    - `WpCollection`    Service to get a collection of endpoint type.
-    - `WpModel`         Service to get a single object of endpoint type by id.
-    - `WpState`         Class to configure the library (e.g. wordpress base url).
+ - `WpCollection`    Service to get a collection of endpoint type.
+ - `WpModel`         Service to get a single object of endpoint type by id.
+ - `WpState`         Class to configure the library (e.g. wordpress base url).
 
 ### Helper Classes:  
 
-    - `Post`            Class for Post/Page contains helper functions (e.g. functions for accessing embedded properties).
-    - `User`            Interface for User response.
-    - `QueryArgs`       Class for creating query arguments
-    - `WpHelper`        Get endpoint address.
+ - `Post`            Class for Post/Page contains helper functions (e.g. functions for accessing embedded properties).
+ - `User`            Interface for User response.
+ - `QueryArgs`       Class for creating query arguments
+ - `WpHelper`        Get endpoint address.
 
 :
 
