@@ -38,22 +38,22 @@ Install it with npm
 # Abstract
 
 
-    Components:
-     - `Collection`      Inputs: args, endpoint - Output: collection response.
-     - `Model`           Inputs: id, args, endpoint - Output: model response.
+Components:
+    - `Collection`      Inputs: args, endpoint - Output: collection response.
+    - `Model`           Inputs: id, args, endpoint - Output: model response.
 
-    Services:    
-     - `WpCollection`    Service to get a collection of endpoint type.
-     - `WpModel`         Service to get a single object of endpoint type by id.
-     - `WpState`         Class to configure the library base url and user credentials.
+Services:    
+    - `WpCollection`    Service to get a collection of endpoint type.
+    - `WpModel`         Service to get a single object of endpoint type by id.
+    - `WpState`         Class to configure the library base url and user credentials.
 
-    Classes:  
-     - `Post`            Class for Post/Page contains helper functions (e.g. functions for accessing embedded properties).
-     - `User`            Interface for User response.
-     - `QueryArgs`       Class for creating query arguments
+Classes:  
+    - `Post`            Class for Post/Page contains helper functions (e.g. functions for accessing embedded properties).
+    - `User`            Interface for User response.
+    - `QueryArgs`       Class for creating query arguments
 
-    Helper:
-     - `Endpoint`        Default endpoints.   
+Helper:
+    - `Endpoint`        Default endpoints.   
 
 **Default Endpoints** are : `Posts`, `Pages`, `Users`, `Categories`, `Tags`, `Taxonomies`, `Statuses`, `Comments`, `Media`     
 
