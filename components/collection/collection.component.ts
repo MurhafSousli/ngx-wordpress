@@ -1,6 +1,6 @@
 import {Component, Input, Output, EventEmitter, SimpleChange} from '@angular/core';
 
-import {WpCollection} from 'ng2-wp-api/ng2-wp-api';
+import {WpCollection} from '../../service';
 
 @Component({
   selector: 'collection',
