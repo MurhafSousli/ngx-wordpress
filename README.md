@@ -46,8 +46,8 @@ You can either use the components or services to get the data from WordPress api
 
 ### Services:    
 
- - `WpCollection`    Service to get a collection of endpoint type.
- - `WpModel`         Service to get a single object of endpoint type by id.
+ - `WpCollection`    Service to get a collection of objects (posts).
+ - `WpModel`         Service to get/add/update/delete a single object (post) by id.
  - `WpState`         Class to configure the library (e.g. wordpress base url).
 
 ### Helper Classes:  
