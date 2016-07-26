@@ -325,17 +325,26 @@ export class TestModel {
     args: QueryArgs;
     post: Post;
 
-    constructor(private service:WpModel) {
+    constructor(private wpModel:WpModel) {
 
     }
 
     ngOnInit(){
-        /** Assume we already have the post ID */
-        this.id = 123;
+        /** requested post id */
+        this.id = 7;
+
+        /** Set the query arguments, more info https://codex.wordpress.org/Class_Reference/WP_Query#Parameters */
+        this.args = new QueryArgs();
+        this.args._embed = true;
+        this.fetchPost();
     }
 
     fetchPost() {
-        this.service.Posts().get(this.id, this.args).subscribe(
+        /*
+         * for custom endpoint:  
+         * use `wpModel.Endpoint('/wp-json/wp/v2/books/').get(this.args)...` 
+         */
+        this.wpModel.Posts().get(this.id, this.args).subscribe(
             (res) => {
                 this.post = new Post(res);
             },

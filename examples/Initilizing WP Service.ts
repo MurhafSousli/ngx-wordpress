@@ -21,9 +21,9 @@ export class App {
     constructor(wpState: WpState){
         wpState.setBaseUrl("http://yourWordPressDomain.com");
         /*
-         * Setting up authentication keys is required to make Add/Update/Delete requests,
-         * Pass your wordpress username and password in `setAuthKeys($username, $password)`
+         * To make Add/Update/Delete requests pass your
+         * Wordpress username and password
          */
-        wpState.setAuthKeys("yourUsername", "yourPassword");
+        wpState.setAuthKeys("username", "password");
     }
 }

@@ -1,5 +1,11 @@
 import {Component} from '@angular/core';
+
 import {Model, WpHelper, Post} from 'ng2-wp-api/ng2-wp-api';
+/**
+ * import Model:  **optional** child component to display the post
+ * WpHelper: to get post endpoint url 
+ * Post: create Post class from post data to get the functions
+ */
 
 @Component({
   selector: 'test-model',
@@ -17,10 +23,13 @@ export class TestModel {
   response;
 
   ngOnInit() {
-    /** get page where id = 123 */
+    /** requested page id 123 */
     this.id = 123;
   }
 
+  /**
+   * pageData fires when the data is recieved from Model component
+   */
   pageData(event) {
     if (event.error) {
       /** handle model request error */
@@ -32,9 +41,7 @@ export class TestModel {
   }
 }
 
-/** Optional component to use Post class */ 
-
-import {Post} from 'ng2-wp-api/ng2-wp-api';
+/** Optional component that create Post class from the data */ 
 
 @Component({
   selector: 'single',
@@ -52,12 +59,19 @@ import {Post} from 'ng2-wp-api/ng2-wp-api';
   `,
 })
 export class Single {
+    /**
+     *  Create Post class from the input to get Post functions.
+     *  
+     *  Pass the size you want for the featured image 
+     *  default images: `small`, `medium`, `large`, `full`
+     * 
+     *  check Post class file to see the functions list.
+    */
 
   @Input() data;
   post: response;
 
   ngOnInit() {
-    /* Create Post class from the `@Input data`. */
     this.response = new Post(this.data);
   }
 }

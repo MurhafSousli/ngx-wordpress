@@ -1,6 +1,8 @@
 /*
- * In the following example, we fetch a collection of posts from WP API, the template displays the posts and a "Load more" button to load the next available page.
+ * In this example, we display a collection of posts, pagination and a button to load the next page.
  * we also set the QueryArgs for the request to get embedded posts and filter the results to 6 posts per page
+ * 
+ * get pagination properties from `wpCollection.service`
  */
 import {Component} from '@angular/core';
 
@@ -42,6 +44,10 @@ export class TestCollection {
     }
 
     fetchPosts() {
+        /*
+         * for custom endpoint:  
+         * use `wpCollection.Endpoint('/wp-json/wp/v2/projects/').get(this.args)...` 
+         */
         this.wpCollection.Posts().get(this.args).subscribe(
             (res) => {
                 this.posts = res;
