@@ -37,27 +37,29 @@ Install it with npm
 <a name="abstract"/>
 # Abstract
 
+You can either use the components or services to get the data from WordPress api.
 
-Components:
+### Components:
 
-	- `Collection`      Inputs: args, endpoint - Output: collection response.
+    - `Collection`      Inputs: args, endpoint - Output: collection response.
     - `Model`           Inputs: id, args, endpoint - Output: model response.
 
-Services:    
+### Services:    
 
     - `WpCollection`    Service to get a collection of endpoint type.
     - `WpModel`         Service to get a single object of endpoint type by id.
     - `WpState`         Class to configure the library (e.g. wordpress base url).
 
-Classes:  
+### Helper Classes:  
 
     - `Post`            Class for Post/Page contains helper functions (e.g. functions for accessing embedded properties).
     - `User`            Interface for User response.
     - `QueryArgs`       Class for creating query arguments
+    - `WpHelper`        Get endpoint address.
 
-Helper:
+:
 
-    - `Endpoint`        Default endpoints.   
+       
 
 **Default Endpoints** are : `Posts`, `Pages`, `Users`, `Categories`, `Tags`, `Taxonomies`, `Statuses`, `Comments`, `Media`     
 
