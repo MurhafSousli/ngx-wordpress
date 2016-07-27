@@ -381,7 +381,15 @@ export class App {
 <a name="issues"/>
 # Issues
 
+
 The library is still in beta, if you identify any errors in this service, or have an idea for an improvement, please open an [issue](https://github.com/MurhafSousli/ng2-wp-api/issues). I am excited to see what the community thinks of this project, and I would love your input!
+
+# Author
+
+ **Murhaf Sousli**
+
+ - [github/murhafsousli](https://github.com/MurhafSousli)
+ - [twitter/murhafsousli](https://twitter.com/MurhafSousli)
 
 <a name="license"/>
 # License
