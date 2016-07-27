@@ -4,6 +4,8 @@
 
 ![Alt text](/assets/logo.png?raw=true "Optional Title")
 
+[![npm](https://img.shields.io/npm/dt/express.svg?maxAge=2592000)]()
+
 # Purpose
 
 This library is designed to make it easy for your Angular2 application to request specific resources from a WordPress install. it returns the API server's response to your application as an `Observable<any>` object.
