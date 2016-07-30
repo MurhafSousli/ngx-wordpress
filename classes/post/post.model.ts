@@ -26,50 +26,52 @@ export class Post {
   constructor(public post) {
   }
 
-  id():string{
-    if(this.post.id) return this.post.id;
+  id = ():string=> {
+    if (this.post.id) return this.post.id;
   }
 
-  title():string {
-    if(this.post.title) return this.post.title.rendered;
+  title = ():string=> {
+    if (this.post.title) return this.post.title.rendered;
   }
 
-  content():string {
-    if(this.post.content) return this.post.content.rendered;
+  content = ():string=> {
+    if (this.post.content) return this.post.content.rendered;
   }
 
-  date():string{
-    if(this.post.date) return this.post.date;
+  excerpt = ():string => {
+    if (this.post.excerpt) return (<string>this.post.excerpt.rendered).replace(/<a\b[^>]*>(.*?)<\/a>/i, "");
   }
 
-  categories():any {
-    if (this.post._embedded && this.post._embedded['wp:term'][0])
+  date = ():string => {
+    if (this.post.date) return this.post.date;
+  }
+
+  categories = ():any=> {
+    if (this.post._embedded && this.post._embedded['wp:term'][0]) {
       return this.post._embedded['wp:term'][0];
+    }
   }
 
-  tags():any {
+  tags = ():any => {
     if (this.post._embedded && this.post._embedded['wp:term'][1])
       return this.post._embedded['wp:term'][1];
   }
 
-  excerpt():string {
-    if(this.post.excerpt) return (<string>this.post.excerpt.rendered).replace(/<a\b[^>]*>(.*?)<\/a>/i,"");
-  }
 
-  author():User {
-    if(this.post._embedded)  return <User>this.post._embedded.author;
+  author = ():User => {
+    if (this.post._embedded)  return <User>this.post._embedded.author;
   }
 
   /** featuredMedia(): check if has featured image, return false | number */
-  featuredMedia():boolean | number {
-    if(this.post.featured_media)  return +this.post.featured_media;
+  featuredMedia = ():boolean | number => {
+    if (this.post.featured_media)  return +this.post.featured_media;
   }
 
   /**
    * get post featured image url
-   * @params {string} size - 
+   * @params {string} size -
    */
-  featuredImageUrl(size:string):string {
+  featuredImageUrl = (size:string):string => {
     if (this.featuredMedia() && this.post._embedded) {
 
       var featuredImage = this.post._embedded['wp:featuredmedia'][0];

@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, SimpleChange} from '@angular/core';
+import {Component, Input, Output, EventEmitter, SimpleChange, OnChanges, OnInit} from '@angular/core';
 
 import {WpCollection} from '../../service';
 
@@ -8,31 +8,35 @@ import {WpCollection} from '../../service';
   template: `<ng-content></ng-content>`
 })
 
-export class Collection {
+export class Collection implements OnInit{
 
   /** Inputs for api endpoint and query arguments */
-  @Input() endpoint;
-  @Input() args;
+  @Input() endpoint:string;
+  @Input() args:any;
 
   /** Output for the response */
   @Output() response = new EventEmitter();
 
-  private data;
+  private data:any;
 
   constructor(private wpCollection:WpCollection) {
   }
 
-  /** Detects if args has changed to fetch again. */
-  ngOnChanges(changes:{[propName:string]:SimpleChange}) {
-    let prevArgs = changes['args'].previousValue;
-    let newArgs = changes['args'].currentValue;
-    if (prevArgs != newArgs) {
-      this.fetch(newArgs);
-    }
+  ngOnInit(){
+    this.fetch(this.args);
   }
 
+  // /** Detects if args has changed to fetch again. */
+  // ngOnChanges(changes:{[propName:string]:SimpleChange}) {
+  //   let prevArgs = changes['args'].previousValue;
+  //   let newArgs = changes['args'].currentValue;
+  //   if (prevArgs != newArgs) {
+  //     this.fetch(newArgs);
+  //   }
+  // }
+
   /** Get collection of endpoint type */
-  fetch(args) {
+  public fetch(args):void {
     this.wpCollection.Endpoint(this.endpoint).get(args).subscribe(
       (res) => {
         this.data = res;
@@ -49,8 +53,8 @@ export class Collection {
     );
   }
 
-  /** Get more collection if available */
-  more() {
+  /** Get more collection (next page) */
+  public more():void {
     this.wpCollection.Endpoint(this.endpoint).more().subscribe(
       (res) => {
         this.data = this.data.concat(res);
@@ -68,7 +72,7 @@ export class Collection {
   }
 
   /** Check if WP has more collection */
-  hasMore() {
+  public hasMore():boolean {
     return this.wpCollection.service.hasMore();
   }
 

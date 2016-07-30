@@ -11,39 +11,40 @@ import {WpState} from "../state/state.service";
 @Injectable()
 export class WpModel {
 
-  public service;
+  public service:any;
 
-  constructor(private http: Http, private state: WpState) { }
+  constructor(private http:Http, private state:WpState) {
+  }
 
-  Endpoint(endpoint: string): ModelService {
+  public Endpoint = (endpoint:string):ModelService=> {
     if (!this.service) {
       this.service = new ModelService(this.http, this.state, endpoint);
     }
     return this.service;
   }
 
-  Posts(): ModelService {
+  public Posts = ():ModelService => {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/posts/';
       this.service = new ModelService(this.http, this.state, endpoint);
     }
     return this.service;
   }
-  Users(): ModelService {
+  public Users = ():ModelService=> {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/users/';
       this.service = new ModelService(this.http, this.state, endpoint);
     }
     return this.service;
   }
-  Categories(): ModelService {
+  public Categories = ():ModelService => {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/categories/';
       this.service = new ModelService(this.http, this.state, endpoint);
     }
     return this.service;
   }
-  Pages(): ModelService {
+  public Pages = ():ModelService=> {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/pages/';
       this.service = new ModelService(this.http, this.state, endpoint);
@@ -51,7 +52,7 @@ export class WpModel {
     return this.service;
   }
 
-  Tags(): ModelService {
+  public Tags = ():ModelService=> {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/tags/';
       this.service = new ModelService(this.http, this.state, endpoint);
@@ -59,7 +60,7 @@ export class WpModel {
     return this.service;
   }
 
-  Comments(): ModelService {
+  public Comments = ():ModelService=> {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/comments/';
       this.service = new ModelService(this.http, this.state, endpoint);
@@ -67,7 +68,7 @@ export class WpModel {
     return this.service;
   }
 
-  Media(): ModelService {
+  public Media = ():ModelService=> {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/media/';
       this.service = new ModelService(this.http, this.state, endpoint);
@@ -75,7 +76,7 @@ export class WpModel {
     return this.service;
   }
 
-  Taxonomies(): ModelService {
+  public Taxonomies = ():ModelService => {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/taxonomies/';
       this.service = new ModelService(this.http, this.state, endpoint);
@@ -83,7 +84,7 @@ export class WpModel {
     return this.service;
   }
 
-  Statuses(): ModelService {
+  public Statuses = ():ModelService=> {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/statuses/';
       this.service = new ModelService(this.http, this.state, endpoint);
@@ -91,7 +92,7 @@ export class WpModel {
     return this.service;
   }
 
-  Types(): ModelService {
+  public Types = ():ModelService=> {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/types/'
       this.service = new ModelService(this.http, this.state, endpoint);
@@ -103,20 +104,19 @@ export class WpModel {
 
 export class ModelService {
 
-  constructor(
-    private http: Http,
-    private state: WpState, 
-    private endpoint: string) {
+  constructor(private http:Http,
+              private state:WpState,
+              private endpoint:string) {
   }
 
-  public get = (id, args?): Observable<any> => {
+  public get = (id, args?):Observable<any> => {
 
     return this.http.get(
       this.state.generateUrl(this.endpoint + id, args),
       this.state.getOptions()).map(res => res.json());
   }
 
-  public add = (body): Observable<any> => {
+  public add = (body):Observable<any> => {
 
     return this.http.post(
       this.state.generateUrl(this.endpoint),
@@ -124,7 +124,7 @@ export class ModelService {
       this.state.getOptions()).map(res => res.json());
   }
 
-  public update = (id, body): Observable<any> => {
+  public update = (id, body):Observable<any> => {
 
     return this.http.put(
       this.state.generateUrl(this.endpoint + id),
@@ -132,7 +132,7 @@ export class ModelService {
       this.state.getOptions()).map(res => res.json());
   }
 
-  public delete = (id): Observable<any> => {
+  public delete = (id):Observable<any> => {
 
     return this.http.delete(
       this.state.generateUrl(this.endpoint + id + "?force=true"),

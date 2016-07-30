@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
 
 import {WpHelper} from '../helper/helper.service';
 
@@ -12,33 +11,33 @@ import {WpHelper} from '../helper/helper.service';
 @Injectable()
 export class WpState {
 
-    private baseUrl: string;
-    private authKeys: string;
+  private baseUrl:string;
+  private authKeys:string;
 
-    constructor() {
-    }
+  constructor() {
+  }
 
-    /** functions to use in components */
-    getBaseUrl = () => {
-        return this.baseUrl;
-    }
-    setBaseUrl = (url: string) => {
-        this.baseUrl = url;
-    }
+  /** functions to use in components */
+  public getBaseUrl = ():string => {
+    return this.baseUrl;
+  }
+  public setBaseUrl = (url:string):void => {
+    this.baseUrl = url;
+  }
 
-    setAuthKeys = (username: string, password: string): void => {
-        this.authKeys = WpHelper.encodeKeys(username, password);
-    }
-    getAuthKeys = (): string => {
-        return this.authKeys;
-    }
+  public setAuthKeys = (username:string, password:string):void => {
+    this.authKeys = WpHelper.encodeKeys(username, password);
+  }
+  public getAuthKeys = ():string => {
+    return this.authKeys;
+  }
 
-    /** Those function are used within the library */
-    getOptions = (): any => {
-        return { headers: WpHelper.getHeaders(this.authKeys) };
-    }
-    generateUrl = (endpoint: string, args?: any): string => {
-        return WpHelper.generateUrl(this.baseUrl, endpoint, args);
-    }
+  /** Those function are used within the library */
+  public getOptions = ():any => {
+    return {headers: WpHelper.getHeaders(this.authKeys)};
+  }
+  public generateUrl = (endpoint:string, args?:any):string => {
+    return WpHelper.generateUrl(this.baseUrl, endpoint, args);
+  }
 
 }

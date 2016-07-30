@@ -32,7 +32,7 @@ export module WpHelper {
   }
 
   /** get headers with authentication if `authKeys` is available */
-  export function getHeaders(authKeys): Headers {
+  export function getHeaders(authKeys:string): Headers {
     let headers = new Headers();
     if (authKeys) {
       headers.append('Authorization', 'Basic ' + authKeys);

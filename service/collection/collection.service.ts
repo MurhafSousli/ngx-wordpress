@@ -7,47 +7,48 @@ import {WpState} from "../state/state.service";
 
 /*
  * WpCollection Service: Get collection from WP API
- * 
+ *
  * In this class each function represent default endpoint and returns the CollectionService.
- * 
+ *
  */
 
 @Injectable()
 export class WpCollection {
 
-  public service;
+  public service:any;
 
-  constructor(private http: Http, private state: WpState) { }
+  constructor(private http:Http, private state:WpState) {
+  }
 
-  Endpoint(endpoint: string): CollectionService {
+  public Endpoint = (endpoint:string):CollectionService=> {
     if (!this.service) {
       this.service = new CollectionService(this.http, this.state, endpoint);
     }
     return this.service;
   }
 
-  Posts(): CollectionService {
+  public Posts = ():CollectionService => {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/posts/';
       this.service = new CollectionService(this.http, this.state, endpoint);
     }
     return this.service;
   }
-  Users(): CollectionService {
+  public Users = ():CollectionService=> {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/users/';
       this.service = new CollectionService(this.http, this.state, endpoint);
     }
     return this.service;
   }
-  Categories(): CollectionService {
+  public Categories = ():CollectionService => {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/categories/';
       this.service = new CollectionService(this.http, this.state, endpoint);
     }
     return this.service;
   }
-  Pages(): CollectionService {
+  public Pages = ():CollectionService=> {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/pages/';
       this.service = new CollectionService(this.http, this.state, endpoint);
@@ -55,7 +56,7 @@ export class WpCollection {
     return this.service;
   }
 
-  Tags(): CollectionService {
+  public Tags = ():CollectionService=> {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/tags/';
       this.service = new CollectionService(this.http, this.state, endpoint);
@@ -63,7 +64,7 @@ export class WpCollection {
     return this.service;
   }
 
-  Comments(): CollectionService {
+  public Comments = ():CollectionService=> {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/comments/';
       this.service = new CollectionService(this.http, this.state, endpoint);
@@ -71,7 +72,7 @@ export class WpCollection {
     return this.service;
   }
 
-  Media(): CollectionService {
+  public Media = ():CollectionService=> {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/media/';
       this.service = new CollectionService(this.http, this.state, endpoint);
@@ -79,7 +80,7 @@ export class WpCollection {
     return this.service;
   }
 
-  Taxonomies(): CollectionService {
+  public Taxonomies = ():CollectionService => {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/taxonomies/';
       this.service = new CollectionService(this.http, this.state, endpoint);
@@ -87,7 +88,7 @@ export class WpCollection {
     return this.service;
   }
 
-  Statuses(): CollectionService {
+  public Statuses = ():CollectionService=> {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/statuses/';
       this.service = new CollectionService(this.http, this.state, endpoint);
@@ -95,7 +96,7 @@ export class WpCollection {
     return this.service;
   }
 
-  Types(): CollectionService {
+  public Types = ():CollectionService=> {
     if (!this.service) {
       let endpoint = '/wp-json/wp/v2/types/'
       this.service = new CollectionService(this.http, this.state, endpoint);
@@ -107,24 +108,23 @@ export class WpCollection {
 export class CollectionService {
 
   /** collection pagination properties */
-  public currentPage: number = 1;
-  public totalPages: number = 1;
-  public totalObjects: number = 0;
+  public currentPage:number = 1;
+  public totalPages:number = 1;
+  public totalObjects:number = 0;
 
   /** WP query args */
-  private args: any;
+  private args:any;
 
-  constructor(
-    private http: Http,
-    private state: WpState,
-    private endpoint: string) {
+  constructor(private http:Http,
+              private state:WpState,
+              private endpoint:string) {
   }
 
   /*
    * get() : get collection
    */
 
-  public get = (args?: any): Observable<any> => {
+  public get = (args?:any):Observable<any> => {
     this.args = args;
     return this.fetch();
   }
@@ -133,7 +133,7 @@ export class CollectionService {
    * more() : get the next page if available
    */
 
-  public more = (): Observable<any> => {
+  public more = ():Observable<any> => {
     if (this.hasMore()) {
       /** increment currentPage then set page argument */
       this.args.page = ++this.currentPage;
@@ -148,7 +148,7 @@ export class CollectionService {
    *  hasMore() : check if the next page available
    */
 
-  public hasMore = (): boolean => {
+  public hasMore = ():boolean => {
     return this.currentPage < this.totalPages;
   }
 
@@ -156,7 +156,7 @@ export class CollectionService {
    * fetch() : request the final url
    */
 
-  private fetch = (): Observable<any> => {
+  private fetch = ():Observable<any> => {
     return this.http.get(this.state.generateUrl(this.endpoint, this.args), this.state.getOptions()).map(
       (res) => {
         /** set totalObject and totalPages from response's headers */

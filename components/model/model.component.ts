@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, SimpleChange} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 
 import {WpModel} from '../../service';
 
@@ -8,17 +8,17 @@ import {WpModel} from '../../service';
   template: `<ng-content></ng-content>`
 })
 
-export class Model {
+export class Model implements OnInit{
 
   /** Inputs for api endpoint, query arguments and model id */
-  @Input() endpoint;
-  @Input() args;
-  @Input() id;
+  @Input() endpoint:string;
+  @Input() args:any;
+  @Input() id:string;
 
   /** Output for the response */
   @Output() response = new EventEmitter();
 
-  private data;
+  private data:any;
 
   constructor(private wpModel:WpModel) {
   }
@@ -28,7 +28,7 @@ export class Model {
   }
 
   /** Get a model of endpoint type by id */
-  fetch(id, args?) {
+  public fetch(id, args?) {
     this.wpModel.Endpoint(this.endpoint).get(id, args).subscribe(
       (res) => {
         this.data = res;
