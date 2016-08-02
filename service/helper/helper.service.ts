@@ -27,7 +27,7 @@ export module WpHelper {
       /** add args to actionUrl */
       url += '?' + serialize(args);
     }
-    console.log('[WPService]: ' + url);
+    //console.log('[WPService]: ' + url);
     return url;
   }
 
@@ -59,7 +59,7 @@ export module WpHelper {
 var serialize = function (obj, prefix?): string {
   var str = [];
   for (var p in obj) {
-    if (obj.hasOwnProperty(p) && obj[p] !== undefined) {
+    if (obj.hasOwnProperty(p) && obj[p]) {
       var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
       str.push(typeof v == "object" ?
         serialize(v, k) :
