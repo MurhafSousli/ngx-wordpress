@@ -46,14 +46,18 @@ export class Post {
     if (this.post.date) return this.post.date;
   }
 
+  type = (): string =>{
+    if (this.post.type) return this.post.type;
+  }
+
   categories = ():any=> {
-    if (this.post._embedded && this.post._embedded['wp:term'][0]) {
+    if (this.post._embedded && this.post._embedded['wp:term']) {
       return this.post._embedded['wp:term'][0];
     }
   }
 
   tags = ():any => {
-    if (this.post._embedded && this.post._embedded['wp:term'][1])
+    if (this.post._embedded && this.post._embedded['wp:term'])
       return this.post._embedded['wp:term'][1];
   }
 
