@@ -59,7 +59,7 @@ export module WpHelper {
 var serialize = function (obj, prefix?): string {
   var str = [];
   for (var p in obj) {
-    if (obj.hasOwnProperty(p)) {
+    if (obj.hasOwnProperty(p) && obj[p] !== undefined) {
       var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
       str.push(typeof v == "object" ?
         serialize(v, k) :

@@ -22,17 +22,16 @@ export class QueryArgs {
     search?:string;
     status?:any;
     _embed?:boolean;
-  } = {}) {
-
-    this.author = options.author;
-    this.context = options.context;
-    this.filter = options.filter;
-    this.order = options.order;
-    this.orderby = options.orderby;
-    this.page = options.page;
-    this.per_page = options.per_page;
-    this.search = options.search;
-    this.status = options.status;
-    this._embed = options._embed;
+  }) {
+    this.author = options.author || null;
+    this.context = options.context || null;
+    this.filter = options.filter || null;
+    this.order = options.order || null;
+    this.orderby = options.orderby || null;
+    this.page = options.page || null;
+    this.per_page = options.per_page || null;
+    this.search = options.search || null;
+    this.status = options.status || null;
+    this._embed = options._embed || null;
   }
 }
