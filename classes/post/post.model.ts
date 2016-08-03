@@ -39,6 +39,7 @@ export class Post {
   }
 
   excerpt = ():string => {
+    /** filter excerpt from the links */
     if (this.post.excerpt) return (<string>this.post.excerpt.rendered).replace(/<a\b[^>]*>(.*?)<\/a>/i, "");
   }
 
