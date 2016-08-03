@@ -1,174 +1,85 @@
-import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import {Observable} from "rxjs/Observable";
-import * as Rx from 'rxjs/Rx';
+import {Component, Input, Output, EventEmitter, SimpleChange, OnChanges} from '@angular/core';
 
-import {WpState} from "../state/state.service";
+import {WpCollection} from '../../service';
 
-/*
- * WpCollection Service: Get collection from WP API
- *
- * In this class each function represent default endpoint and returns the CollectionService.
- *
- */
+@Component({
+  selector: 'collection',
+  providers: [WpCollection],
+  template: `<ng-content></ng-content>`
+})
 
-@Injectable()
-export class WpCollection {
+export class Collection implements OnChanges{
 
-  public service:any;
+  /** Inputs for api endpoint and query arguments */
+  @Input() endpoint:string;
+  @Input() args:any;
 
-  constructor(private http:Http, private state:WpState) {
+  /** Output for the response */
+  @Output() response = new EventEmitter();
+
+  private data:any;
+
+  constructor(private wpCollection:WpCollection) {
   }
 
-  public Endpoint = (endpoint:string):CollectionService=> {
-    if (!this.service) {
-      this.service = new CollectionService(this.http, this.state, endpoint);
-    }
-    return this.service;
-  }
-
-  public Posts = ():CollectionService => {
-    if (!this.service) {
-      let endpoint = '/wp-json/wp/v2/posts/';
-      this.service = new CollectionService(this.http, this.state, endpoint);
-    }
-    return this.service;
-  }
-  public Users = ():CollectionService=> {
-    if (!this.service) {
-      let endpoint = '/wp-json/wp/v2/users/';
-      this.service = new CollectionService(this.http, this.state, endpoint);
-    }
-    return this.service;
-  }
-  public Categories = ():CollectionService => {
-    if (!this.service) {
-      let endpoint = '/wp-json/wp/v2/categories/';
-      this.service = new CollectionService(this.http, this.state, endpoint);
-    }
-    return this.service;
-  }
-  public Pages = ():CollectionService=> {
-    if (!this.service) {
-      let endpoint = '/wp-json/wp/v2/pages/';
-      this.service = new CollectionService(this.http, this.state, endpoint);
-    }
-    return this.service;
-  }
-
-  public Tags = ():CollectionService=> {
-    if (!this.service) {
-      let endpoint = '/wp-json/wp/v2/tags/';
-      this.service = new CollectionService(this.http, this.state, endpoint);
-    }
-    return this.service;
-  }
-
-  public Comments = ():CollectionService=> {
-    if (!this.service) {
-      let endpoint = '/wp-json/wp/v2/comments/';
-      this.service = new CollectionService(this.http, this.state, endpoint);
-    }
-    return this.service;
-  }
-
-  public Media = ():CollectionService=> {
-    if (!this.service) {
-      let endpoint = '/wp-json/wp/v2/media/';
-      this.service = new CollectionService(this.http, this.state, endpoint);
-    }
-    return this.service;
-  }
-
-  public Taxonomies = ():CollectionService => {
-    if (!this.service) {
-      let endpoint = '/wp-json/wp/v2/taxonomies/';
-      this.service = new CollectionService(this.http, this.state, endpoint);
-    }
-    return this.service;
-  }
-
-  public Statuses = ():CollectionService=> {
-    if (!this.service) {
-      let endpoint = '/wp-json/wp/v2/statuses/';
-      this.service = new CollectionService(this.http, this.state, endpoint);
-    }
-    return this.service;
-  }
-
-  public Types = ():CollectionService=> {
-    if (!this.service) {
-      let endpoint = '/wp-json/wp/v2/types/'
-      this.service = new CollectionService(this.http, this.state, endpoint);
-    }
-    return this.service;
-  }
-}
-
-export class CollectionService {
-
-  /** collection pagination properties */
-  public currentPage:number = 1;
-  public totalPages:number = 1;
-  public totalObjects:number = 0;
-
-  /** WP query args */
-  private args:any;
-
-  constructor(private http:Http,
-              private state:WpState,
-              private endpoint:string) {
-  }
-
-  /*
-   * get() : get collection
-   */
-
-  public get = (args?:any):Observable<any> => {
-    this.args = args;
-    return this.fetch();
-  }
-
-  /*
-   * more() : get the next page if available
-   */
-
-  public more = ():Observable<any> => {
-    if (this.hasMore()) {
-      /** increment currentPage then set page argument */
-      this.args.page = ++this.currentPage;
-      return this.fetch();
-    }
-    else {
-      return Rx.Observable.empty();
+  /** Detects if args has changed to fetch again. */
+  ngOnChanges(changes:{[propName:string]:SimpleChange}) {
+    let prevArgs = changes['args'].previousValue;
+    let newArgs = changes['args'].currentValue;
+    if (prevArgs != newArgs) {
+      this.fetch(newArgs);
     }
   }
 
-  /*
-   *  hasMore() : check if the next page available
-   */
-
-  public hasMore = ():boolean => {
-    return this.currentPage < this.totalPages;
-  }
-
-  /*
-   * fetch() : request the final url
-   */
-
-  private fetch = ():Observable<any> => {
-    return this.http.get(this.state.generateUrl(this.endpoint, this.args), this.state.getOptions()).map(
+  /** Get collection of endpoint type */
+  public fetch(args):void {
+    this.wpCollection.Endpoint(this.endpoint).get(args).subscribe(
       (res) => {
-        /** set totalObject and totalPages from response's headers */
-        this.totalObjects = +res.headers.get('X-WP-Total');
-        this.totalPages = +res.headers.get('X-WP-TotalPages');
-        return res.json();
+        this.data = res;
+        this.response.emit({
+          objects: this.data,
+          currentPage: this.wpCollection.service.currentPage,
+          totalPages: this.wpCollection.service.totalPages,
+          totalObjects: this.wpCollection.service.totalObjects
+        });
+      },
+      (err) => {
+        this.response.emit({error: err});
       }
     );
   }
 
+  /** Get more collection (next page) */
+  public more():void {
+    this.wpCollection.Endpoint(this.endpoint).more().subscribe(
+      (res) => {
+        this.data = this.data.concat(res);
+        this.response.emit({
+          objects: this.data,
+          currentPage: this.wpCollection.service.currentPage,
+          totalPages: this.wpCollection.service.totalPages,
+          totalObjects: this.wpCollection.service.totalObjects
+        });
+      },
+      (err) => {
+        this.response.emit({error: err});
+      }
+    );
+  }
+
+  /** Check if WP has more collection */
+  public hasMore():boolean {
+    return this.wpCollection.service.hasMore();
+  }
+
 }
 
+
 /*
- * PS: Handle request errors from "subscribe" function
+ * Collection component fetches data from WpCollection service,
+ * it has 2 properties:
+ *  - @INPUT: args
+ *  - @INPUT: endpoint
+ *  - @OUTPUT: response
+ *  The data are fetched when args changes.
  */
