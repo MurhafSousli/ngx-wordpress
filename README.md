@@ -145,7 +145,7 @@ Now the library is initialized, the services `WpModel` and `WpCollection` are re
 </div>
 ```
 
-It's recommended to create item component for each post item
+**Optional** Create item component for each post item
 
 ```
 @Component({
@@ -162,11 +162,10 @@ It's recommended to create item component for each post item
 
 export class Item {
 
-  @Input() data;
   post: Post;
-
-  ngOnInit() {
-    this.post = new Post(this.data);
+  @Input()
+  set data(data: any) {
+    this.post = new Post(data);
   }
 }
 ```
@@ -207,6 +206,16 @@ export class TestCollection {
 
     constructor(private wpCollection: WpCollection) {
 
+    }
+
+    ngOnInit(){
+        /** page id */
+        this.id = 123;
+        /** page args */
+        this.args = new QueryArgs({
+            _embed: true
+        });
+        this.fetchPost();
     }
 
     fetchPosts() {
@@ -280,12 +289,10 @@ import {Post} from 'ng2-wp-api/ng2-wp-api';
 })
 export class Single {
 
-  @Input() data;
-  post: response;
-
-  ngOnInit() {
-    /* Create Post class from the `@Input data`. */
-    this.response = new Post(this.data);
+  post: Post;
+  @Input()
+  set data(data: any) {
+    this.post = new Post(data);
   }
 }
 ```
@@ -331,13 +338,13 @@ export class TestModel {
 
     }
 
-    ngOnInit(){
-        /** requested post id */
-        this.id = 7;
-
-        /** Set the query arguments, more info https://codex.wordpress.org/Class_Reference/WP_Query#Parameters */
-        this.args = new QueryArgs();
-        this.args._embed = true;
+    ngOnInit() {
+        /** page id */
+        this.id = 123;
+        /** page args */
+        this.args = new QueryArgs({
+        _embed: true
+        });
         this.fetchPost();
     }
 
