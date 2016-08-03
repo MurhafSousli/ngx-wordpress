@@ -35,13 +35,13 @@ export class TestModel {
     }
 
     ngOnInit(){
-        /** requested post id */
+        /** post id */
         this.id = 7;
 
-        /** Set the query arguments, more info https://codex.wordpress.org/Class_Reference/WP_Query#Parameters */
-        this.args = new QueryArgs();
-        this.args._embed = true;
-        this.fetchPost();
+        /** post args, more info https://codex.wordpress.org/Class_Reference/WP_Query#Parameters */
+        this.args = new QueryArgs({
+            _embed: true
+        });
     }
 
     fetchPost() {

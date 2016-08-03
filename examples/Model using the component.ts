@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 import {Model, WpHelper, Post} from 'ng2-wp-api/ng2-wp-api';
 /**
@@ -23,8 +23,12 @@ export class TestModel {
   response;
 
   ngOnInit() {
-    /** requested page id 123 */
+    /** page id */
     this.id = 123;
+    /** page args */
+    this.args = new QueryArgs({
+      _embed: true
+    });
   }
 
   /**
@@ -68,11 +72,11 @@ export class Single {
      *  check Post class file to see the functions list.
     */
 
-  @Input() data;
-  post: response;
-
-  ngOnInit() {
-    this.response = new Post(this.data);
+  post: Post;
+  @Input()
+  set data(data: any) {
+     /* Create Post class for the view `. */
+    this.post = new Post(data);
   }
 }
 

@@ -13,7 +13,7 @@
  *  hasMore():boolean
  */
 
-import {Component, ViewChild} from '@angular/core';
+import {Component, ViewChild, Input} from '@angular/core';
 import {Collection, WpHelper, QueryArgs} from 'ng2-wp-api/ng2-wp-api';
 
 @Component({
@@ -44,20 +44,27 @@ export class TestCollection {
 
   ngOnInit() {
     /** initializing query arguments */
-    let args = new QueryArgs();
-    args._embed = true;
-    args.per_page = 4;
-    this.args = args;
+     this.args = new QueryArgs({
+        _embed: true,
+        per_page: 4
+      }
+    );
   }
 
-  /** collection output */
+   /** Handle response */
   postsData(event) {
     if (event.error) {
-      /** handle collection request error */
-      console.log(event.error);
+      //console.log("[Blog]: " + event.error);
+      // this.router.navigate(['/404']);
     }
     else {
       this.response = event;
+
+      /** if response is empty
+      if (!event.objects.length) {
+
+      }
+       */
     }
   }
 
@@ -96,13 +103,11 @@ import {Post} from 'ng2-wp-api/ng2-wp-api';
 })
 
 export class Item {
-
-  @Input() data;
-  post: response;
-
-  ngOnInit() {
-     /* Create Post class from the `@Input data`. */
-    this.response = new Post(this.data);
+  post: Post;
+  @Input()
+  set data(data: any) {
+     /* Create Post class for the view `. */
+    this.post = new Post(data);
   }
 }
 

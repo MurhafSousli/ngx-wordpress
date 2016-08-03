@@ -35,12 +35,10 @@ export class TestCollection {
     ngOnInit() {
 
         /** Filtering Collections, more info https://codex.wordpress.org/Class_Reference/WP_Query#Parameters */
-        this.args = new QueryArgs();
-
-        /** Get 6 posts in each page */
-        this.args.per_page = 6;
-        this.args._embed = true;
-        this.fetchPosts();
+        this.args = new QueryArgs({
+            _embed: true,
+            per_page: 6
+        });
     }
 
     fetchPosts() {
