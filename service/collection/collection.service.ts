@@ -160,8 +160,8 @@ export class CollectionService {
     return this.http.get(this.state.generateUrl(this.endpoint, this.args), this.state.getOptions()).map(
       (res) => {
         /** set totalObject and totalPages from response's headers */
-        this.totalObjects = +res.headers.get('X-WP-Total');
-        this.totalPages = +res.headers.get('X-WP-TotalPages');
+        this.totalObjects = +res.headers.get('X-Wp-Total');
+        this.totalPages = +res.headers.get('X-Wp-Totalpages');
         return res.json();
       }
     );
