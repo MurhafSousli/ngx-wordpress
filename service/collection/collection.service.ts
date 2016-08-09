@@ -159,9 +159,19 @@ export class CollectionService {
   private fetch = ():Observable<any> => {
     return this.http.get(this.state.generateUrl(this.endpoint, this.args), this.state.getOptions()).map(
       (res) => {
-        /** set totalObject and totalPages from response's headers */
-        this.totalObjects = +res.headers.get('X-Wp-Total');
-        this.totalPages = +res.headers.get('X-Wp-Totalpages');
+        /** set totalObject and totalPages from response's headers
+         * It's very weird that sometimes WP API total pages property name change
+         * this is a workaround...
+         */
+        let totalPages = +res.headers.get('X-WP-TotalPages');
+        if(totalPages){
+          this.totalPages = +res.headers.get('X-WP-TotalPages');
+          this.totalObjects = +res.headers.get('X-WP-Total');
+        }
+        else{
+          this.totalPages = +res.headers.get('X-Wp-TotalPages');
+          this.totalObjects = +res.headers.get('X-Wp-Total');
+        }
         return res.json();
       }
     );
