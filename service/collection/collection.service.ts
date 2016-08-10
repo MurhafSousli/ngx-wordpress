@@ -169,7 +169,7 @@ export class CollectionService {
           this.totalObjects = +res.headers.get('X-WP-Total');
         }
         else{
-          this.totalPages = +res.headers.get('X-Wp-TotalPages');
+          this.totalPages = +res.headers.get('X-Wp-Totalpages');
           this.totalObjects = +res.headers.get('X-Wp-Total');
         }
         return res.json();
