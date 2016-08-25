@@ -4,11 +4,11 @@
 
 ###BREAKING CHANGES: 
 
-    Before:
+* **Before**:
     ```
     import {Collection} from 'ng2-wp-api/ng2-wp-api';
     ```
-    After:
+* **After**:
     ```
     import {Collection} from 'ng2-wp-api';
     ```
@@ -18,11 +18,4 @@
 
 ###Bug Fixes: 
 
-* **Before**:
-    ```
-    import {Collection} from 'ng2-wp-api/ng2-wp-api';
-    ```
-* **After**:
-    ```
-    import {Collection} from 'ng2-wp-api';
-    ```
+* Collection response headers: fix property name for `X-WP-Total` and `X-Wp-Totalpages`
