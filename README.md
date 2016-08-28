@@ -397,9 +397,9 @@ export class App {
     * collection of posts `wpService.Endpoint('pathToYourEndpoint').perPage(4).page(3).subscribe(...)`
     * collection of posts `wpService.Endpoint('pathToYourEndpoint').search('post title').subscribe(...)`
 
-- use query args as optional to pass the query arguments
+- use the old syntax by passing `queryArgs?` as an optional parameter
 
-    * collection of posts `wpService.Posts($args).subscribe(...)`
+    * collection of posts `wpService.Posts(queryArgs?).subscribe(...)`
     * single post `wpService.Posts($args, $id).subscribe(...)`
 
 - Subscribe to **logs** `wpService.logs.subscribe(...)` to listen for requests status.
