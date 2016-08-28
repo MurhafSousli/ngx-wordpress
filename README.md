@@ -380,31 +380,31 @@ export class App {
 
 # TODOs for v2 (next release)
 
-    - Version 2 coming soon (New architecure).
+- Version 2 coming soon (New architecure).
 
-    - Combine Model and Collection and States into a single service `WpService`.
+- Combine Model and Collection and States into a single service `WpService`.
 
-    - Authentication:
+- Authentication:
 
-        * Cookie Authentication (if you app works internally as a wordpress theme).
-        * Basic Authentication (no requirement).
-        * JWT Authentication (requires [JWT plugin](https://github.com/Tmeister/wp-api-jwt-auth)).
-        * OAuth Authentication (requires [OAuth Plugin](https://github.com/WP-API/OAuth1)).
+    * Cookie Authentication (if you app works internally as a wordpress theme).
+    * Basic Authentication (no requirement).
+    * JWT Authentication (requires [JWT plugin](https://github.com/Tmeister/wp-api-jwt-auth)).
+    * OAuth Authentication (requires [OAuth Plugin](https://github.com/WP-API/OAuth1)).
 
-    - New syntax for querying data => 
+- New syntax for querying data => 
 
-        * single post `wpService.Posts().id('127').embed().subscribe(...)`  
-        * collection of posts `wpService.Endpoint('pathToYourEndpoint').perPage(4).page(3).subscribe(...)`
-        * collection of posts `wpService.Endpoint('pathToYourEndpoint').search('post title').subscribe(...)`
+    * single post `wpService.Posts().id('127').embed().subscribe(...)`  
+    * collection of posts `wpService.Endpoint('pathToYourEndpoint').perPage(4).page(3).subscribe(...)`
+    * collection of posts `wpService.Endpoint('pathToYourEndpoint').search('post title').subscribe(...)`
 
-    - use query args as optional to pass the query arguments
+- use query args as optional to pass the query arguments
 
-        * collection of posts `wpService.Posts($args).subscribe(...)`
-        * single post `wpService.Posts($args, $id).subscribe(...)`
+    * collection of posts `wpService.Posts($args).subscribe(...)`
+    * single post `wpService.Posts($args, $id).subscribe(...)`
 
-    - Subscribe to **logs** `wpService.logs.subscribe(...)` to listen for requests status.
-    - Subscribe to **loading** `wpService.loading.subscribe(...)` to listen for the service state.
-    - Set default timeOut for requests `wpService.timeOut($seconds);`
+- Subscribe to **logs** `wpService.logs.subscribe(...)` to listen for requests status.
+- Subscribe to **loading** `wpService.loading.subscribe(...)` to listen for the service state.
+- Set default timeOut for requests `wpService.timeOut($seconds);`
 
  If you like this project, I need your contributions specially in the authentications part, this will be the base for two future project
 
