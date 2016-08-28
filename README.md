@@ -406,15 +406,6 @@ export class App {
 - Subscribe to **loading** `wpService.loading.subscribe(...)` to listen for the service state.
 - Set default timeOut for requests `wpService.timeOut($seconds);`
 
-
-## Project ideas for consuming this service  
-
-    Possible project Ideas with this service:
-
-    * CMS app that serves any kind of business using storing backend and rest api and portable to any device using electron.js
-    * Subscriber/Reader app for any new/magazine/blog WordPress site
-    * WordPress Theme
-    * External site
   
 
 <a name="issues"/>
