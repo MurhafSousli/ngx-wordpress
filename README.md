@@ -382,8 +382,6 @@ export class App {
 
 - Version 2 coming soon (New architecure).
 
-- Combine Model and Collection and States into a single service `WpService`.
-
 - Authentication:
 
     * Cookie Authentication (if you app works internally as a wordpress theme).
