@@ -406,7 +406,6 @@ export class App {
 - Subscribe to **loading** `wpService.loading.subscribe(...)` to listen for the service state.
 - Set default timeOut for requests `wpService.timeOut($seconds);`
 
- If you like this project, I need your contributions specially in the authentications part, this will be the base for two future project
 
 ## Project ideas for consuming this service  
 
@@ -417,9 +416,6 @@ export class App {
     * WordPress Theme
     * External site
   
-
-  can help me get things better and faster and you can help me build a CMS stater for 
-  This will be the base of another interesting project CMS starter
 
 <a name="issues"/>
 # Issues
