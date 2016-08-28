@@ -380,36 +380,42 @@ export class App {
 
 # TODOs for v2 (next release)
 
- - Version 2 coming soon (New architecure)
- - Combine Model and Collection and States into a single service `WpService` 
- - Authentication:
-   * Cookie Authentication (if you app works internally as a wordpress theme)
-   * Basic Authentication (no requirement)
-   * JWT Authentication (requires [JWT plugin](https://github.com/Tmeister/wp-api-jwt-auth))
-   * OAuth Authentication (requires [OAuth Plugin](https://github.com/WP-API/OAuth1))
- - New syntax for querying data => 
-   * `wpService.Posts().id('127').embed().subscribe(...)`  
-   * `wpService.Endpoint('pathToYourEndpoint').perPage(4).page(3).subscribe(...)`
-   * `wpService.Endpoint('pathToYourEndpoint').search('post title').subscribe(...)`
-   
-   Add args optional to pass the query arguments
+    - Version 2 coming soon (New architecure).
 
-   * `wpService.Posts($args).subscribe(...)`
+    - Combine Model and Collection and States into a single service `WpService`.
 
- - Subscribe to **logs** `wpService.logs.subscribe(...)` to listen for requests status.
- - Subscribe to **loading** `wpService.loading.subscribe(...)` to listen for the service state.
- - Set default timeOut for requests `wpService.timeOut($seconds);`
+    - Authentication:
+
+        * Cookie Authentication (if you app works internally as a wordpress theme).
+        * Basic Authentication (no requirement).
+        * JWT Authentication (requires [JWT plugin](https://github.com/Tmeister/wp-api-jwt-auth)).
+        * OAuth Authentication (requires [OAuth Plugin](https://github.com/WP-API/OAuth1)).
+
+    - New syntax for querying data => 
+
+        * single post `wpService.Posts().id('127').embed().subscribe(...)`  
+        * collection of posts `wpService.Endpoint('pathToYourEndpoint').perPage(4).page(3).subscribe(...)`
+        * collection of posts `wpService.Endpoint('pathToYourEndpoint').search('post title').subscribe(...)`
+
+    - use query args as optional to pass the query arguments
+
+        * collection of posts `wpService.Posts($args).subscribe(...)`
+        * single post `wpService.Posts($args, $id).subscribe(...)`
+
+    - Subscribe to **logs** `wpService.logs.subscribe(...)` to listen for requests status.
+    - Subscribe to **loading** `wpService.loading.subscribe(...)` to listen for the service state.
+    - Set default timeOut for requests `wpService.timeOut($seconds);`
 
  If you like this project, I need your contributions specially in the authentications part, this will be the base for two future project
 
 ## Project ideas for consuming this service  
 
-  Possible project Ideas with this service:
+    Possible project Ideas with this service:
 
- * CMS app that serves any kind of business using storing backend and rest api and portable to any device using electron.js
- * Subscriber/Reader app for any new/magazine/blog WordPress site
- * WordPress Theme
- * External site
+    * CMS app that serves any kind of business using storing backend and rest api and portable to any device using electron.js
+    * Subscriber/Reader app for any new/magazine/blog WordPress site
+    * WordPress Theme
+    * External site
   
 
   can help me get things better and faster and you can help me build a CMS stater for 
