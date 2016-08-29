@@ -397,8 +397,8 @@ Upcoming release features:
    wpService.posts().perPage(8).page(3).get().subscribe(...)
    ```
 - [x] Legacy style
-   * collection of posts `wpService.posts().get($queryArgs).subscribe(...)`
-   * single post `wpService.Posts($args, $id).subscribe(...)`
+   * Collection of posts `wpService.posts().get($queryArgs).subscribe(...)`
+   * Get single user by ID `wpService.users($id).subscribe(...)`
 - [ ] Components style 
 - [ ] Get DirectLink `wpService.link($url).subscribe(...)`  
 - [x] Set http request timeout (ms) `wpConfig.timeout = $milliSec;` default: 3000 
