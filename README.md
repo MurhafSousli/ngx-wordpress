@@ -378,32 +378,28 @@ export class App {
 ```
 [Initilizing the library - full example](/examples/Initilizing WP Service.ts)
 
+
 # TODOs for v2 (next release)
 
-- Version 2 coming soon (New architecure).
+Upcoming release features:
 
-- Authentication:
-
-    * Cookie Authentication (if you app works internally as a wordpress theme).
-    * Basic Authentication (no requirement).
-    * JWT Authentication (requires [JWT plugin](https://github.com/Tmeister/wp-api-jwt-auth)).
-    * OAuth Authentication (requires [OAuth Plugin](https://github.com/WP-API/OAuth1)).
-
-- New syntax for querying data => 
-
-    * single post `wpService.Posts().id('127').embed().subscribe(...)`  
-    * collection of posts `wpService.Endpoint('pathToYourEndpoint').perPage(4).page(3).subscribe(...)`
-    * collection of posts `wpService.Endpoint('pathToYourEndpoint').search('post title').subscribe(...)`
-
-- use the old syntax by passing `queryArgs?` as an optional parameter
-
-    * collection of posts `wpService.Posts(queryArgs?).subscribe(...)`
-    * single post `wpService.Posts($args, $id).subscribe(...)`
-
-- Subscribe to **logs** `wpService.logs.subscribe(...)` to listen for requests status.
-- Subscribe to **loading** `wpService.loading.subscribe(...)` to listen for the service state.
-- Set default timeOut for requests `wpService.timeOut($seconds);`
-
+- [x] Modern style  
+   * Get single page by ID with embedded=true `wpService.model().pages().id('127').embed().get().subscribe(...)`
+   * Get last 4 projects desc order `wpService.collection().endpoint('/wp-json/wp/v2/projects').perPage(4).orderBy('DESC').get().subscribe(...)`
+   * get last 8 posts from page 3 `wpService.posts().perPage(8).page(3).get().subscribe(...)`
+- [x] Legacy style
+   * collection of posts `wpService.posts().get($queryArgs).subscribe(...)`
+   * single post `wpService.Posts($args, $id).subscribe(...)`
+- [x] Set http request timeout (ms) `wpConfig.timeout = $milliSec;` default: 3000 
+- [ ] Set http retryWhen delay (ms) `wpConfig.retryDelay = 500` (not sure if it's useful!)
+- [x] Error Notifier
+- [x] Loading Notifier
+- [ ] Authentication Notifier
+- [ ] Authentication
+   - [x] Basic Authentication (no requirement).
+   - [ ] Cookie Authentication (if you app works internally as a wordpress theme).
+   - [ ] JWT Authentication (requires [JWT plugin](https://github.com/Tmeister/wp-api-jwt-auth)).
+   - [ ] OAuth Authentication (requires [OAuth Plugin](https://github.com/WP-API/OAuth1)).
   
 
 <a name="issues"/>
