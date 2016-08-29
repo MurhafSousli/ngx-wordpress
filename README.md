@@ -381,7 +381,7 @@ export class App {
 
 # TODOs for v2 (next release)
 
-Upcoming release features:
+[Upcoming release](https://github.com/MurhafSousli/ng2-wp-api/tree/next-release) features:
 
 - [x] Modern style  
    * Get single page by ID with embedded=true 
