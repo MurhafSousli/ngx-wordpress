@@ -384,9 +384,18 @@ export class App {
 Upcoming release features:
 
 - [x] Modern style  
-   * Get single page by ID with embedded=true `wpService.model().pages().id('127').embed().get().subscribe(...)`
-   * Get last 4 projects desc order `wpService.collection().endpoint('/wp-json/wp/v2/projects').perPage(4).orderBy('DESC').get().subscribe(...)`
-   * get last 8 posts from page 3 `wpService.posts().perPage(8).page(3).get().subscribe(...)`
+   * Get single page by ID with embedded=true 
+   ```
+   wpService.model().pages().id('127').embed().get().subscribe(...)
+   ```
+   * Get last 4 projects desc order 
+   ```
+   wpService.collection().endpoint('/wp-json/wp/v2/projects').perPage(4).orderBy('DESC').get().subscribe(...)
+   ```
+   * get last 8 posts from page 3 
+   ```
+   wpService.posts().perPage(8).page(3).get().subscribe(...)
+   ```
 - [x] Legacy style
    * collection of posts `wpService.posts().get($queryArgs).subscribe(...)`
    * single post `wpService.Posts($args, $id).subscribe(...)`
