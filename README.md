@@ -402,7 +402,7 @@ Upcoming release features:
 - [ ] Components style 
 - [ ] Get DirectLink `wpService.link($url).subscribe(...)`  
 - [x] Set http request timeout (ms) `wpConfig.timeout = $milliSec;` default: 3000 
-- [ ] Set http retryWhen delay (ms) `wpConfig.retryDelay = 500` (not sure if it's useful!)
+- [ ] Set retry http request after delay (ms) `wpConfig.retryDelay = 500` (not sure if it's useful!)
 - [x] Error Notifier `wpConfig.errors.subscribe(...)`
 - [x] Loading Notifier `wpConfig.loading.subscribe(...)`
 - [ ] Authentication Notifier `wpConfig.authenticated.subscribe(...)`
