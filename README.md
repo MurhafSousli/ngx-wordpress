@@ -390,11 +390,13 @@ Upcoming release features:
 - [x] Legacy style
    * collection of posts `wpService.posts().get($queryArgs).subscribe(...)`
    * single post `wpService.Posts($args, $id).subscribe(...)`
+- [ ] Components style 
+- [ ] Get DirectLink `wpService.link($url).subscribe(...)`  
 - [x] Set http request timeout (ms) `wpConfig.timeout = $milliSec;` default: 3000 
 - [ ] Set http retryWhen delay (ms) `wpConfig.retryDelay = 500` (not sure if it's useful!)
-- [x] Error Notifier
-- [x] Loading Notifier
-- [ ] Authentication Notifier
+- [x] Error Notifier `wpConfig.errors.subscribe(...)`
+- [x] Loading Notifier `wpConfig.loading.subscribe(...)`
+- [ ] Authentication Notifier `wpConfig.authenticated.subscribe(...)`
 - [ ] Authentication
    - [x] Basic Authentication (no requirement).
    - [ ] Cookie Authentication (if you app works internally as a wordpress theme).
