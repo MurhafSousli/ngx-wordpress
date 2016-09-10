@@ -383,6 +383,7 @@ export class App {
 
 [Upcoming release](https://github.com/MurhafSousli/ng2-wp-api/tree/next-release) features:
 
+- [x] Async http calls (built-in worker) 
 - [x] Modern style  
    * Get single page by ID with embedded=true 
    ```
@@ -396,7 +397,6 @@ export class App {
    ```
    wpService.posts().perPage(8).page(3).get().subscribe(...)
    ```
-- [x] Async calls (built-in worker)   
 - [x] Legacy style
    * Collection of posts `wpService.posts().get($queryArgs).subscribe(...)`
    * Get single user by ID `wpService.users($id).subscribe(...)`
