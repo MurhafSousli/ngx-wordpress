@@ -115,6 +115,18 @@ Install it with npm
 <a name="usage"/>
 ## Usage
 
+Add `WordPressModule` to **NgModule** `imports` array.
+
+```javascript
+import { WordPressModule } from 'ng2-wp-api';
+
+@NgModule({
+imports: [
+    WordPressModule
+  ]
+})
+```
+
 <a name="initialization"/>
 ### Initialization
 
