@@ -1,5 +1,6 @@
 # Node
 node_modules
+examples
 src
 typings
 npm-debug.log
