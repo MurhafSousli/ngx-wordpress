@@ -1,7 +1,7 @@
 {
   "name": "ng2-wp-api",
   "version": "2.0.1",
-  "description": "WordPress API Service for Angular2",
+  "description": "WordPress API Service for Angular 2",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/MurhafSousli/ng2-wp-api.git"
@@ -11,9 +11,13 @@
     "url": "https://github.com/MurhafSousli/ng2-wp-api/issues"
   },
   "keywords": [
+    "angular",
     "angular2",
     "wordpress",
-    "wp-api"
+    "wp",
+    "api",
+    "service",
+    "ng2"
   ],
   "author": "Murhaf Sousli <murhafsousi@gmail.com>",
   "license": "MIT",
