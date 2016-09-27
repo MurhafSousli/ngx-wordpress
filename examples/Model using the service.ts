@@ -3,7 +3,7 @@
  */
 import {Component} from '@angular/core';
 
-import {WpModel, Post, QueryArgs} from "ng2-wp-api";
+import {WpModel, Post, QueryArgs} from "ng2-wp-api/dist";
 
 @Component({
     selector: 'test-model',

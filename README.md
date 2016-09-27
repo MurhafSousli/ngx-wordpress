@@ -118,7 +118,7 @@ Install it with npm
 Add `WordPressModule` to **NgModule** `imports` array.
 
 ```javascript
-import { WordPressModule } from 'ng2-wp-api';
+import { WordPressModule } from 'ng2-wp-api/dist';
 
 @NgModule({
 imports: [

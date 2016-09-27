@@ -5,7 +5,7 @@
  * get pagination properties from `wpCollection.service`
  */
 import { Component, OnInit } from '@angular/core';
-import {QueryArgs, WpHelper, WpService, CollectionService, CollectionResponse} from 'ng2-wp-api';
+import {QueryArgs, WpHelper, WpService, CollectionService, CollectionResponse} from 'ng2-wp-api/dist';
 
 @Component({
   selector: 'test-collection',

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {ConfigService} from 'ng2-wp-api';
+import {ConfigService} from 'ng2-wp-api/dist';
 
 @Component({
   selector: 'app-root',

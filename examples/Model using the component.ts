@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 
-import {Model, WpHelper} from 'ng2-wp-api';
+import {Model, WpHelper} from 'ng2-wp-api/dist';
 /**
  * import Model:  **optional** child component to display the post
  * WpHelper: to get post endpoint url 
