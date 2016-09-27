@@ -159,7 +159,7 @@ After initializing, you can either consume the library as a service, or as a com
 Import `WpService` and inject it in your component constructor
 
 ```javascript
-import {WpService} from "ng2-wp-api";
+import {WpService} from "ng2-wp-api/dist";
 
 @Component({...})
 export class testComponent {
