@@ -1,15 +1,16 @@
-import {Component, Input, Output, EventEmitter, OnChanges, SimpleChange} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnChanges, SimpleChange, ChangeDetectionStrategy} from '@angular/core';
 
 import {WpService} from '../service/wp.service';
 import {ModelService} from '../service/model/model.service';
-import {QueryArgs} from "../classes/args.model";
+import {WpQueryArgs} from "../helpers/wp-query.class";
 
 @Component({
   selector: 'wp-model',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `<ng-content></ng-content>`
 })
 
-export class WpModel implements OnChanges {
+export class WpModelComponent implements OnChanges {
 
   private model: ModelService;
 
@@ -23,7 +24,7 @@ export class WpModel implements OnChanges {
   @Input() id: number;
 
   /** Model QueryArgs */
-  @Input() args: QueryArgs;
+  @Input() args: WpQueryArgs;
 
   /** Output for the response */
   @Output() response = new EventEmitter();

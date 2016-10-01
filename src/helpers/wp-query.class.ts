@@ -1,4 +1,4 @@
-export class QueryArgs {
+export class WpQueryArgs {
 
   author:string;
   context:any;

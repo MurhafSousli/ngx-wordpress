@@ -1,14 +1,16 @@
 import {Observable} from 'rxjs/Observable';
-import {QueryArgs} from "../../classes/args.model";
-import {Pagination} from "./collection.service";
+import {WpQueryArgs} from "../../helpers/wp-query.class";
+import {WpPagination} from "./collection.service";
 
 export interface CollectionInterface {
 
-  get(queryArgs?: QueryArgs): Observable<any>;
+  get(args?: WpQueryArgs): Observable<any>;
   more(): Observable<any>;
+  next(): Observable<any>;
+  prev(): Observable<any>;
 }
 
 export interface CollectionResponse {
   data: any;
-  pagination: Pagination;
+  pagination: WpPagination;
 }

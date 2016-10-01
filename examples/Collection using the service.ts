@@ -5,7 +5,7 @@
  * get pagination properties from `wpCollection.service`
  */
 import { Component, OnInit } from '@angular/core';
-import {QueryArgs, WpHelper, WpService, CollectionService, CollectionResponse} from 'ng2-wp-api/dist';
+import {WpQueryArgs, WpEndpoint, WpService, CollectionResponse} from 'ng2-wp-api';
 
 @Component({
   selector: 'test-collection',
@@ -23,13 +23,13 @@ import {QueryArgs, WpHelper, WpService, CollectionService, CollectionResponse} f
 })
 export class SiderComponent implements OnInit {
 
-  endpoint = WpHelper.endpoint.posts;
+  endpoint = WpEndpoint.posts;
   args;
 
   posts;
   pagination;
 
-  collection: CollectionService;
+  collection;
 
   constructor(private wpService: WpService) {
   }
@@ -39,7 +39,7 @@ export class SiderComponent implements OnInit {
   }
 
   get(){
-    this.args = new QueryArgs({
+    this.args = new WpQueryArgs({
       per_page: 4
     });
     this.collection = this.wpService.collection().posts();
@@ -50,12 +50,29 @@ export class SiderComponent implements OnInit {
     });
   }
 
+  /** Get next collection combined with current collection */
   getMore() {
     this.collection.more().subscribe((res: CollectionResponse) => {
         this.posts = res.data;
+        this.pagination = res.pagination;
     });
-
   }
+
+    /** Get next collection only */
+    getMore() {
+        this.collection.next().subscribe((res: CollectionResponse) => {
+            this.posts = res.data;
+            this.pagination = res.pagination;
+        });
+    }
+
+    /** Get prev collection only */
+    getMore() {
+        this.collection.prev().subscribe((res: CollectionResponse) => {
+            this.posts = res.data;
+            this.pagination = res.pagination;
+        });
+    }
 
 }
 
@@ -63,7 +80,7 @@ export class SiderComponent implements OnInit {
 /* Optional component that uses Post class which wraps the post response making it easy to access.
  * NOTE: The embed in QueryArgs must be set to true in order to get Post class to work.
  */
-import {Post} from 'ng2-wp-api';
+import {WpPost} from 'ng2-wp-api';
 
 @Component({
     selector: 'item',
@@ -74,15 +91,14 @@ import {Post} from 'ng2-wp-api';
         </div>
     <div class="post-excerpt" [innerHtml]="post.excerpt()">
   `,
-    directives: [Collection]
 })
 
 export class Item {
 
     @Input() data;
-    post: Post;
+    post: WpPost;
 
     ngOnInit() {
-        this.post = new Post(this.data);
+        this.post = new WpPost(this.data);
     }
 }

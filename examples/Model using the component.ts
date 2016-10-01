@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 
-import {Model, WpHelper} from 'ng2-wp-api/dist';
+import {WpEndpoint} from 'ng2-wp-api';
 /**
  * import Model:  **optional** child component to display the post
  * WpHelper: to get post endpoint url 
@@ -17,7 +17,7 @@ import {Model, WpHelper} from 'ng2-wp-api/dist';
 })
 export class TestModel {
 
-  endpoint = WpHelper.Endpoint.Pages;
+  endpoint = WpEndpoint.Pages;
   id;
 
   response;
@@ -26,7 +26,7 @@ export class TestModel {
     /** page id */
     this.id = 123;
     /** page args */
-    this.args = new QueryArgs({
+    this.args = new WpQueryArgs({
       _embed: true
     });
   }
@@ -43,7 +43,7 @@ export class TestModel {
 
 
 
-import {Post} from 'ng2-wp-api';
+import {WpPost} from 'ng2-wp-api';
 /** Optional component that create Post class from the data */ 
 
 @Component({
@@ -71,11 +71,11 @@ export class Single {
      *  check Post class file to see the functions list.
     */
 
-  post: Post;
+  post: WpPost;
   @Input()
   set data(data: any) {
      /* Create Post class for the view `. */
-    this.post = new Post(data);
+    this.post = new WpPost(data);
   }
 }
 

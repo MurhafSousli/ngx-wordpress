@@ -14,7 +14,7 @@
 
 import { Component, ViewChild } from '@angular/core';
 
-import {WpCollection,WpHelper,CollectionResponse,QueryArgs} from "ng2-wp-api/dist";
+import {WpCollection,WpEndpoint,CollectionResponse,WpQueryArgs} from "ng2-wp-api";
 
 @Component({
   selector: 'test-collection',
@@ -32,7 +32,7 @@ import {WpCollection,WpHelper,CollectionResponse,QueryArgs} from "ng2-wp-api/dis
 })
 export class PartialComponent  {
 
-  endpoint = WpHelper.endpoint.posts;
+  endpoint = WpEndpoint.posts;
   args;
 
   posts;
@@ -46,7 +46,7 @@ export class PartialComponent  {
   getCollectionWay1() {
   //WpCollection component gets a new response automatically when the input `[args]` value has set/changed.
   //NOTE: Make sure enableProdMode() is called to avoid onChanges error.
-   this.args = new QueryArgs({
+   this.args = new WpQueryArgs({
         per_page: 3,
         page: 3
       });
@@ -54,7 +54,7 @@ export class PartialComponent  {
 
   
   //OPTIONAL: use ViewChild to get WpCollection reference, so you can call .get and .more
-  @ViewChild(WpCollection) collection: WpCollection;
+  @ViewChild(WpCollectionComponent) collection: WpCollectionComponent;
 
   getCollectionWay2() {
     //Get a new collection by setting the bound args the collection using ViewChild
@@ -63,9 +63,19 @@ export class PartialComponent  {
     });
   }
 
-  getNextPage() {
+  getMore() {
     //you must have the reference of `WpCollection`.
     this.collection.more();
+  }
+
+  getNextPage() {
+    //you must have the reference of `WpCollection`.
+    this.collection.next();
+  }
+
+  getPrevPage() {
+    //you must have the reference of `WpCollection`.
+    this.collection.prev();
   }
 }
 
@@ -76,7 +86,7 @@ export class PartialComponent  {
  *  NOTE: The embed in QueryArgs must be set to true in order to get Post class to work.
  *  */ 
 
-import {Post} from 'ng2-wp-api';
+import {WpPost} from 'ng2-wp-api';
 
 @Component({
   selector: 'item',
@@ -92,11 +102,11 @@ import {Post} from 'ng2-wp-api';
 })
 
 export class Item {
-  post: Post;
+  post: WpPost;
   @Input()
   set data(data: any) {
      /* Create Post class for the view `. */
-    this.post = new Post(data);
+    this.post = new WpPost(data);
   }
 }
 

@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
-import {WpHttp} from '../../classes/wp.http';
+import {WpHttp} from '../../helpers/wp-http.class';
 import {ModelInterface} from './model.interface';
-import {QueryArgs} from "../../classes/args.model";
+import {WpQueryArgs} from "../../helpers/wp-query.class";
 /**
  * WpModel Service: Get/Add/Update/Delete single from WP API
  */
@@ -11,12 +11,12 @@ import {QueryArgs} from "../../classes/args.model";
 export class ModelService implements ModelInterface {
 
   /** Request Parameters  */
-  private queryArgs: QueryArgs;
+  private WpQueryArgs: WpQueryArgs;
   private _id: number;
   private _body: any;
 
   constructor(private http: WpHttp, private endpoint: string) {
-    this.queryArgs = new QueryArgs({});
+    this.WpQueryArgs = new WpQueryArgs({});
   }
 
   /**
@@ -25,9 +25,9 @@ export class ModelService implements ModelInterface {
    * @param args
    * @returns {Observable<Response>}
    */
-  public get = (id?: number, args?: QueryArgs): Observable<any> => {
+  public get = (id?: number, args?: WpQueryArgs): Observable<any> => {
     let reqId = (id) ? id : this._id;
-    let reqArgs = (args) ? args : this.queryArgs;
+    let reqArgs = (args) ? args : this.WpQueryArgs;
     return this.http.get(this.endpoint + reqId, reqArgs).map(res => res.json());
   };
   /**

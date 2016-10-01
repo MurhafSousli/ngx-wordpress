@@ -3,31 +3,27 @@ import {NgModule} from '@angular/core';
 import {HttpModule, RequestOptions, XHRBackend} from "@angular/http";
 
 /** Services */
-import {CollectionService} from './service/collection/collection.service';
-import {ModelService} from './service/model/model.service';
-import {ConfigService} from './service/config/config.service';
 import {WpService} from "./service/wp.service";
-import {EndpointService} from './service/endpoint/endpoint.service';
+import {ConfigService} from "./service/config/config.service";
 
 /** components */
-import {WpCollection} from './components/collection.component';
-import {WpModel} from './components/model.component';
+import {WpCollectionComponent} from './components/collection.component';
+import {WpModelComponent} from './components/model.component';
 
-/** classes */
-import {WpHttp} from "./classes/wp.http";
-import {QueryArgs} from './classes/args.model';
-import {Post} from './classes/post.model';
-import {User} from './classes/user.model';
-import {WpHelper} from './classes/wp.helper';
-
-/** interfaces */
+/** helpers */
+import {WpHttp} from './helpers/wp-http.class';
+import {WpQueryArgs} from './helpers/wp-query.class';
+import {WpPost} from './helpers/wp-post.class';
+import {WpUser} from './helpers/wp-user.interface';
+import {WpEndpoint} from './helpers/wp-endpoints';
+import {WpPagination} from './service/collection/collection.service';
 import {CollectionResponse} from './service/collection/collection.interface';
 
 
 @NgModule({
   declarations: [
-    WpCollection,
-    WpModel
+    WpCollectionComponent,
+    WpModelComponent
   ],
   imports: [
     CommonModule,
@@ -45,29 +41,22 @@ import {CollectionResponse} from './service/collection/collection.interface';
     }
   ],
   exports: [
-    WpCollection,
-    WpModel
+    WpCollectionComponent,
+    WpModelComponent
   ]
 })
 export class WordPressModule {
 }
 
-export * from './service/config/config.service';
-export * from "./service/wp.service";
-
 export {
-  CollectionService,
-  ModelService,
-  ConfigService,
   WpService,
-  EndpointService,
-  WpCollection,
-  WpModel,
+  WpCollectionComponent,
+  WpModelComponent,
 
-  QueryArgs,
-  Post,
-  User,
-  WpHelper,
-
+  WpQueryArgs,
+  WpPost,
+  WpUser,
+  WpEndpoint,
+  WpPagination,
   CollectionResponse
 }

@@ -5,7 +5,7 @@ import {
 
 import {WpService} from '../service/wp.service';
 import {CollectionService} from '../service/collection/collection.service';
-import {QueryArgs} from "../classes/args.model";
+import {WpQueryArgs} from "../helpers/wp-query.class";
 
 @Component({
   selector: 'wp-collection',
@@ -13,7 +13,7 @@ import {QueryArgs} from "../classes/args.model";
   template: `<ng-content></ng-content>`
 })
 
-export class WpCollection implements OnChanges {
+export class WpCollectionComponent implements OnChanges {
 
   private collection: CollectionService;
 
@@ -29,7 +29,7 @@ export class WpCollection implements OnChanges {
   @Output() response = new EventEmitter(true);
 
   constructor(private wpService: WpService) {
-    this.args = new QueryArgs({});
+    this.args = new WpQueryArgs({});
   }
 
   /** Detects if args has changed to fetch again. */
@@ -56,6 +56,24 @@ export class WpCollection implements OnChanges {
   /** Get more collection (next page) */
   public more = (): void => {
     this.collection.more().subscribe(
+      (res)=> {
+        this.response.emit(res);
+      }
+    );
+  };
+
+  /** Get more collection (next page) */
+  public next = (): void => {
+    this.collection.next().subscribe(
+      (res)=> {
+        this.response.emit(res);
+      }
+    );
+  };
+
+  /** Get more collection (next page) */
+  public prev = (): void => {
+    this.collection.prev().subscribe(
       (res)=> {
         this.response.emit(res);
       }

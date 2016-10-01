@@ -3,8 +3,8 @@ import {Injectable} from '@angular/core';
 import {EndpointInterface} from "../endpoint/endpoint.interface";
 import {CollectionService} from "../collection/collection.service";
 import {ModelService} from "../model/model.service";
-import {WpHttp} from "../../classes/wp.http";
-import {WpHelper} from '../../classes/wp.helper';
+import {WpHttp} from "../../helpers/wp-http.class";
+import {WpEndpoint} from "../../helpers/wp-endpoints";
 
 @Injectable()
 export class EndpointService implements EndpointInterface {
@@ -27,52 +27,52 @@ export class EndpointService implements EndpointInterface {
 
     public endpoint = (endpoint: string): any => {
         return this.swithcer(endpoint);
-    }
+    };
 
     public posts = ():  any => {
-        let endpoint = WpHelper.endpoint.posts;
+        let endpoint = WpEndpoint.posts;
         return this.swithcer(endpoint);
-    }
+    };
     public users = ():  any=> {
-        let endpoint = WpHelper.endpoint.users;
+        let endpoint = WpEndpoint.users;
         return this.swithcer(endpoint);
-    }
+    };
     public categories = ():  any => {
-        let endpoint = WpHelper.endpoint.categories;
+        let endpoint = WpEndpoint.categories;
         return this.swithcer(endpoint);
-    }
+    };
     public pages = ():  any=> {
-        let endpoint = WpHelper.endpoint.pages;
+        let endpoint = WpEndpoint.pages;
         return this.swithcer(endpoint);
-    }
+    };
 
     public tags = ():  any=> {
-        let endpoint = WpHelper.endpoint.tags;
+        let endpoint = WpEndpoint.tags;
         return this.swithcer(endpoint);
-    }
+    };
 
     public comments = ():  any=> {
-        let endpoint = WpHelper.endpoint.comments;
+        let endpoint = WpEndpoint.comments;
         return this.swithcer(endpoint);
-    }
+    };
 
     public media = ():  any=> {
-        let endpoint = WpHelper.endpoint.media;
+        let endpoint = WpEndpoint.media;
         return this.swithcer(endpoint);
-    }
+    };
 
     public taxonomies = ():  any => {
-        let endpoint = WpHelper.endpoint.taxonomies;
+        let endpoint = WpEndpoint.taxonomies;
         return this.swithcer(endpoint);
-    }
+    };
 
     public statuses = ():  any=> {
-        let endpoint = WpHelper.endpoint.statuses;
+        let endpoint = WpEndpoint.statuses;
         return  this.swithcer(endpoint);
-    }
+    };
 
     public types = ():  any=> {
-        let endpoint = WpHelper.endpoint.types;
+        let endpoint = WpEndpoint.types;
         return this.swithcer(endpoint);
-    }
+    };
 }

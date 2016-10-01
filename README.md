@@ -40,23 +40,16 @@ Install it with npm
 
 [](#features)This library is very flexible and easy to use, you will find everything you need included out of the box:
 - [x] WordPress Service
-   * Get collection of posts `wpService.collection().posts().get(args?).subscribe(...)`
-   * Get single post by ID `wpService.model().posts.get(id,args?).subscribe(...)`
 - [x] WordPress Components (an alternative to the service)
-   * `<wp-model [endpoint]='endpoint' [id]='id' (response)='wpResponse(event)'></wp-model>`
-   * `<wp-collection [endpoint]='endpoint' [args]='args' (response)='wpResponse(event)'></wp-collection>`
-- [x] Direct link `wpService.link(url).subscribe(...)`
-- [x] Aysnc http calls, runs in the background (no UI blocking).
-- [x] Useful classes to access several models and properties.
-- [x] Timeout for http calls (ms) `wpConfig.timeout = 6000;` default: 6s 
+- [x] Direct link
+- [x] Async http calls, runs in the background (no UI blocking)
+- [x] Useful classes to access several models and their properties
+- [x] Timeout for http calls (ms) `wpConfig.timeout = 5000;` default: 5s 
 - [x] Error Notifier `wpConfig.errors.subscribe(...)`
 - [x] Loading Notifier `wpConfig.loading.subscribe(...)`
-- [x] Authentication Notifier `wpConfig.authUser.subscribe(...)`
-- [ ] Authentication
+- [x] Authentication
    - [x] Basic Authentication. `wpService.auth().basic(username,password)`
-   - [ ] Cookie Authentication (if your app works internally in a wordpress theme).
-   - [ ] JWT Authentication (requires [JWT plugin](https://github.com/Tmeister/wp-api-jwt-auth)).
-   - [ ] OAuth Authentication (requires [OAuth Plugin](https://github.com/WP-API/OAuth1)).
+   - [x] Cookie Authentication (only if your app works internally in a WordPress theme)
   
 
 <a name="abstract"/>
@@ -65,8 +58,7 @@ Install it with npm
 
 #### Services:
 
- - `WpService`    Service to get a collection/model of the wanted endpoint.
- - `WpConfig`     Service to initialize and configure the library (e.g. wordpress base url).
+ - `WpService`    Service to get a collection or model, authenticate and 
 
  ---
  
@@ -79,10 +71,10 @@ Install it with npm
 
 #### Helper Classes:  
 
- - `Post`            Useful class for posts and pages (e.g. functions for accessing embedded posts).
- - `User`            Interface for user response.
- - `QueryArgs`       Class for creating query arguments
- - `WpHelper`        Contains the default endpoints addresses.
+ - `WpPost`            Useful class for posts and pages (contains functions for accessing embedded posts).
+ - `WpUser`            Interface for user response.
+ - `WpQueryArgs`       Class for creating query arguments for collection/model.
+ - `WpEndpoint`        List of default endpoints and their addresses.
 
  ---
 
@@ -90,6 +82,13 @@ Install it with npm
 
 ```
     WpService
+    ├── config 
+    |    ├── baseUrl: string
+    |    ├── timeOut: number
+    |    ├── errors: Observable
+    |    ├── loading: Observable
+    |
+    ├── discover(url): Observable
     ├── link(url): Observable
     ├── collection()
     |    ├── endpoint(ep)
@@ -102,13 +101,9 @@ Install it with npm
     |        ├──  update(id, body): Observable
     |        ├──  delete(id): Observable
     ├── auth()
-    |    ├── basic(username, password): void;
-    |    ├── logout(): void;
-    
-
-    WpConfig
-    ├── baseUrl: string
-    ├── authKeys: string (encrypted)
+    |    ├── basic(username, password): Observable
+    |    ├── cookies(): Observable
+    |    ├── logout()
 ```
 
 
@@ -118,7 +113,7 @@ Install it with npm
 Add `WordPressModule` to **NgModule** `imports` array.
 
 ```javascript
-import { WordPressModule } from 'ng2-wp-api/dist';
+import { WordPressModule } from 'ng2-wp-api';
 
 @NgModule({
 imports: [
@@ -133,18 +128,17 @@ imports: [
 Set your WordPress base url in the root component
 
 ```javascript
-constructor(wpConfig: WpConfig){
+constructor(wpService: WpService){
+}
 
-    wpConfig.baseUrl = "http://localhost/wordpress";
-    
-    /** Optional observables */
-    
-    //catch loading state (useful for spinner)
-    wpConfig.loading.subscribe(...);
-    //catch any errors occurs in all requests
-    wpConfig.errors.subscribe(...);
-    //catch authenticated user once login is successful
-    wpConfig.authUser.subscribe(...);
+ngOnInit(){
+   wpService.config.baseUrl = "http://localhost/wordpress";
+   /** Optional */
+
+   //catch loading state (useful for spinner)
+   wpService.config.loading.subscribe(...);
+   //catch any errors occurs in all requests
+   wpService.config.errors.subscribe(...); 
 }
 ```
 See [Initializing example](/examples/Initilizing WP Service.ts).
@@ -156,10 +150,11 @@ After initializing, you can either consume the library as a service, or as a com
 <a name="service"/>
 ## Using the service
 
-Import `WpService` and inject it in your component constructor
+Import `WpService` in component constructor
+Import `WpEndpoint` to get the desired endpoint address
 
 ```javascript
-import {WpService} from "ng2-wp-api/dist";
+import {WpService} from "ng2-wp-api";
 
 @Component({...})
 export class testComponent {
@@ -175,15 +170,18 @@ export class testComponent {
 A basic example of fetching 6 embedded posts:
   
 ```javascript
-var endpoint = WpHelper.endpoint.posts;
+import {WpService,WpEndpoint,WpQueryArgs,CollectionResponse} from "ng2-wp-api";
+.
+.
+var endpoint = WpEndpoint.posts;
 
-var args = new QueryArgs({
+var args = new WpQueryArgs({
     perPage: 6,
     embed: true
 });
 
 this.wpService.collection()
-  .endpoint(endpoint)       //or .posts()
+  .endpoint(endpoint)       //or posts()
   .get(args)
   .subscribe((res: CollectionResponse) => {
       this.data = res.data;
@@ -196,10 +194,10 @@ See [WpService Collection example](/examples/Collection using the service.ts)
 **For model:**
 
 ```javascript
-var endpoint = WpHelper.endpoint.posts;
+var endpoint = WpEndpoint.posts;
 
 this.wpService.model()
-    .endpoint(endpoint)     //posts() or pages() or users() ..etc
+    .endpoint(endpoint)     //or posts() or pages() or users() ..etc
     .get(id)
     .subscribe((res) => {
         this.data = res;
@@ -257,6 +255,30 @@ wpService.model().users().delete(userId);
 ```
 
 <a name="issues"/>
+## Authentication
+
+ - Basic Authentication:
+```javascript
+ this.wpService.auth().basic('username', 'password').subscribe(
+  (loggedInUser: WpUser)=> {
+    console.log(loggedInUser);
+  });
+```
+
+ - Cookies Authentication:
+```javascript
+ this.wpService.auth().cookies().subscribe(
+  (loggedInUser: WpUser)=> {
+    console.log(loggedInUser);
+  });
+```
+
+## Direct Link
+
+If you have to do a `GET` request from other resources, Use `WpService.link(url).subscribe(...)` to get the advantage of error handling and loading state. 
+
+
+<a name="issues"/>
 ## Issues
 
 If you identify any errors in the library, or have an idea for an improvement, please open an [issue](https://github.com/MurhafSousli/ng2-wp-api/issues). I am excited to see what the community thinks of this project, and I would love your input!
@@ -264,18 +286,18 @@ If you identify any errors in the library, or have an idea for an improvement, p
 <a name="hints"/>
 ## Hints
 
- - Use `WpHelper.endpoint` to get the default endpoints and their addresses.
- - Use `wpService.collection.posts().get(...)` instead of `WpService.Collection.endpoint(WpHelper.endpoint.posts)`
- - Use `QueryArgs` class to specify your request argument.
- - Use `Post` class when the response is embedded, it has useful functions for accessing embedded posts.
- - `Post` class works for posts, pages and custom post types.
- - Use `User` interface if the response is user.
- - If you struggle with specifing your query arguments, check [WordPress Query parameters](https://codex.wordpress.org/Class_Reference/WP_Query#Parameters) to get a better idea.
+ - Use `WpEndpoint` to get the default endpoints and their addresses.
+ - `WpService.collection.posts().get(...)` is a shortcut of `WpService.Collection.endpoint(WpEndpoint.posts)`
+ - Use `WpQueryArgs` class to specify your request argument.
+ - Use `WpPost` class when the response is embedded, it has useful functions for accessing embedded posts.
+ - `WpPost` class works for posts, pages and custom post types.
+ - Use `WpUser` interface if the response is user.
+ - If you struggle with specifying your query arguments, check [WordPress Query parameters](https://codex.wordpress.org/Class_Reference/WP_Query#Parameters) to get a better idea.
 
 <a name="author"/>
 ## Author
 
- **Murhaf Sousli**
+ **[Murhaf Sousli](http://murhafsousli.com)**
 
  - [github/murhafsousli](https://github.com/MurhafSousli)
  - [twitter/murhafsousli](https://twitter.com/MurhafSousli)

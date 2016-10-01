@@ -2,13 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14048f6f-edaa-444d-badd-6c990c94a483" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/classes/args.class.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/classes/endpoint.interface.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/classes/post.class.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/classes/user.model.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/classes/wp.helper.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/classes/wp.http.ts" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CHANGELOG.md" afterPath="$PROJECT_DIR$/CHANGELOG.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/classes/post.model.ts" afterPath="$PROJECT_DIR$/src/classes/post.model.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/classes/wp.helper.ts" afterPath="$PROJECT_DIR$/src/classes/wp.helper.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Collection using the component.ts" afterPath="$PROJECT_DIR$/examples/Collection using the component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Collection using the service.ts" afterPath="$PROJECT_DIR$/examples/Collection using the service.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Initilizing WP Service.ts" afterPath="$PROJECT_DIR$/examples/Initilizing WP Service.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Model using the component.ts" afterPath="$PROJECT_DIR$/examples/Model using the component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Model using the service.ts" afterPath="$PROJECT_DIR$/examples/Model using the service.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/collection.component.ts" afterPath="$PROJECT_DIR$/src/components/collection.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/model.component.ts" afterPath="$PROJECT_DIR$/src/components/model.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.ts" afterPath="$PROJECT_DIR$/src/index.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/authentication/auth.interface.ts" afterPath="$PROJECT_DIR$/src/service/authentication/auth.interface.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/authentication/auth.service.ts" afterPath="$PROJECT_DIR$/src/service/authentication/auth.service.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/collection/collection.interface.ts" afterPath="$PROJECT_DIR$/src/service/collection/collection.interface.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/collection/collection.service.ts" afterPath="$PROJECT_DIR$/src/service/collection/collection.service.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/config/config.interface.ts" afterPath="$PROJECT_DIR$/src/service/config/config.interface.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/config/config.service.ts" afterPath="$PROJECT_DIR$/src/service/config/config.service.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/endpoint/endpoint.service.ts" afterPath="$PROJECT_DIR$/src/service/endpoint/endpoint.service.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/model/model.interface.ts" afterPath="$PROJECT_DIR$/src/service/model/model.interface.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/model/model.service.ts" afterPath="$PROJECT_DIR$/src/service/model/model.service.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/wp.interface.ts" afterPath="$PROJECT_DIR$/src/service/wp.interface.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/wp.service.ts" afterPath="$PROJECT_DIR$/src/service/wp.service.ts" />
     </list>
     <ignored path="test.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,34 +52,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="wp.helper.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/classes/wp.helper.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="32" column="6" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="collection.component.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/collection.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1802">
-              <caret line="111" column="34" selection-start-line="111" selection-start-column="34" selection-end-line="111" selection-end-column="34" />
-              <folding>
-                <element signature="e#0#105#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="model.component.ts" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/model.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="572">
-              <caret line="60" column="10" selection-start-line="60" selection-start-column="10" selection-end-line="60" selection-end-column="10" />
-              <folding />
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="4590">
+                <caret line="270" column="24" selection-start-line="270" selection-start-column="24" selection-end-line="270" selection-end-column="24" />
+                <folding>
+                  <marker date="1475353647945" expanded="true" signature="3711:3749" ph="{...}" />
+                  <marker date="1475353647945" expanded="true" signature="3722:3747" ph="[...]" />
+                  <marker date="1475353647945" expanded="true" signature="3901:3904" ph="{...}" />
+                  <marker date="1475353647945" expanded="true" signature="3901:4178" ph="{...}" />
+                  <marker date="1475353647945" expanded="true" signature="3916:4178" ph="{...}" />
+                  <marker date="1475353647945" expanded="true" signature="3917:3996" ph="/** ...*/" />
+                  <marker date="1475353647945" expanded="true" signature="3981:3996" ph="/**...*/" />
+                  <marker date="1475353647945" expanded="true" signature="4584:4640" ph="{...}" />
+                  <marker date="1475353647945" expanded="true" signature="4902:4937" ph="{...}" />
+                  <marker date="1475353647945" expanded="true" signature="5065:5138" ph="{...}" />
+                  <marker date="1475353647945" expanded="true" signature="5437:5451" ph="{...}" />
+                  <marker date="1475353647945" expanded="true" signature="5738:5788" ph="..." />
+                  <marker date="1475353647945" expanded="true" signature="6180:6224" ph="..." />
+                  <marker date="1475353647945" expanded="true" signature="6814:6850" ph="{...}" />
+                  <marker date="1475353647945" expanded="true" signature="6970:7006" ph="{...}" />
+                </folding>
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -80,18 +98,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/gulpfile.js" />
-        <option value="$PROJECT_DIR$/src/service/state.service.ts" />
-        <option value="$PROJECT_DIR$/src/service/model.interface.ts" />
-        <option value="$PROJECT_DIR$/src/service/collection.interface.ts" />
-        <option value="$PROJECT_DIR$/src/classes/log.model.ts" />
-        <option value="$PROJECT_DIR$/src/service/collection.service.ts" />
-        <option value="$PROJECT_DIR$/src/service/ErrorNotifierService.ts" />
-        <option value="$PROJECT_DIR$/src/service/state.interface.ts" />
-        <option value="$PROJECT_DIR$/src/service/model.service.ts" />
-        <option value="$PROJECT_DIR$/src/service/wpConfig.interface.ts" />
-        <option value="$PROJECT_DIR$/src/service/wp.helper.ts" />
-        <option value="$PROJECT_DIR$/src/service/wpConfig.service.ts" />
         <option value="$PROJECT_DIR$/src/service/wpModel.interface.ts" />
         <option value="$PROJECT_DIR$/src/service/pagination.interface.ts" />
         <option value="$PROJECT_DIR$/src/service/wpCollection.interface.ts" />
@@ -110,27 +116,39 @@
         <option value="$PROJECT_DIR$/src/service/model/wpModel.service.ts" />
         <option value="$PROJECT_DIR$/src/service/endpoint/endpoint.interface.ts" />
         <option value="$PROJECT_DIR$/src/components/base.component.ts" />
-        <option value="$PROJECT_DIR$/src/service/collection/collection.interface.ts" />
         <option value="$PROJECT_DIR$/src/index.ts" />
         <option value="$PROJECT_DIR$/src/service/base/base.interface.ts" />
         <option value="$PROJECT_DIR$/src/service/base/base.service.ts" />
         <option value="$PROJECT_DIR$/src/service/model/model.interface.ts" />
-        <option value="$PROJECT_DIR$/src/components/model.component.ts" />
         <option value="$PROJECT_DIR$/src/service/model/model.service.ts" />
-        <option value="$PROJECT_DIR$/src/service/wp.service.ts" />
-        <option value="$PROJECT_DIR$/src/service/wp.interface.ts" />
-        <option value="$PROJECT_DIR$/src/classes/wp.http.ts" />
-        <option value="$PROJECT_DIR$/src/service/authentication/auth.interface.ts" />
-        <option value="$PROJECT_DIR$/src/service/authentication/auth.service.ts" />
         <option value="$PROJECT_DIR$/src/components/collection.component.ts" />
         <option value="$PROJECT_DIR$/src/service/endpoint/endpoint.service.ts" />
-        <option value="$PROJECT_DIR$/src/service/config/config.service.ts" />
-        <option value="$PROJECT_DIR$/src/service/config/config.interface.ts" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/src/service/collection/collection.service.ts" />
         <option value="$PROJECT_DIR$/src/classes/post.model.ts" />
+        <option value="$PROJECT_DIR$/src/components/model.component.ts" />
+        <option value="$PROJECT_DIR$/src/service/wp.interface.ts" />
+        <option value="$PROJECT_DIR$/src/classes/user.interface.ts" />
+        <option value="$PROJECT_DIR$/src/classes/endpoint.class.ts" />
         <option value="$PROJECT_DIR$/src/classes/wp.helper.ts" />
+        <option value="$PROJECT_DIR$/src/classes/post.class.ts" />
+        <option value="$PROJECT_DIR$/src/classes/config.class.ts" />
+        <option value="$PROJECT_DIR$/src/service/config/config.interface.ts" />
+        <option value="$PROJECT_DIR$/src/service/wp.service.ts" />
+        <option value="$PROJECT_DIR$/src/classes/args.class.ts" />
+        <option value="$PROJECT_DIR$/src/classes/wp.http.ts" />
+        <option value="$PROJECT_DIR$/src/service/config/config.service.ts" />
+        <option value="$PROJECT_DIR$/src/helpers/wp-http.class.ts" />
+        <option value="$PROJECT_DIR$/src/service/collection/collection.interface.ts" />
+        <option value="$PROJECT_DIR$/src/service/collection/collection.service.ts" />
+        <option value="$PROJECT_DIR$/CHANGELOG.md" />
+        <option value="$PROJECT_DIR$/src/service/authentication/auth.interface.ts" />
+        <option value="$PROJECT_DIR$/examples/Initilizing WP Service.ts" />
+        <option value="$PROJECT_DIR$/examples/Model using the service.ts" />
+        <option value="$PROJECT_DIR$/examples/Collection using the service.ts" />
+        <option value="$PROJECT_DIR$/examples/Model using the component.ts" />
+        <option value="$PROJECT_DIR$/src/service/authentication/auth.service.ts" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/examples/Collection using the component.ts" />
       </list>
     </option>
   </component>
@@ -258,7 +276,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -267,9 +285,19 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ng2-wp-api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ng2-wp-api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -392,6 +420,10 @@
       <workItem from="1474111401980" duration="217000" />
       <workItem from="1474766797546" duration="3065000" />
       <workItem from="1474773027051" duration="3000" />
+      <workItem from="1475262940619" duration="4206000" />
+      <workItem from="1475271381641" duration="13000" />
+      <workItem from="1475308852943" duration="3472000" />
+      <workItem from="1475348723300" duration="5937000" />
     </task>
     <task id="LOCAL-00001" summary="pre-release checkpoint">
       <created>1472429703456</created>
@@ -446,31 +478,31 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="175568000" />
+    <option name="totallyTimeSpent" value="189196000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15625" sideWeight="0.12083333" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15625" sideWeight="0.87916666" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22401172" sideWeight="0.3797753" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22401172" sideWeight="0.6202247" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.113464445" sideWeight="0.4290844" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2647059" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29810727" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21440262" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.025236594" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.320598" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -511,21 +543,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/gulp.config.js" />
-    <entry file="file://$PROJECT_DIR$/dist/sass/_share.scss" />
-    <entry file="file://$PROJECT_DIR$/dist/sass/_buttons.scss" />
-    <entry file="file://$PROJECT_DIR$/dist/share.scss" />
-    <entry file="file://$PROJECT_DIR$/tslint.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/share.html" />
-    <entry file="file://$PROJECT_DIR$/dist/share.model.js" />
-    <entry file="file://$PROJECT_DIR$/dist/share.component.js" />
-    <entry file="file://$PROJECT_DIR$/dist/share.css" />
     <entry file="file://$PROJECT_DIR$/tsconfig.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -588,13 +605,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/base.component.ts" />
-    <entry file="file://$PROJECT_DIR$/src/service/base/base.interface.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/base/base.interface.ts" />
     <entry file="file://$PROJECT_DIR$/src/service/model/model.service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-799">
@@ -602,20 +613,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/base/base.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="7" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/wp.interface.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/base/base.service.ts" />
     <entry file="file://$PROJECT_DIR$/src/service/endpoint/endpoint.interface.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -630,53 +628,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/authentication/auth.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/service/model/model.interface.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/authentication/auth.interface.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="19" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/config/config.interface.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -687,92 +642,234 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/config/config.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="39" column="34" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/collection/collection.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="37" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/collection/collection.interface.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/service/wp.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="33" column="46" selection-start-line="33" selection-start-column="46" selection-end-line="33" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/classes/args.model.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/classes/endpoint.model.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/classes/post.model.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="50" column="4" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/classes/user.model.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="2" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/classes/wp.http.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-153">
-          <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/classes/wp.helper.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="32" column="6" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/collection.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1802">
-          <caret line="111" column="34" selection-start-line="111" selection-start-column="34" selection-end-line="111" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#105#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="986">
+          <caret line="63" column="1" selection-start-line="63" selection-start-column="1" selection-end-line="63" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/model.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="572">
-          <caret line="60" column="10" selection-start-line="60" selection-start-column="10" selection-end-line="60" selection-end-column="10" />
+          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/endpoint.interface.ts" />
+    <entry file="file://$PROJECT_DIR$/src/classes/config.class.ts" />
+    <entry file="file://$PROJECT_DIR$/src/classes/post.class.ts" />
+    <entry file="file://$PROJECT_DIR$/src/classes/args.class.ts" />
+    <entry file="file://$PROJECT_DIR$/src/service/wp.interface.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/classes/wp.helper.ts" />
+    <entry file="file://$PROJECT_DIR$/src/classes/user.interface.ts" />
+    <entry file="file://$PROJECT_DIR$/src/classes/wp.http.ts" />
+    <entry file="file://$PROJECT_DIR$/src/helpers/wp-endpoints.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="55" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+          <folding>
+            <element signature="e#173#220#0" expanded="false" />
+            <element signature="e#303#375#0" expanded="false" />
+            <element signature="e#455#502#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/collection/collection.interface.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="170">
+            <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/config/config.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/config/config.interface.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" column="9" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/wp.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#148#189#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/Initilizing WP Service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#40#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/Collection using the service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1564">
+          <caret line="92" column="4" selection-start-line="92" selection-start-column="4" selection-end-line="92" selection-end-column="4" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#279#329#0" expanded="true" />
+            <marker date="1475353006895" expanded="true" signature="493:644" ph="..." />
+            <marker date="1475353006895" expanded="true" signature="547:633" ph="..." />
+            <marker date="1475353006895" expanded="true" signature="564:618" ph="..." />
+            <marker date="1475353006895" expanded="true" signature="2335:2408" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/Model using the service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="2" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="e#68#108#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/Model using the component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+            <marker date="1475353006854" expanded="true" signature="396:457" ph="..." />
+            <marker date="1475353006854" expanded="true" signature="992:1354" ph="..." />
+            <marker date="1475353006854" expanded="true" signature="1082:1153" ph="..." />
+            <marker date="1475353006854" expanded="true" signature="1219:1351" ph="..." />
+            <marker date="1475353006854" expanded="true" signature="1254:1340" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/collection/collection.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1614">
+          <caret line="97" column="28" selection-start-line="97" selection-start-column="28" selection-end-line="97" selection-end-column="28" />
+          <folding>
+            <element signature="e#123#164#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/authentication/auth.interface.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/authentication/auth.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="60" column="9" selection-start-line="60" selection-start-column="9" selection-end-line="60" selection-end-column="9" />
+          <folding>
+            <element signature="e#35#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/Collection using the component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#398#451#0" expanded="true" />
+            <marker date="1475359984692" expanded="true" signature="681:816" ph="..." />
+            <marker date="1475359984692" expanded="true" signature="731:797" ph="..." />
+            <marker date="1475359984692" expanded="true" signature="742:786" ph="..." />
+            <marker date="1475359984692" expanded="true" signature="2310:2557" ph="..." />
+            <marker date="1475359984692" expanded="true" signature="2402:2477" ph="..." />
+            <marker date="1475359984692" expanded="true" signature="2543:2554" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helpers/wp-http.class.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-68">
+          <caret line="2" column="43" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="4590">
+            <caret line="270" column="24" selection-start-line="270" selection-start-column="24" selection-end-line="270" selection-end-column="24" />
+            <folding>
+              <marker date="1475353647945" expanded="true" signature="3711:3749" ph="{...}" />
+              <marker date="1475353647945" expanded="true" signature="3722:3747" ph="[...]" />
+              <marker date="1475353647945" expanded="true" signature="3901:3904" ph="{...}" />
+              <marker date="1475353647945" expanded="true" signature="3901:4178" ph="{...}" />
+              <marker date="1475353647945" expanded="true" signature="3916:4178" ph="{...}" />
+              <marker date="1475353647945" expanded="true" signature="3917:3996" ph="/** ...*/" />
+              <marker date="1475353647945" expanded="true" signature="3981:3996" ph="/**...*/" />
+              <marker date="1475353647945" expanded="true" signature="4584:4640" ph="{...}" />
+              <marker date="1475353647945" expanded="true" signature="4902:4937" ph="{...}" />
+              <marker date="1475353647945" expanded="true" signature="5065:5138" ph="{...}" />
+              <marker date="1475353647945" expanded="true" signature="5437:5451" ph="{...}" />
+              <marker date="1475353647945" expanded="true" signature="5738:5788" ph="..." />
+              <marker date="1475353647945" expanded="true" signature="6180:6224" ph="..." />
+              <marker date="1475353647945" expanded="true" signature="6814:6850" ph="{...}" />
+              <marker date="1475353647945" expanded="true" signature="6970:7006" ph="{...}" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>

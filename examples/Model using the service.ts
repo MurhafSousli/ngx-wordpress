@@ -3,18 +3,18 @@
  */
 import {Component} from '@angular/core';
 
-import {WpModel, Post, QueryArgs} from "ng2-wp-api/dist";
+import {WpModel, WpPost, WpQueryArgs} from "ng2-wp-api";
 
 @Component({
     selector: 'test-model',
     template: `
-        <h1>{{post?.title?.rendered}}</h1>
+        <h1>{{post.title()}}</h1>
     `
 })
 
 export class TestModel {
 
-    post: Post;
+    post;
 
     constructor(private wpService: WpService) {
 
@@ -22,13 +22,13 @@ export class TestModel {
 
     ngOnInit(){
 
-        let args = new QueryArgs({
+        let args = new WpQueryArgs({
             _embed: true
         });
 
         this.wpService.model().posts().get(1395, args)
         .subscribe((res)=>{
-            this.post = res;
+            this.post = new WpPost(res);
         });
     }
 

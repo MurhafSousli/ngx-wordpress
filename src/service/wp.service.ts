@@ -5,44 +5,65 @@
  */
 
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable} from "rxjs/Observable";
 
 import {WpInterface} from "./wp.interface";
-import {WpHttp} from "../classes/wp.http";
+import {WpHttp} from "../helpers/wp-http.class";
 import {EndpointService} from "./endpoint/endpoint.service";
 import {ConfigService} from "./config/config.service";
 import {AuthService} from "./authentication/auth.service";
+import {WpEndpoint} from '../helpers/wp-endpoints';
 
 @Injectable()
-export class WpService implements WpInterface{
+export class WpService implements WpInterface {
 
-    constructor(private _http: WpHttp, private _wpConfig: ConfigService) {
-    }
+  constructor(private _http: WpHttp, public config: ConfigService) {
 
-    /**
-     * Get Direct Link
-     * @param url
-     * @returns {Observable<Response>}
-     */
-    public link = (url: string): Observable<any> => {
-        return this._http.direct(url).map((res)=>res.json());
-    };
-    /**
-     * Get Collection Service
-     * @returns {EndpointService}
-     */
-    public collection = (): EndpointService => {
-        return new EndpointService(this._http, 'collection');
-    };
-    /**
-     * Get Model Service
-     * @returns {EndpointService}
-     */
-    public model = (): EndpointService => {
-        return new EndpointService(this._http, 'model');
-    };
+  }
 
-    public auth = (): AuthService => {
-        return new AuthService(this._http,this._wpConfig);
-    };
+  /**
+   * Discover WP API
+   * @param url
+   * @returns {any}
+   */
+  discover(url: string): Observable<any> {
+    return this._http.direct(url + WpEndpoint.discover).map((res)=> {
+      if (res) {
+        /** discovery success */
+        this.config.baseUrl = url;
+        return res.json();
+      }
+    });
+  }
+  /**
+   * Direct Link
+   * @param url
+   * @returns {any}
+   */
+  link(url: string): Observable<any> {
+    return this._http.direct(url).map((res)=> {
+      return res.json();
+    });
+  }
+  /**
+   * Collection Service
+   * @returns {EndpointService}
+   */
+  collection(): EndpointService {
+    return new EndpointService(this._http, 'collection');
+  }
+  /**
+   * Model Service
+   * @returns {EndpointService}
+   */
+  model(): EndpointService {
+    return new EndpointService(this._http, 'model');
+  }
+  /**
+   * Authenticate Service
+   * @returns {AuthService}
+   */
+  auth(): AuthService{
+    return new AuthService(this._http, this.config);
+  }
 }

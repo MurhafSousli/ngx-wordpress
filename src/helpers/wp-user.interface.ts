@@ -1,4 +1,4 @@
-export interface User {
+export interface WpUser {
   id:string;
   name:string;
   url:string;

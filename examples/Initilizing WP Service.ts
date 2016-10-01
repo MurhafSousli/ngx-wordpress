@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {ConfigService} from 'ng2-wp-api/dist';
+import {WpService} from 'ng2-wp-api';
 
 @Component({
   selector: 'app-root',
@@ -12,17 +12,17 @@ export class AppComponent {
   loading = false;
   errors = [];
 
-  constructor(private wpConfig: ConfigService) {
+  constructor(private wpService: WpService) {
     /** Set WordPress base URL */
-    wpConfig.baseUrl = "http://localhost/wordpress";
+    wpService.config.baseUrl = "http://localhost/wordpress";
 
     /** Notify when loading state changes */
-    wpConfig.loading.subscribe((res) => {
+    wpService.config.loading.subscribe((res) => {
       this.loading = res;
     });
 
     /** Notify when an error occurs */
-    wpConfig.errors.subscribe((res)=> {
+    wpService.config.errors.subscribe((res)=> {
       this.errors.push(res);
     });
 

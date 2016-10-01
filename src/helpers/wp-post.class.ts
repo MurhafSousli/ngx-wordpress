@@ -1,6 +1,6 @@
-import {User} from "./user.model";
+import {WpUser} from "./wp-user.interface";
 
-export class Post {
+export class WpPost {
 
   constructor(public post) {
   }
@@ -41,8 +41,8 @@ export class Post {
       return this.post._embedded['wp:term'][1];
   };
 
-  author = ():User => {
-    if (this.post._embedded)  return <User>this.post._embedded.author;
+  author = ():WpUser => {
+    if (this.post._embedded)  return <WpUser>this.post._embedded.author;
   };
 
   /** featuredMedia(): check if has featured image, return false | number */
