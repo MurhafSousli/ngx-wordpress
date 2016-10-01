@@ -276,7 +276,7 @@ wpService.model().users().delete(userId);
 
 ## Direct Link
 
-If you want to do a `GET` request for any URL, Use `WpService.link(url).subscribe(...)` to get the advantage of error handling and loading state. 
+If you want to do a `GET` request for any URL, Use `WpService.link(url).subscribe(...)` to get the advantage of error and loading notifiers. 
 
 
 <a name="issues"/>

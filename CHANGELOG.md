@@ -4,30 +4,31 @@
 
 Use `WpService.config` instead of `WpConfig` to keep all usages in one service.
     
-**Bugs**:
+###Bugs:
     
 - Basic Authentication: Fixes request and return observable instead of void
 
     `WpService.auth().basic(username,password).subscribe(...)`
 
     
-**Features:**
+###Features:
 
-- CollectionService: Added `next` and `prev`
+- WpService.Collection(): Added `next()` and `prev()` functions
 
   - `collectionService = wpService.collection().posts().get.subscribe(...)` Get collection
   - `collectionService.more().subscrube(...)` Combine current page with next page collection
   - `collectionService.next().subscrube(...)` Get next page collection
   - `collectionService.prev().subscrube(...)` Get prev page collection
 
+- WpCollectionComponent: Added `next()` and `prev()` functions
     
 - Discovery endpoint: Discover if a url has WP API install.
 `WpService.discover(url).subscribe(...)`
 
-- Cookies Authentication
+- Cookies Authentication:
 `WpService.auth().cookies().subscribe(...)`
 
-Breaking Changes:
+###Breaking Changes:
 
 All helper classes has been prefixed with `Wp`
 - `Post` is now `WpPost`
