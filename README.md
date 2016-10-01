@@ -44,12 +44,13 @@ Install it with npm
 - [x] Direct link
 - [x] Async http calls, runs in the background (no UI blocking)
 - [x] Useful classes to access several models and their properties
-- [x] Timeout for http calls (ms) `wpConfig.timeout = 5000;` default: 5s 
-- [x] Error Notifier `wpConfig.errors.subscribe(...)`
-- [x] Loading Notifier `wpConfig.loading.subscribe(...)`
+- [x] Timeout for Http requests
+- [x] Error Notifier
+- [x] Loading Notifier
+- [x] Discovery
 - [x] Authentication
-   - [x] Basic Authentication. `wpService.auth().basic(username,password)`
-   - [x] Cookie Authentication (only if your app works internally in a WordPress theme)
+   - [x] Basic Authentication
+   - [x] Cookie Authentication
   
 
 <a name="abstract"/>
@@ -58,7 +59,7 @@ Install it with npm
 
 #### Services:
 
- - `WpService`    Service to get a collection or model, authenticate and 
+ - `WpService`    One service for all operations (Access/Authenticate/Configure).
 
  ---
  
@@ -133,8 +134,8 @@ constructor(wpService: WpService){
 
 ngOnInit(){
    wpService.config.baseUrl = "http://localhost/wordpress";
+   
    /** Optional */
-
    //catch loading state (useful for spinner)
    wpService.config.loading.subscribe(...);
    //catch any errors occurs in all requests
@@ -275,7 +276,7 @@ wpService.model().users().delete(userId);
 
 ## Direct Link
 
-If you have to do a `GET` request from other resources, Use `WpService.link(url).subscribe(...)` to get the advantage of error handling and loading state. 
+If you want to do a `GET` request for any URL, Use `WpService.link(url).subscribe(...)` to get the advantage of error handling and loading state. 
 
 
 <a name="issues"/>

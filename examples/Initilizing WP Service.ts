@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {WpService} from 'ng2-wp-api';
 
@@ -7,25 +7,27 @@ import {WpService} from 'ng2-wp-api';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
 
   loading = false;
   errors = [];
 
   constructor(private wpService: WpService) {
+  }
+
+  ngOnInit(){
     /** Set WordPress base URL */
-    wpService.config.baseUrl = "http://localhost/wordpress";
+    this.wpService.config.baseUrl = "http://localhost/wordpress";
 
     /** Notify when loading state changes */
-    wpService.config.loading.subscribe((res) => {
+    this.wpService.config.loading.subscribe((res) => {
       this.loading = res;
     });
 
     /** Notify when an error occurs */
-    wpService.config.errors.subscribe((res)=> {
+    this.wpService.config.errors.subscribe((res)=> {
       this.errors.push(res);
     });
-
   }
 
 }

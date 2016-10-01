@@ -2,34 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14048f6f-edaa-444d-badd-6c990c94a483" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/classes/args.class.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/classes/endpoint.interface.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/classes/post.class.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/classes/user.model.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/classes/wp.helper.ts" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/classes/wp.http.ts" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CHANGELOG.md" afterPath="$PROJECT_DIR$/CHANGELOG.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Collection using the component.ts" afterPath="$PROJECT_DIR$/examples/Collection using the component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Collection using the service.ts" afterPath="$PROJECT_DIR$/examples/Collection using the service.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Initilizing WP Service.ts" afterPath="$PROJECT_DIR$/examples/Initilizing WP Service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Model using the component.ts" afterPath="$PROJECT_DIR$/examples/Model using the component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Model using the service.ts" afterPath="$PROJECT_DIR$/examples/Model using the service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/collection.component.ts" afterPath="$PROJECT_DIR$/src/components/collection.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/model.component.ts" afterPath="$PROJECT_DIR$/src/components/model.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.ts" afterPath="$PROJECT_DIR$/src/index.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/authentication/auth.interface.ts" afterPath="$PROJECT_DIR$/src/service/authentication/auth.interface.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/authentication/auth.service.ts" afterPath="$PROJECT_DIR$/src/service/authentication/auth.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/collection/collection.interface.ts" afterPath="$PROJECT_DIR$/src/service/collection/collection.interface.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/collection/collection.service.ts" afterPath="$PROJECT_DIR$/src/service/collection/collection.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/config/config.interface.ts" afterPath="$PROJECT_DIR$/src/service/config/config.interface.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/config/config.service.ts" afterPath="$PROJECT_DIR$/src/service/config/config.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/endpoint/endpoint.service.ts" afterPath="$PROJECT_DIR$/src/service/endpoint/endpoint.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/model/model.interface.ts" afterPath="$PROJECT_DIR$/src/service/model/model.interface.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/model/model.service.ts" afterPath="$PROJECT_DIR$/src/service/model/model.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/wp.interface.ts" afterPath="$PROJECT_DIR$/src/service/wp.interface.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/service/wp.service.ts" afterPath="$PROJECT_DIR$/src/service/wp.service.ts" />
     </list>
     <ignored path="test.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,24 +30,24 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="4590">
-                <caret line="270" column="24" selection-start-line="270" selection-start-column="24" selection-end-line="270" selection-end-column="24" />
+              <first_editor relative-caret-position="136">
+                <caret line="44" column="53" selection-start-line="44" selection-start-column="53" selection-end-line="44" selection-end-column="53" />
                 <folding>
-                  <marker date="1475353647945" expanded="true" signature="3711:3749" ph="{...}" />
-                  <marker date="1475353647945" expanded="true" signature="3722:3747" ph="[...]" />
-                  <marker date="1475353647945" expanded="true" signature="3901:3904" ph="{...}" />
-                  <marker date="1475353647945" expanded="true" signature="3901:4178" ph="{...}" />
-                  <marker date="1475353647945" expanded="true" signature="3916:4178" ph="{...}" />
-                  <marker date="1475353647945" expanded="true" signature="3917:3996" ph="/** ...*/" />
-                  <marker date="1475353647945" expanded="true" signature="3981:3996" ph="/**...*/" />
-                  <marker date="1475353647945" expanded="true" signature="4584:4640" ph="{...}" />
-                  <marker date="1475353647945" expanded="true" signature="4902:4937" ph="{...}" />
-                  <marker date="1475353647945" expanded="true" signature="5065:5138" ph="{...}" />
-                  <marker date="1475353647945" expanded="true" signature="5437:5451" ph="{...}" />
-                  <marker date="1475353647945" expanded="true" signature="5738:5788" ph="..." />
-                  <marker date="1475353647945" expanded="true" signature="6180:6224" ph="..." />
-                  <marker date="1475353647945" expanded="true" signature="6814:6850" ph="{...}" />
-                  <marker date="1475353647945" expanded="true" signature="6970:7006" ph="{...}" />
+                  <marker date="1475364123977" expanded="true" signature="3524:3562" ph="{...}" />
+                  <marker date="1475364123977" expanded="true" signature="3535:3560" ph="[...]" />
+                  <marker date="1475364123977" expanded="true" signature="3714:3717" ph="{...}" />
+                  <marker date="1475364123977" expanded="true" signature="3714:3994" ph="{...}" />
+                  <marker date="1475364123977" expanded="true" signature="3729:3994" ph="{...}" />
+                  <marker date="1475364123977" expanded="true" signature="3730:3813" ph="/** ...*/" />
+                  <marker date="1475364123977" expanded="true" signature="3798:3813" ph="/**...*/" />
+                  <marker date="1475364123977" expanded="true" signature="4400:4456" ph="{...}" />
+                  <marker date="1475364123977" expanded="true" signature="4718:4753" ph="{...}" />
+                  <marker date="1475364123977" expanded="true" signature="4881:4954" ph="{...}" />
+                  <marker date="1475364123977" expanded="true" signature="5253:5267" ph="{...}" />
+                  <marker date="1475364123977" expanded="true" signature="5554:5604" ph="..." />
+                  <marker date="1475364123977" expanded="true" signature="5996:6040" ph="..." />
+                  <marker date="1475364123977" expanded="true" signature="6630:6666" ph="{...}" />
+                  <marker date="1475364123977" expanded="true" signature="6786:6822" ph="{...}" />
                 </folding>
               </first_editor>
               <second_editor />
@@ -142,13 +116,13 @@
         <option value="$PROJECT_DIR$/src/service/collection/collection.service.ts" />
         <option value="$PROJECT_DIR$/CHANGELOG.md" />
         <option value="$PROJECT_DIR$/src/service/authentication/auth.interface.ts" />
-        <option value="$PROJECT_DIR$/examples/Initilizing WP Service.ts" />
         <option value="$PROJECT_DIR$/examples/Model using the service.ts" />
         <option value="$PROJECT_DIR$/examples/Collection using the service.ts" />
         <option value="$PROJECT_DIR$/examples/Model using the component.ts" />
         <option value="$PROJECT_DIR$/src/service/authentication/auth.service.ts" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/examples/Collection using the component.ts" />
+        <option value="$PROJECT_DIR$/examples/Initilizing WP Service.ts" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -423,7 +397,7 @@
       <workItem from="1475262940619" duration="4206000" />
       <workItem from="1475271381641" duration="13000" />
       <workItem from="1475308852943" duration="3472000" />
-      <workItem from="1475348723300" duration="5937000" />
+      <workItem from="1475348723300" duration="7327000" />
     </task>
     <task id="LOCAL-00001" summary="pre-release checkpoint">
       <created>1472429703456</created>
@@ -478,14 +452,14 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="189196000" />
+    <option name="totallyTimeSpent" value="190586000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22401172" sideWeight="0.3797753" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22401172" sideWeight="0.6202247" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22401172" sideWeight="0.11235955" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22401172" sideWeight="0.8876405" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.113464445" sideWeight="0.4290844" order="0" side_tool="true" content_ui="tabs" />
@@ -737,16 +711,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/Initilizing WP Service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#40#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/Collection using the service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1564">
@@ -841,27 +805,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/examples/Initilizing WP Service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="4590">
-            <caret line="270" column="24" selection-start-line="270" selection-start-column="24" selection-end-line="270" selection-end-column="24" />
+          <first_editor relative-caret-position="136">
+            <caret line="44" column="53" selection-start-line="44" selection-start-column="53" selection-end-line="44" selection-end-column="53" />
             <folding>
-              <marker date="1475353647945" expanded="true" signature="3711:3749" ph="{...}" />
-              <marker date="1475353647945" expanded="true" signature="3722:3747" ph="[...]" />
-              <marker date="1475353647945" expanded="true" signature="3901:3904" ph="{...}" />
-              <marker date="1475353647945" expanded="true" signature="3901:4178" ph="{...}" />
-              <marker date="1475353647945" expanded="true" signature="3916:4178" ph="{...}" />
-              <marker date="1475353647945" expanded="true" signature="3917:3996" ph="/** ...*/" />
-              <marker date="1475353647945" expanded="true" signature="3981:3996" ph="/**...*/" />
-              <marker date="1475353647945" expanded="true" signature="4584:4640" ph="{...}" />
-              <marker date="1475353647945" expanded="true" signature="4902:4937" ph="{...}" />
-              <marker date="1475353647945" expanded="true" signature="5065:5138" ph="{...}" />
-              <marker date="1475353647945" expanded="true" signature="5437:5451" ph="{...}" />
-              <marker date="1475353647945" expanded="true" signature="5738:5788" ph="..." />
-              <marker date="1475353647945" expanded="true" signature="6180:6224" ph="..." />
-              <marker date="1475353647945" expanded="true" signature="6814:6850" ph="{...}" />
-              <marker date="1475353647945" expanded="true" signature="6970:7006" ph="{...}" />
+              <marker date="1475364123977" expanded="true" signature="3524:3562" ph="{...}" />
+              <marker date="1475364123977" expanded="true" signature="3535:3560" ph="[...]" />
+              <marker date="1475364123977" expanded="true" signature="3714:3717" ph="{...}" />
+              <marker date="1475364123977" expanded="true" signature="3714:3994" ph="{...}" />
+              <marker date="1475364123977" expanded="true" signature="3729:3994" ph="{...}" />
+              <marker date="1475364123977" expanded="true" signature="3730:3813" ph="/** ...*/" />
+              <marker date="1475364123977" expanded="true" signature="3798:3813" ph="/**...*/" />
+              <marker date="1475364123977" expanded="true" signature="4400:4456" ph="{...}" />
+              <marker date="1475364123977" expanded="true" signature="4718:4753" ph="{...}" />
+              <marker date="1475364123977" expanded="true" signature="4881:4954" ph="{...}" />
+              <marker date="1475364123977" expanded="true" signature="5253:5267" ph="{...}" />
+              <marker date="1475364123977" expanded="true" signature="5554:5604" ph="..." />
+              <marker date="1475364123977" expanded="true" signature="5996:6040" ph="..." />
+              <marker date="1475364123977" expanded="true" signature="6630:6666" ph="{...}" />
+              <marker date="1475364123977" expanded="true" signature="6786:6822" ph="{...}" />
             </folding>
           </first_editor>
           <second_editor />
