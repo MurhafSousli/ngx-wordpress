@@ -50,7 +50,7 @@ Install it with npm
 - [x] Discovery
 - [x] Authentication
    - [x] Basic Authentication
-   - [x] Cookie Authentication
+   - [x] Cookies Authentication
   
 
 <a name="abstract"/>
@@ -84,27 +84,34 @@ Install it with npm
 ```
     WpService
     ├── config 
-    |    ├── baseUrl: string
-    |    ├── timeOut: number
-    |    ├── errors: Observable
-    |    ├── loading: Observable
+    |    ├── baseUrl                       ** Set WordPress URL
+    |    ├── timeOut                       ** Http requests timeout
+    |    ├── loading                       ** Listener for requests loading state
+    |    ├── errors                        ** Listener for requests errors
     |
-    ├── discover(url): Observable
-    ├── link(url): Observable
+    ├── discover(url)                      ** Discover if a URL has a valid API
+    |
+    ├── link(url)                          ** Http Getter with the benefits of loading and errors listeners.
+    |                                         Useful for getting data from external resources
+    |
     ├── collection()
     |    ├── endpoint(ep)
-    |        ├── get(args?): Observable
-    |        ├── more(): Observable
+    |        ├── get(args?)                ** Get Collection of endpoint type.
+    |        ├── more()                    ** Get Next page collection combined with any previous ones.
+    |        ├── next()                    ** Get Next page collection.
+    |        ├── prev()                    ** Get Prev page collection.
+    |
     ├── model()
-    |    ├── endpoint($ep)
-    |        ├──  get(id, args?): Observable
-    |        ├──  add(body): Observable
-    |        ├──  update(id, body): Observable
-    |        ├──  delete(id): Observable
+    |    ├── endpoint(ep)
+    |        ├──  get(id, args?)           ** Get Model by Id.
+    |        ├──  add(body)                ** Add Model to WP.
+    |        ├──  update(id, body)         ** Update Model by Id.
+    |        ├──  delete(id)               ** Delete Model by Id.
+    |
     ├── auth()
-    |    ├── basic(username, password): Observable
-    |    ├── cookies(): Observable
-    |    ├── logout()
+    |    ├── basic(username, password)     ** Basic authentication, returns loggedInUser.
+    |    ├── cookies()                     ** Cookies authentication, returns loggedInUser.
+    |    ├── logout()                      ** Removes authentication info from all requests.
 ```
 
 

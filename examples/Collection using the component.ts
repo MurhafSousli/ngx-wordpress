@@ -14,7 +14,7 @@
 
 import { Component, ViewChild } from '@angular/core';
 
-import {WpCollection,WpEndpoint,CollectionResponse,WpQueryArgs} from "ng2-wp-api";
+import {WpCollectionComponent,WpEndpoint,CollectionResponse,WpQueryArgs} from "ng2-wp-api";
 
 @Component({
   selector: 'test-collection',
