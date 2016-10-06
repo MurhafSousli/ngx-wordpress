@@ -29,7 +29,7 @@ Install it with npm
     - [Components](#components)
         - [Collection Component](#collectionCmp)
         - [Model Component](#modelCmp)
- - [Authentication](#authentication)
+    - [Authentication](#authentication)
  - [Hints](#hints)    
  - [Issues](#issues)    
  - [Author](#author) 
@@ -91,7 +91,7 @@ Install it with npm
     |
     ├── discover(url)                      ** Discover if a URL has a valid API
     |
-    ├── link(url)                          ** Http Getter with the benefits of loading and errors listeners.
+    ├── link(url)                          ** Http Getter with the benefits of loading and errors observables.
     |                                         Useful for getting data from external resources
     |
     ├── collection()
@@ -248,6 +248,13 @@ See [Model Component example](/examples/Model using the component.ts)
 
 ***
 
+<a name="direct"/>
+## Direct Link
+
+If you want to do a `GET` request for any URL, Use `WpService.link(url).subscribe(...)` to get the advantage of error and loading notifiers. 
+
+***
+
 <a name="cud"/>
 ## Add/Update/Delete
 
@@ -262,7 +269,9 @@ wpService.model().pages().update(pageId, body);
 wpService.model().users().delete(userId);
 ```
 
-<a name="issues"/>
+***
+
+<a name="authentication"/>
 ## Authentication
 
  - Basic Authentication:
@@ -280,11 +289,6 @@ wpService.model().users().delete(userId);
     console.log(loggedInUser);
   });
 ```
-
-## Direct Link
-
-If you want to do a `GET` request for any URL, Use `WpService.link(url).subscribe(...)` to get the advantage of error and loading notifiers. 
-
 
 <a name="issues"/>
 ## Issues
