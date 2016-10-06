@@ -294,7 +294,8 @@ wpService.model().users().delete(userId);
 <a name="embedding"/>
 ## Embedded Responses
 
-Usually when displaying a post, you want to display post's featured image, categories, tags, author and comments, the normal post response contains only the Id references which you will have to request each one of them individually.
+Usually when displaying a post, you want to display post's featured image, categories, tags, author and comments.
+The normal post response contains only the Id references which you will have to request each one of them individually.
 
 Embedded responses are very useful to reduce the amount of http requets. you will get all the information you need in one response.
 
@@ -323,7 +324,7 @@ other properties can be accessed from the original `post` object.
    var wpPost = new WpPost(originalPost);
    wpPost.post.propertyName
 ```
-where `wpPost.post` = `originalPost`, See [WpPost class source code](src/helpers/wp-post.class)
+where `wpPost.post` = `originalPost`, See [WpPost class source code](/src/helpers/wp-post.class.ts)
 
 
 <a name="hints"/>
