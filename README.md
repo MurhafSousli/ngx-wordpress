@@ -26,10 +26,11 @@ Install it with npm
         - [Getting Models](#modelSrv)
         - [Direct Link](#direct)
         - [Add/Update/Delete Operations](#cud)
+        - [Authentication](#authentication)
     - [Components](#components)
         - [Collection Component](#collectionCmp)
         - [Model Component](#modelCmp)
-    - [Authentication](#authentication)
+ - [Embedded Responses](#embedding)       
  - [Hints](#hints)    
  - [Issues](#issues)    
  - [Author](#author) 
@@ -290,10 +291,40 @@ wpService.model().users().delete(userId);
   });
 ```
 
-<a name="issues"/>
-## Issues
+<a name="embedding"/>
+## Embedded Responses
 
-If you identify any errors in the library, or have an idea for an improvement, please open an [issue](https://github.com/MurhafSousli/ng2-wp-api/issues). I am excited to see what the community thinks of this project, and I would love your input!
+Usually when displaying a post, you want to display post's featured image, categories, tags, author and comments, the normal post response contains only the Id references which you will have to request each one of them individually.
+
+Embedded responses are very useful to reduce the amount of http requets. you will get all the information you need in one response.
+
+Embedding is triggered by setting the `_embed=true` in WpQueryArgs, check [Linking and Embedding](http://v2.wp-api.org/reference/links.html)
+
+And now `WpPost` class will be useful to access the following properties:
+
+```
+post                        **  the original object
+id()                        **  post id                  
+title()                     **  post title
+content()                   **  post content
+excerpt()                   **  post excerpt without the (read more) link
+date()                      **  post date
+type()                      **  post type 
+categories()                **  post categories array  
+tags()                      **  post tags array
+author()                    **  post author object (WpUser)
+featuredMedia()             **  to check if a post has a featured image
+featuredImageUrl(size)      **  to get featured image by the size, ("full", large", "medium") or 
+                                any other valid size you have in your WP
+```
+other properties can be accessed from the original `post` object.
+
+```
+   var wpPost = new WpPost(originalPost);
+   wpPost.post.propertyName
+```
+where `wpPost.post` = `originalPost`, See [WpPost class source code](src/helpers/wp-post.class)
+
 
 <a name="hints"/>
 ## Hints
@@ -303,8 +334,13 @@ If you identify any errors in the library, or have an idea for an improvement, p
  - Use `WpQueryArgs` class to specify your request argument.
  - Use `WpPost` class when the response is embedded, it has useful functions for accessing embedded posts.
  - `WpPost` class works for posts, pages and custom post types.
- - Use `WpUser` interface if the response is user.
+ - Use `WpUser` interface for user response.
  - If you struggle with specifying your query arguments, check [WordPress Query parameters](https://codex.wordpress.org/Class_Reference/WP_Query#Parameters) to get a better idea.
+
+<a name="issues"/>
+## Issues
+
+If you identify any errors in the library, or have an idea for an improvement, please open an [issue](https://github.com/MurhafSousli/ng2-wp-api/issues). I am excited to see what the community thinks of this project, and I would love your input!
 
 <a name="author"/>
 ## Author
