@@ -324,7 +324,7 @@ other properties can be accessed from the original `post` object.
    var wpPost = new WpPost(originalPost);
    wpPost.post.propertyName
 ```
-where `wpPost.post` = `originalPost`, See [WpPost class source code](/src/helpers/wp-post.class.ts)
+where `wpPost.post` = `originalPost`, See [WpPost class source code](https://github.com/MurhafSousli/ng2-wp-api/blob/master/src/helpers/wp-post.class.ts)
 
 
 <a name="hints"/>
