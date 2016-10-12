@@ -1,6 +1,6 @@
 {
   "name": "ng2-wp-api",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "WordPress API Service for Angular 2",
   "repository": {
     "type": "git",

@@ -42,7 +42,7 @@ export class CollectionService implements CollectionInterface {
     return this.fetch().map((res)=> {
 
       if(res.error){
-        return res.error;
+        return res;
       }
 
       this._items = res;
@@ -64,7 +64,7 @@ export class CollectionService implements CollectionInterface {
       return this.fetch().map((res)=> {
       
         if(res.error){
-          return res.error;
+          return res;
         }
 
         this._items = this._items.concat(res);
@@ -90,7 +90,7 @@ export class CollectionService implements CollectionInterface {
       return this.fetch().map((res)=> {
 
         if(res.error){
-          return res.error;
+          return res;
         }
 
         this._items = res;
@@ -116,7 +116,7 @@ export class CollectionService implements CollectionInterface {
       return this.fetch().map((res)=> {
 
         if(res.error){
-          return res.error;
+          return res;
         }
 
         this._items = res;
