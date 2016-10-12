@@ -39,8 +39,13 @@ export class PartialComponent  {
   pagination;
 
   wpResponse(event:CollectionResponse){
-    this.pagination = event.pagination;
-    this.posts = event.data;
+    if(event.error){
+      console.log(event.error);
+    }
+    else{
+      this.pagination = event.pagination;
+      this.posts = event.data;
+    }
   }
 
   getCollectionWay1() {

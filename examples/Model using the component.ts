@@ -35,7 +35,12 @@ export class TestModel {
    * pageData fires when the data is recieved from Model component
    */
   wpResponse(event) {
-    this.response = event;
+    if(event.error){
+      console.log(event.error);
+    }
+    else{
+      this.response = event.data;
+    }
   }
 }
 

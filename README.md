@@ -193,8 +193,13 @@ this.wpService.collection()
   .endpoint(endpoint)       //or posts()
   .get(args)
   .subscribe((res: CollectionResponse) => {
-      this.data = res.data;
-      this.pagination = res.pagination;
+      if(res.error){
+        console.log(res.error);
+      }
+      else{
+        this.data = res.data;
+        this.pagination = res.pagination;
+      }
   });
 ```
 See [WpService Collection example](/examples/Collection using the service.ts)
@@ -208,8 +213,13 @@ var endpoint = WpEndpoint.posts;
 this.wpService.model()
     .endpoint(endpoint)     //or posts() or pages() or users() ..etc
     .get(id)
-    .subscribe((res) => {
-        this.data = res;
+    .subscribe((res: ModelResponse) => {
+      if(res.error){
+        console.log(res.error);
+      }
+      else{
+        this.data = res.data;
+      }
     });
 ```
 

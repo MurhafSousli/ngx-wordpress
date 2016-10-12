@@ -28,7 +28,12 @@ export class TestModel {
 
         this.wpService.model().posts().get(1395, args)
         .subscribe((res)=>{
-            this.post = new WpPost(res);
+            if(res.error){
+                console.log(res.error);
+            }
+            else{
+                this.post = new WpPost(res.data);
+            }
         });
     }
 

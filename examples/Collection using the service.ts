@@ -45,8 +45,13 @@ export class SiderComponent implements OnInit {
     this.collection = this.wpService.collection().posts();
     // or this.collection = this.wpService.collection().endpoint(WpHelper.endpoint.posts);
     this.collection.get(this.args).subscribe((res: CollectionResponse) => {
-        this.pagination = res.pagination;
-        this.posts = res.data;
+        if(res.error){
+            console.log(res.error);
+        }
+        else{
+            this.pagination = res.pagination;
+            this.posts = res.data;
+        }
     });
   }
 
