@@ -4,7 +4,7 @@
     
 ###Bugs:
 
- - Fixes `WpHttp` returns `Observable.empty()` instead of `Observable.of(err)`.
+ - Fixes `WpHttp`: used to return `Observable.empty()` instead of `Observable.throw(err)`.
     
 ###Improvements:
 
