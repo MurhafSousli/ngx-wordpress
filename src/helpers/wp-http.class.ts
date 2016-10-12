@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, RequestOptions, RequestOptionsArgs, ConnectionBackend} from '@angular/http';
-import {Observable} from 'rxjs';
+import {Observable} from 'rxjs/Observable';
 
 import {ConfigService} from "../service/config/config.service";
 import {WpQueryArgs} from "./wp-query.class";
