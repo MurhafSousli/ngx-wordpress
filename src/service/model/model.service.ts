@@ -28,7 +28,11 @@ export class ModelService implements ModelInterface {
   public get = (id?: number, args?: WpQueryArgs): Observable<any> => {
     let reqId = (id) ? id : this._id;
     let reqArgs = (args) ? args : this.WpQueryArgs;
-    return this.http.get(this.endpoint + reqId, reqArgs).map(res => res.json());
+    return this.http.get(this.endpoint + reqId, reqArgs)
+      .map(res => res.json())
+      .catch(err=> {
+          return Observable.of({error: err})
+      });
   };
   /**
    *
@@ -37,7 +41,11 @@ export class ModelService implements ModelInterface {
    */
   public add = (body?: any): Observable<any> => {
     let reqBody = (body) ? body : this._body;
-    return this.http.post(this.endpoint, reqBody).map(res => res.json());
+    return this.http.post(this.endpoint, reqBody)
+      .map(res => res.json())
+      .catch(err=> {
+          return Observable.of({error: err})
+      });
   };
   /**
    *
@@ -48,7 +56,11 @@ export class ModelService implements ModelInterface {
   public update = (id?: number, body?: any): Observable<any> => {
     let reqId = (id) ? id : this._id;
     let reqBody = (body) ? body : this._body;
-    return this.http.put(this.endpoint + reqId, reqBody).map(res => res.json());
+    return this.http.put(this.endpoint + reqId, reqBody)
+      .map(res => res.json())
+      .catch(err=> {
+          return Observable.of({error: err})
+      });
   };
   /**
    *
@@ -57,7 +69,11 @@ export class ModelService implements ModelInterface {
    */
   public delete = (id?: number): Observable<any> => {
     let reqId = (id) ? id : this._id;
-    return this.http.delete(this.endpoint + reqId + "?force=true").map(res => res.json());
+    return this.http.delete(this.endpoint + reqId + "?force=true")
+      .map(res => res.json())
+      .catch(err=> {
+          return Observable.of({error: err})
+      });
   };
 
   /**

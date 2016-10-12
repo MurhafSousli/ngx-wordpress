@@ -18,6 +18,7 @@ import {WpUser} from './helpers/wp-user.interface';
 import {WpEndpoint} from './helpers/wp-endpoints';
 import {WpPagination} from './service/collection/collection.service';
 import {CollectionResponse} from './service/collection/collection.interface';
+import {ModelResponse} from './service/Model/Model.interface';
 
 
 @NgModule({
@@ -58,5 +59,6 @@ export {
   WpUser,
   WpEndpoint,
   WpPagination,
-  CollectionResponse
+  CollectionResponse,
+  ModelResponse
 }

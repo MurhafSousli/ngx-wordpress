@@ -92,12 +92,9 @@ export class WpHttp extends Http {
 
   /** Handle errors */
   private onError(err): Observable<any> {
-    /** Stream errors in wpConfig */
-    if (!(err.status === 400 || err.status === 422)) {
-
-    }
+    /** emits and return errors */
     this._wpConfig.errors.next(err);
-    return Observable.empty();
+    return Observable.throw(err);
   }
 
   /** Request completed */

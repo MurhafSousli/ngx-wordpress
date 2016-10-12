@@ -40,6 +40,11 @@ export class CollectionService implements CollectionInterface {
       }
     }
     return this.fetch().map((res)=> {
+
+      if(res.error){
+        return res.error;
+      }
+
       this._items = res;
       return {
         data: this._items,
@@ -57,6 +62,11 @@ export class CollectionService implements CollectionInterface {
       /** increment currentPage then set page argument */
       this._args.page = ++this._pagination.currentPage;
       return this.fetch().map((res)=> {
+      
+        if(res.error){
+          return res.error;
+        }
+
         this._items = this._items.concat(res);
         return {
           data: this._items,
@@ -78,6 +88,11 @@ export class CollectionService implements CollectionInterface {
       /** increment currentPage then set page argument */
       this._args.page = ++this._pagination.currentPage;
       return this.fetch().map((res)=> {
+
+        if(res.error){
+          return res.error;
+        }
+
         this._items = res;
         return {
           data: this._items,
@@ -99,6 +114,11 @@ export class CollectionService implements CollectionInterface {
       /** decrement currentPage then set page argument */
       this._args.page = --this._pagination.currentPage;
       return this.fetch().map((res)=> {
+
+        if(res.error){
+          return res.error;
+        }
+
         this._items = res;
         return {
           data: this._items,
@@ -123,7 +143,10 @@ export class CollectionService implements CollectionInterface {
         this.setPagination(res.headers);
         return res.json();
       }
-    );
+    ).catch((err) => {
+      /** return errors in form of res.error */
+      return Observable.of({error: err});
+    });
   };
 
   /**

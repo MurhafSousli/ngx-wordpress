@@ -8,3 +8,8 @@ export interface ModelInterface {
     update(id: number, body: any): Observable<any>;
     delete(id: number): Observable<any>;
 }
+
+export interface ModelResponse {
+  data: any;
+  error: any;
+}

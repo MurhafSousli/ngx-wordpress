@@ -13,4 +13,5 @@ export interface CollectionInterface {
 export interface CollectionResponse {
   data: any;
   pagination: WpPagination;
+  error: any;
 }
