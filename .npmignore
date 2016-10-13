@@ -4,3 +4,5 @@ examples
 src
 typings
 npm-debug.log
+.vscode
+.idea

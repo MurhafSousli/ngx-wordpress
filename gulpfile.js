@@ -33,9 +33,6 @@ const cssnano = require('cssnano');
 const scss = require('postcss-scss');
 const stripInlineComments = require('postcss-strip-inline-comments');
 
-
-const tsProject = typescript.createProject('tsconfig.json');
-
 const config = {
     allSass: 'src/**/*.scss',
     allTs: 'src/**/*.ts',
@@ -64,7 +61,7 @@ gulp.task('compile-ts', ['clean', 'styles'], function () {
     var tsResult = gulp.src(sourceTsFile)
         .pipe(embedTemplates({base: './src/share'}))
         .pipe(sourcemaps.init())
-        .pipe(typescript(tsProject));
+        .pipe(typescript('tsconfig.json'));
 
     tsResult.js.pipe(uglify())
         .pipe(gulp.dest(config.OutputDir));
