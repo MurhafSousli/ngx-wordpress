@@ -1,5 +1,11 @@
 #Changelog
 
+##2.1.3
+
+###Bugs:
+
+ - Fixes: `timeout` is not a function error, closes ([#4](https://github.com/MurhafSousli/ng2-wp-api/issues/4))
+
 ##2.1.2
     
 ###Bugs:

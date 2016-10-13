@@ -1,3 +1,9 @@
+import 'rxjs/add/operator/timeout';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/finally';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/throw';
+
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {HttpModule, RequestOptions, XHRBackend} from "@angular/http";
