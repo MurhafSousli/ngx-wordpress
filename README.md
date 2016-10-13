@@ -285,7 +285,10 @@ wpService.model().users().delete(userId);
 <a name="authentication"/>
 ## Authentication
 
- - Basic Authentication:
+ - Basic Authentication: 
+   
+   Install and activate [Basic-Auth Plugin](https://github.com/WP-API/Basic-Auth)
+   
 ```javascript
  this.wpService.auth().basic('username', 'password').subscribe(
   (loggedInUser: WpUser)=> {
