@@ -13,6 +13,11 @@ var merge = require('merge2');
 /** load templates and styles in ng2 components */
 var embedTemplates = require('gulp-inline-ng2-template');
 
+const embedOptions = {
+    base: './src',
+    useRelativePaths: true
+}
+
 /** Typescript compiler */
 const typescript = require('gulp-typescript');
 
@@ -59,7 +64,7 @@ gulp.task('compile-ts', ['clean', 'styles'], function () {
         config.allTsd
     ];
     var tsResult = gulp.src(sourceTsFile)
-        .pipe(embedTemplates({base: './src/share'}))
+        .pipe(embedTemplates(embedOptions))
         .pipe(sourcemaps.init())
         .pipe(typescript('tsconfig.json'));
 
