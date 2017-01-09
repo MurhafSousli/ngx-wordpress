@@ -1,6 +1,6 @@
 import {Component, OnInit, enableProdMode} from '@angular/core';
 
-import {WpService} from './ng2-wp-api';
+import {WpService} from 'ng2-wp-api';
 
 
 enableProdMode();

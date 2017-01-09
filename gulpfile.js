@@ -39,7 +39,7 @@ const path = require('path');
 const pump = require('pump');
 
 
-const LIBRARY_NAME = 'ng2-progressbar';
+const LIBRARY_NAME = 'ng2-wp-api';
 
 const config = {
     allSass: 'src/**/*.scss',

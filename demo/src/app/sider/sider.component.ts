@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {WpQueryArgs, WpEndpoint, WpService, CollectionResponse, ModelResponse} from '../ng2-wp-api';
+import {WpQueryArgs, WpEndpoint, WpService, CollectionResponse, ModelResponse} from 'ng2-wp-api';
 
 @Component({
   selector: 'app-sider',

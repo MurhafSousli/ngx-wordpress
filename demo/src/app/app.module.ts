@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { WordPressModule } from './ng2-wp-api';
+import { WordPressModule } from 'ng2-wp-api';
 import { PartialComponent } from './partial/partial.component';
 import { SiderComponent } from './sider/sider.component'
 

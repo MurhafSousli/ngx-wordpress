@@ -1,6 +1,6 @@
 import {Component, ViewChild, OnInit} from '@angular/core';
 
-import {WpCollectionComponent, WpEndpoint, CollectionResponse, WpQueryArgs} from "../ng2-wp-api";
+import {WpCollectionComponent, WpEndpoint, CollectionResponse, WpQueryArgs} from "ng2-wp-api";
 
 @Component({
   selector: 'app-partial',
