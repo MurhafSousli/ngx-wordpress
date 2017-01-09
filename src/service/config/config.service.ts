@@ -44,7 +44,6 @@ export class ConfigService implements ConfigInterface {
 
 }
 
-
 export enum AuthType{
   basic,
   cookies

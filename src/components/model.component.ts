@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, OnChanges, SimpleChange, ChangeDetectionStrategy} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ChangeDetectionStrategy} from '@angular/core';
 
 import {WpService} from '../service/wp.service';
 import {ModelService} from '../service/model/model.service';
@@ -17,6 +17,7 @@ export class WpModelComponent implements OnChanges {
   /** Inputs for api endpoint, query arguments and model id */
   @Input()
   set endpoint(endpoint: string) {
+    /** Set model endpoint */
     this.model = this.wpService.model().endpoint(endpoint);
   }
 
@@ -33,24 +34,18 @@ export class WpModelComponent implements OnChanges {
   }
 
   /** Detects if args has changed to fetch again. */
-  ngOnChanges(changes: {[propName: string]: SimpleChange}) {
-
-    if (changes['id']) {
-      let prevId = changes['id'].previousValue;
-      let newId = changes['id'].currentValue;
-      if (prevId != newId) {
-        this.get(newId, this.args);
-      }
+  ngOnChanges(changes: SimpleChanges) {
+    let chng = changes['id'];
+    if (chng) {
+      let prevId = chng.previousValue;
+      let newId = chng.currentValue;
+      if (prevId != newId) this.get(newId, this.args);
     }
   }
 
   /** Get a model of endpoint type by id */
   public get(id, args?) {
-    this.model.get(id, args).subscribe(
-      (res) => {
-        this.response.emit(res);
-      }
-    );
+    this.model.get(id, args).subscribe((res) =>this.response.emit(res));
   }
 
 }

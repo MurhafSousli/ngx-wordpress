@@ -20,12 +20,12 @@ export class ModelService implements ModelInterface {
   }
 
   /**
-   *
+   * get
    * @param id
    * @param args
    * @returns {Observable<Response>}
    */
-  public get = (id?: number, args?: WpQueryArgs): Observable<any> => {
+  get = (id?: number, args?: WpQueryArgs): Observable<any> => {
     let reqId = (id) ? id : this._id;
     let reqArgs = (args) ? args : this.WpQueryArgs;
     return this.http.get(this.endpoint + reqId, reqArgs)
@@ -37,11 +37,11 @@ export class ModelService implements ModelInterface {
       });
   };
   /**
-   *
+   * Add a "model" to wordpress
    * @param body
    * @returns {Observable<Response>}
    */
-  public add = (body?: any): Observable<any> => {
+  add = (body?: any): Observable<any> => {
     let reqBody = (body) ? body : this._body;
     return this.http.post(this.endpoint, reqBody)
       .map(res => {
@@ -52,12 +52,12 @@ export class ModelService implements ModelInterface {
       });
   };
   /**
-   *
+   * Update a "model" to wordpress
    * @param id
    * @param body
    * @returns {Observable<Response>}
    */
-  public update = (id?: number, body?: any): Observable<any> => {
+  update = (id?: number, body?: any): Observable<any> => {
     let reqId = (id) ? id : this._id;
     let reqBody = (body) ? body : this._body;
     return this.http.put(this.endpoint + reqId, reqBody)
@@ -69,11 +69,11 @@ export class ModelService implements ModelInterface {
       });
   };
   /**
-   *
+   * Delete "model" from wordpress
    * @param id
    * @returns {Observable<Response>}
    */
-  public delete = (id?: number): Observable<any> => {
+  delete = (id?: number): Observable<any> => {
     let reqId = (id) ? id : this._id;
     return this.http.delete(this.endpoint + reqId + "?force=true")
       .map(res => {
@@ -85,22 +85,22 @@ export class ModelService implements ModelInterface {
   };
 
   /**
-   *
+   * Set the body
    * @param body
    * @returns {ModelService}
    */
 
-  public body = (body: any): ModelService => {
+  body = (body: any): ModelService => {
     this._body = body;
     return this;
   };
 
   /**
-   *
+   * Set the id
    * @param id
    * @returns {ModelService}
    */
-  public id = (id: number): ModelService => {
+  id = (id: number): ModelService => {
     this._id = id;
     return this;
   }

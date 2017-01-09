@@ -1,6 +1,6 @@
 /** WpService: the entry service
  *
- *  This service is the gateway to Collection/Model services, as well as direct links
+ *  This service is the gateway to Collection/Model/Direct links services
  *  by @MurhafSousli
  */
 
@@ -18,9 +18,7 @@ import {WpEndpoint} from '../helpers/wp-endpoints';
 export class WpService implements WpInterface {
 
   constructor(private _http: WpHttp, public config: ConfigService) {
-
   }
-
   /**
    * Discover WP API
    * @param url
@@ -41,9 +39,7 @@ export class WpService implements WpInterface {
    * @returns {any}
    */
   link(url: string): Observable<any> {
-    return this._http.direct(url).map((res)=> {
-      return res.json();
-    });
+    return this._http.direct(url).map((res)=> res.json());
   }
   /**
    * Collection Service

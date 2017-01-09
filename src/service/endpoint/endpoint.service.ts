@@ -10,7 +10,6 @@ import {WpEndpoint} from "../../helpers/wp-endpoints";
 export class EndpointService implements EndpointInterface {
 
     constructor(private _http: WpHttp, private _type: string) {
-
     }
 
     /**

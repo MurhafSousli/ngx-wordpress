@@ -1,4 +1,4 @@
-import {Observable} from "rxjs";
+import {Observable} from "rxjs/Observable";
 import {EndpointService} from "./endpoint/endpoint.service";
 import {AuthService} from "./authentication/auth.service";
 

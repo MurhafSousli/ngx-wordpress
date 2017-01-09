@@ -75,7 +75,7 @@ export class CollectionService implements CollectionInterface {
       });
     }
     else {
-      return Observable.empty();
+      return Observable.of(null);
     }
   };
 
@@ -101,7 +101,7 @@ export class CollectionService implements CollectionInterface {
       });
     }
     else {
-      return Observable.empty();
+      return Observable.of(null);
     }
   };
 
@@ -127,7 +127,7 @@ export class CollectionService implements CollectionInterface {
       });
     }
     else {
-      return Observable.empty();
+      return Observable.of(null);
     }
   };
 

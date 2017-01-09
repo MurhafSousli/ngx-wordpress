@@ -11,7 +11,7 @@ export interface WpUser {
   };
   
 /** TODO: find solution for:
- *  Those properties doesn't exist in user response by default
+ *  Those properties don't exist in user response by default
  **/
   roles:string[];
   email:string[];

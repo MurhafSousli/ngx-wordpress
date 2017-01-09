@@ -1,5 +1,5 @@
 import {
-  Component, Input, Output, EventEmitter, SimpleChange, OnChanges,
+  Component, Input, Output, EventEmitter, SimpleChanges, OnChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
 
@@ -19,6 +19,7 @@ export class WpCollectionComponent implements OnChanges {
 
   @Input()
   set endpoint(endpoint) {
+    /** Set collection endpoint */
     this.collection = this.wpService.collection().endpoint(endpoint);
   }
 
@@ -33,50 +34,33 @@ export class WpCollectionComponent implements OnChanges {
   }
 
   /** Detects if args has changed to fetch again. */
-  ngOnChanges(changes: {[propName: string]: SimpleChange}) {
+  ngOnChanges(changes: SimpleChanges) {
 
-    if (changes['args']) {
-      let prevArgs = changes['args'].previousValue;
-      let newArgs = changes['args'].currentValue;
-      if (prevArgs != newArgs) {
-        this.get(newArgs);
-      }
+    let chng = changes['args'];
+    if(chng){
+      let cur  = JSON.stringify(chng.currentValue);
+      let prev = JSON.stringify(chng.previousValue);
+      if(cur !== prev) this.get(chng.currentValue);
     }
   }
 
  /** Get collection of items */
   public get = (args): void => {
-    this.collection.get(args).subscribe(
-      (res)=> {
-        this.response.emit(res);
-      }
-    );
+    this.collection.get(args).subscribe((res)=> this.response.emit(res));
   };
 
-  /** Get more collection (next page) */
+  /** Get more collection (concat current with next page) */
   public more = (): void => {
-    this.collection.more().subscribe(
-      (res)=> {
-        this.response.emit(res);
-      }
-    );
+    this.collection.more().subscribe((res)=> this.response.emit(res));
   };
 
-  /** Get more collection (next page) */
+  /** Get next collection (next page) */
   public next = (): void => {
-    this.collection.next().subscribe(
-      (res)=> {
-        this.response.emit(res);
-      }
-    );
+    this.collection.next().subscribe((res)=> this.response.emit(res));
   };
 
-  /** Get more collection (next page) */
+  /** Get previous collection (prev page) */
   public prev = (): void => {
-    this.collection.prev().subscribe(
-      (res)=> {
-        this.response.emit(res);
-      }
-    );
+    this.collection.prev().subscribe((res)=> this.response.emit(res));
   };
 }

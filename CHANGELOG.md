@@ -1,5 +1,12 @@
 #Changelog
 
+##2.1.6
+
+ - Support AoT
+ - Import missing operators from rxjs
+ - Cleanup
+ - Demo folder
+
 ##2.1.5
 
 ###Bugs:

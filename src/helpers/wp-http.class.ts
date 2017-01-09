@@ -18,70 +18,45 @@ export class WpHttp extends Http {
 
     this.onStart();
     return super.get(url, this.getOptions())
-
-      .timeout(this._wpConfig.timeOut, new Error('delay exceeded'))
-      .catch((err) => {
-        return this.onError(err);
-      })
-      .finally(() => {
-        this.onComplete();
-      });
+      .timeout(this._wpConfig.timeOut)
+      .catch((err) => this.onError(err))
+      .finally(() => this.onComplete());
   }
 
   get(endpoint: any, args?: WpQueryArgs): Observable<any> {
 
     this.onStart();
     return super.get(this.getUrl(endpoint, args), this.getOptions())
-
-      .timeout(this._wpConfig.timeOut, new Error('delay exceeded'))
-      .catch((err) => {
-        return this.onError(err);
-      })
-      .finally(() => {
-        this.onComplete()
-      });
+      .timeout(this._wpConfig.timeOut)
+      .catch((err) => this.onError(err))
+      .finally(() => this.onComplete())
   }
 
   post(endpoint: any, body: any): Observable<any> {
 
     this.onStart();
     return super.post(this.getUrl(endpoint), body, this.getOptions())
-
-      .timeout(this._wpConfig.timeOut, new Error('delay exceeded'))
-      .catch((err) => {
-        return this.onError(err);
-      })
-      .finally(() => {
-        this.onComplete();
-      });
+      .timeout(this._wpConfig.timeOut)
+      .catch((err) => this.onError(err))
+      .finally(() => this.onComplete());
   }
 
   put(endpoint: any, body: any): Observable<any> {
 
     this.onStart();
     return super.put(this.getUrl(endpoint), body, this.getOptions())
-
-      .timeout(this._wpConfig.timeOut, new Error('delay exceeded'))
-      .catch((err) => {
-        return this.onError(err);
-      })
-      .finally(() => {
-        this.onComplete();
-      });
+      .timeout(this._wpConfig.timeOut)
+      .catch((err) => this.onError(err))
+      .finally(() => this.onComplete());
   }
 
   delete(endpoint: any): Observable<any> {
 
     this.onStart();
     return super.delete(this.getUrl(endpoint), this.getOptions())
-
-      .timeout(this._wpConfig.timeOut, new Error('delay exceeded'))
-      .catch((err) => {
-        return this.onError(err);
-      })
-      .finally(() => {
-        this.onComplete();
-      });
+      .timeout(this._wpConfig.timeOut)
+      .catch((err) => this.onError(err))
+      .finally(() => this.onComplete());
   }
 
   /** Before the request  */
@@ -120,11 +95,11 @@ export class WpHttp extends Http {
 
 }
 
-var serialize = (obj, prefix?): string => {
-  var str = [];
-  for (var p in obj) {
+let serialize = (obj, prefix?): string => {
+  let str = [];
+  for (let p in obj) {
     if (obj.hasOwnProperty(p) && obj[p]) {
-      var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
+      let k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
       str.push(typeof v == "object" ?
         serialize(v, k) :
       encodeURIComponent(k) + "=" + encodeURIComponent(v));
