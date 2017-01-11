@@ -245,8 +245,6 @@ WpCollection component gets a new response automatically when the input `[args]`
 
 See [Collection Component example](/examples/Collection using the component.ts)
 
-> **NOTE**: Make sure `enableProdMode()` is called to avoid `onChanges` error.
-
 <a name="modelCmp">
 **For model:**
   
@@ -347,7 +345,7 @@ where `wpPost.post` = `originalPost`, See [WpPost class source code](https://git
 ## Hints
 
  - Use `WpEndpoint` to get the default endpoints and their addresses.
- - `WpService.collection.posts().get(...)` is a shortcut of `WpService.Collection.endpoint(WpEndpoint.posts)`
+ - `WpService.collection.posts().get(...)` is a equal to `WpService.Collection.endpoint(WpEndpoint.posts).get(...)`
  - Use `WpQueryArgs` class to specify your request argument.
  - Use `WpPost` class when the response is embedded, it has useful functions for accessing embedded posts.
  - `WpPost` class works for posts, pages and custom post types.
