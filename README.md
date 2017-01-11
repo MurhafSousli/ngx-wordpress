@@ -1,7 +1,6 @@
 # Angular WordPress Module [![npm](https://img.shields.io/npm/v/ng2-wp-api.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/ng2-wp-api) [![Build Status](https://travis-ci.org/MurhafSousli/ng2-wp-api.svg?branch=master)](https://travis-ci.org/MurhafSousli/ng2-wp-api) [![npm](https://img.shields.io/npm/dt/ng2-wp-api.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/ng2-wp-api)
 
-![Alt text](https://cdn.rawgit.com/MurhafSousli/ng2-wp-api/master/assets/logo.svg)
-
+<p align="center"><img style="text-align: center; max-width: 300px;max-height:300px;" src="https://cdn.rawgit.com/MurhafSousli/ng2-wp-api/master/assets/logo.svg"></p>
 
 This library is designed to make it easy for your Angular application to request specific resources from a WordPress install.
 
