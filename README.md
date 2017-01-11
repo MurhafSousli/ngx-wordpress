@@ -2,7 +2,7 @@
 
 <p align="center">
   <img height="300px" width="300px" style="text-align: center;" src="https://cdn.rawgit.com/MurhafSousli/ng2-wp-api/1b8cec0a0412eb098545fdb3df5e85d824e4408b/assets/logo.svg">
-  <h1 align="center"><span style="color:#E03237">Angular</span> WordPress Module </h1>
+  <h1 align="center">Angular WordPress Module</h1>
 </p>
 
 This library is designed to make it easy for your Angular application to request specific resources from a WordPress install.
