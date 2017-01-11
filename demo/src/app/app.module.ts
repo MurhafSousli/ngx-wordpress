@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { WordPressModule } from 'ng2-wp-api';
 import { PartialComponent } from './partial/partial.component';
-import { SiderComponent } from './sider/sider.component'
+import { SiderComponent } from './sider/sider.component';
 
 @NgModule({
   declarations: [
