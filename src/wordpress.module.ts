@@ -25,7 +25,7 @@ import {WpUser} from './helpers/wp-user.interface';
 import {WpEndpoint} from './helpers/wp-endpoints';
 import {WpPagination} from './service/collection/collection.service';
 import {CollectionResponse} from './service/collection/collection.interface';
-import {ModelResponse} from './service/Model/Model.interface';
+import {ModelResponse} from './service/model/model.interface';
 
 /** Make AOT compiler happy */
 export function wpHttpFactory(backend: XHRBackend, defaultOptions: RequestOptions, wpConfig: ConfigService) {
