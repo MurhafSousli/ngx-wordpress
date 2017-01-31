@@ -14,6 +14,7 @@ export class ModelService implements ModelInterface {
   private WpQueryArgs: WpQueryArgs;
   private _id: number;
   private _body: any;
+  private _slug: string;
 
   constructor(private http: WpHttp, private endpoint: string) {
     this.WpQueryArgs = new WpQueryArgs({});
@@ -29,6 +30,17 @@ export class ModelService implements ModelInterface {
     let reqId = (id) ? id : this._id;
     let reqArgs = (args) ? args : this.WpQueryArgs;
     return this.http.get(this.endpoint + reqId, reqArgs)
+      .map(res => {
+        return { data: res.json() }
+      })
+      .catch(err=> {
+          return Observable.of({error: err})
+      });
+  };
+  getBySlug = (slug?: string, args?: WpQueryArgs): Observable<any> => {
+    let reqSlug = (slug) ? slug : this._slug;
+    let reqArgs = (args) ? args : this.WpQueryArgs;
+    return this.http.get(`${this.endpoint}?slug=${reqSlug}`, reqArgs)
       .map(res => {
         return { data: res.json() }
       })
