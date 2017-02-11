@@ -46,7 +46,7 @@ Install it with npm
 - [x] WordPress Service
 - [x] WordPress Components (an alternative to the service)
 - [x] Direct link
-- [x] Async http calls, runs in the background (no UI blocking)
+- [x] Async http calls (no UI blocking)
 - [x] Useful classes to access several models and their properties
 - [x] Timeout for Http requests
 - [x] Error Notifier
