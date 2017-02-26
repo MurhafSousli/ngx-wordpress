@@ -9,7 +9,7 @@ This library is designed to make it easy for your Angular application to request
 
 ## Requirments
 
-**Wordpress** installation and **WP API v2** plugin activated.
+**Wordpress** installation.
 
 ## Installation
 
@@ -97,7 +97,7 @@ imports: [
 
     
 <a name="directives"/>
-## Using the components
+## Using the directives
 
 <a name="collectionDir">
 **For collection:**
@@ -110,20 +110,20 @@ imports: [
     </ul>
 </div>
 ```
-this gist shows collection usage in depth [Collection Gist](https://gist.github.com/MurhafSousli/063e4a374ddf0f7fb87ece5e463c9071)
+See collection usage in depth [Collection Gist](https://gist.github.com/MurhafSousli/063e4a374ddf0f7fb87ece5e463c9071)
 
 
-Get a single post by Slug
+ - Get a single post by Slug
 ```ts
 <div class="single-post" [wpCollection]="endpoint" [wpArgs]="{slug: 'hello-world'}" (wpResponse)="single = $event.data[0]">
   <h1 [innerHtml]="single?.title?.rendered"></h1>
 </div>
 ```
 
-<a name="modelnDir">
+<a name="modelDir">
 **For model:**
 
-Get a single post by ID
+ - Get a single post by ID
 ```ts
 <div class="single-post" [wpModel]="endpoint" [wpId]="29043" (wpResponse)="single = $event.data">
   <h1 [innerHtml]="single?.title?.rendered"></h1>
