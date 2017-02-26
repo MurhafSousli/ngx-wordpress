@@ -72,10 +72,12 @@ imports: [
 <a name="directives"/>
 ## Using the directives
 
-`[wpCollection]` to specify which endpoint you want to request the resources e.g. `WpEndpoint.posts` or `WpEndpoint.pages` or `WpEndpoint.categories` ..etc
+`[wpCollection]` to specify which endpoint you want to request the resources e.g. `WpEndpoint.posts`, `WpEndpoint.pages`, `WpEndpoint.categories` ..etc
+
 `[wpArgs]` to specify the arguments of the requests e.g. `{ _embed: true, per_page: 4}`. for more info, check [WordPress Query parameters](https://codex.wordpress.org/Class_Reference/WP_Query#Parameters)
 
 `(wpResponse)` Get the result of your query, which looks like this `$event {data, pagination, error}`
+
 `(wpLoading)` Is helpfull to display loading icon, `$event: boolean`
 
 To get full control on the directive, use the `@ViewChild()
