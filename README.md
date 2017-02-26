@@ -51,7 +51,7 @@ Install it with npm
 <a name="usage"/>
 ## Usage
 
-Add `WordPressModule` to **NgModule** `imports` array.
+Import **ShareButtonsModule** in your module
 
 ```ts
 import { WordPressModule } from 'ng2-wp-api';
