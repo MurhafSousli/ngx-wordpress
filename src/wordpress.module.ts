@@ -62,6 +62,7 @@ export class WordPressModule {
 
 export {
   WpService,
+  ConfigService,
   CollectionDirective,
   ModelDirective,
 

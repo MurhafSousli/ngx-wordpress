@@ -15,7 +15,7 @@ import { ConfigService } from './config/config.service';
 @Injectable()
 export class WpService implements WpInterface {
 
-  constructor(private http: WpHttp, private config: ConfigService) {
+  constructor(private http: WpHttp, public config: ConfigService) {
   }
   /**
    * Collection Service

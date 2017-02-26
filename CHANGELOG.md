@@ -1,11 +1,11 @@
 #Changelog
 
-##3.0.0-beta0
+##3.0.0-beta1
 
  - feat(CollectionDirective) Collection directive
  - feat(ModelDirective) Model directive 
  - docs(Readme): docs for version 3.x
- - feat(ConfigService): Use `configService.debug = true;` to log WP requests' URLs to console.
+ - feat(ConfigService): Use `wpService.config.debug = true;` to log WP requests' URLs to console.
  - feat(build): Support systemjs
  - refactor(gulp.js): improve build system
 
