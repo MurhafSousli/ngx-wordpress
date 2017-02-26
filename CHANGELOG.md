@@ -2,10 +2,24 @@
 
 ##3.0.0-beta0
 
- - Collection and Model Directives 
+ - feat(CollectionDirective) Collection directive
+ - feat(ModelDirective) Model directive 
+ - docs(Readme, Changelog)
+ - feat(ConfigService): debug to log requests url to console.
+ - feat(build): support systemjs
+ - refactor(build system)
+
+ ###Breaking Changes: 
+
+ - Components are replaced with directives
+ - ConfigService:
+    - timeout removed
+    - loading removed
+    - errors removed
 
 ##2.1.6
 
+ - (refactor) code is simplified
  - Support AoT
  - Import missing operators from rxjs
  - Cleanup

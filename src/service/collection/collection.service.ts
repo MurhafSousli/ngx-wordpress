@@ -3,52 +3,51 @@
  * */
 
 import {Injectable} from "@angular/core";
+import {Headers} from '@angular/http';
 import {Observable} from "rxjs/Observable";
 
-import {WpQueryArgs} from "../../helpers/wp-query.class";
-import {WpHttp} from "../../helpers/wp-http.class";
-import {CollectionInterface} from "./collection.interface";
-import {Headers} from '@angular/http';
+import {WpHttp} from "../../classes/wp-http.class";
+import {CollectionInterface, CollectionResponse} from "./collection.interface";
 
 @Injectable()
 export class CollectionService implements CollectionInterface {
 
   /** Request Parameter  */
-  private _args: WpQueryArgs;
+  args;
 
   /** Collection Pagination Properties */
-  private _pagination: WpPagination;
-  private _items = [];
+  pagination: WpPagination;
+  items = [];
 
   constructor(private http: WpHttp, private endpoint: string) {
-    this._args = new WpQueryArgs({});
+    this.args = {};
   }
 
   /**
    * Get the collection
    * @param args
-   * @returns {Observable<Response>}
+   * @returns {Observable<Any>}
    */
-  public get = (args?: WpQueryArgs): Observable<any> => {
+  get(args?): Observable<CollectionResponse> {
     /** reset pagination */
-    this._pagination = new WpPagination();
+    this.pagination = new WpPagination();
     if (args) {
-      this._args = args;
+      this.args = args;
       /** if args.page is provided set the pagination currenPage */
       if (args.page) {
-        this._pagination.currentPage = args.page;
+        this.pagination.currentPage = args.page;
       }
     }
-    return this.fetch().map((res)=> {
+    return this.fetch().map((res) => {
 
-      if(res.error){
+      if (res.error) {
         return res;
       }
 
-      this._items = res;
+      this.items = res;
       return {
-        data: this._items,
-        pagination: this._pagination
+        data: this.items,
+        pagination: this.pagination
       };
     });
   };
@@ -57,20 +56,20 @@ export class CollectionService implements CollectionInterface {
    * Get next page of the collection combined with current collection
    * @returns {any}
    */
-  public more = (): Observable<any> => {
-    if (this._pagination && this._pagination.hasMore) {
+  more(): Observable<CollectionResponse> {
+    if (this.pagination && this.pagination.hasMore) {
       /** increment currentPage then set page argument */
-      this._args.page = ++this._pagination.currentPage;
-      return this.fetch().map((res)=> {
-      
-        if(res.error){
+      this.args.page = ++this.pagination.currentPage;
+      return this.fetch().map((res) => {
+
+        if (res.error) {
           return res;
         }
 
-        this._items = this._items.concat(res);
+        this.items = this.items.concat(res);
         return {
-          data: this._items,
-          pagination: this._pagination
+          data: this.items,
+          pagination: this.pagination
         };
       });
     }
@@ -83,20 +82,20 @@ export class CollectionService implements CollectionInterface {
    * Get next page of the collection
    * @returns {any}
    */
-  public next = (): Observable<any> => {
-    if (this._pagination && this._pagination.hasMore) {
+  next(): Observable<CollectionResponse> {
+    if (this.pagination && this.pagination.hasMore) {
       /** increment currentPage then set page argument */
-      this._args.page = ++this._pagination.currentPage;
-      return this.fetch().map((res)=> {
+      this.args.page = ++this.pagination.currentPage;
+      return this.fetch().map((res) => {
 
-        if(res.error){
+        if (res.error) {
           return res;
         }
 
-        this._items = res;
+        this.items = res;
         return {
-          data: this._items,
-          pagination: this._pagination
+          data: this.items,
+          pagination: this.pagination
         };
       });
     }
@@ -109,20 +108,20 @@ export class CollectionService implements CollectionInterface {
    * Get prev page of the collection
    * @returns {any}
    */
-  public prev = (): Observable<any> => {
-    if (this._pagination && this._pagination.hasPrev) {
+  prev(): Observable<CollectionResponse> {
+    if (this.pagination && this.pagination.hasPrev) {
       /** decrement currentPage then set page argument */
-      this._args.page = --this._pagination.currentPage;
-      return this.fetch().map((res)=> {
+      this.args.page = --this.pagination.currentPage;
+      return this.fetch().map((res) => {
 
-        if(res.error){
+        if (res.error) {
           return res;
         }
 
-        this._items = res;
+        this.items = res;
         return {
-          data: this._items,
-          pagination: this._pagination
+          data: this.items,
+          pagination: this.pagination
         };
       });
     }
@@ -135,9 +134,9 @@ export class CollectionService implements CollectionInterface {
    * Fires the final request
    * @returns {Observable<any>}
    */
-  private fetch = (): Observable<any> => {
+  private fetch(): Observable<any> {
 
-    return this.http.get(this.endpoint, this._args).map(
+    return this.http.get(this.endpoint, this.args).map(
       (res) => {
         /** Set pagination  */
         this.setPagination(res.headers);
@@ -157,15 +156,15 @@ export class CollectionService implements CollectionInterface {
   private setPagination = (headers: Headers): WpPagination => {
 
     /** Fix issue of different property names in response headers */
-    this._pagination.totalPages =
-      +headers.get('X-WP-TotalPages') || +headers.get('X-Wp-TotalPages') || +headers.get('X-Wp-Totalpages') || 0;
+    this.pagination.totalPages =
+      +headers.get('x-wp-totalpages') || +headers.get('X-WP-TotalPages') || +headers.get('X-Wp-TotalPages') || +headers.get('X-Wp-Totalpages') || 0;
 
-    this._pagination.totalObjects =
-      +headers.get('X-WP-Total') || +headers.get('X-Wp-Total') || 0;
+    this.pagination.totalObjects =
+      +headers.get('x-wp-total') || +headers.get('X-WP-Total') || +headers.get('X-Wp-Total') || 0;
 
-    this._pagination.links = headers.get('Link');
+    this.pagination.links = headers.get('Link') || headers.get('link');
 
-    return this._pagination;
+    return this.pagination;
   }
 
 }
@@ -185,7 +184,8 @@ export class WpPagination {
   get hasMore(): boolean {
     return this.currentPage < this.totalPages;
   }
-  get hasPrev(): boolean{
+
+  get hasPrev(): boolean {
     return this.currentPage > 1;
   }
 }

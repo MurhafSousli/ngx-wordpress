@@ -2,6 +2,7 @@
 export module WpEndpoint {
   export const discover: string = '/wp-json/';
   export const posts: string = '/wp-json/wp/v2/posts/';
+  export const revisions: string = '/wp-json/wp/v2/revisions';
   export const users: string = '/wp-json/wp/v2/users/';
   export const categories: string = '/wp-json/wp/v2/categories/';
   export const tags: string = '/wp-json/wp/v2/tags';
