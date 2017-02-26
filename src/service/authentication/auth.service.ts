@@ -1,13 +1,13 @@
 /**
  *  Authentication Service
  */
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
-import {AuthInterface} from './auth.interface';
-import {WpEndpoint} from '../../classes/wp-endpoints';
-import {WpHttp} from '../../classes/wp-http.class';
-import {ConfigService} from "../config/config.service";
+import { AuthInterface } from './auth.interface';
+import { WpEndpoint } from '../../classes/wp-endpoints';
+import { WpHttp } from '../../classes/wp-http.class';
+import { ConfigService } from '../config/config.service';
 
 @Injectable()
 export class AuthService implements AuthInterface {
@@ -61,7 +61,3 @@ export class AuthService implements AuthInterface {
   }
 
 }
-
-
-
-

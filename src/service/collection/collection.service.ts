@@ -2,12 +2,13 @@
  * (Posts, Pages, Comments, Media, Custom Endpoint ... etc)
  * */
 
-import {Injectable} from "@angular/core";
-import {Headers} from '@angular/http';
-import {Observable} from "rxjs/Observable";
+import { Injectable } from '@angular/core';
+import { Headers } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
-import {WpHttp} from "../../classes/wp-http.class";
-import {CollectionInterface, CollectionResponse} from "./collection.interface";
+import { WpHttp } from '../../classes/wp-http.class';
+import { CollectionInterface, CollectionResponse } from './collection.interface';
+import { WpPagination } from '../../classes/wp-pagination.class';
 
 @Injectable()
 export class CollectionService implements CollectionInterface {
@@ -144,7 +145,7 @@ export class CollectionService implements CollectionInterface {
       }
     ).catch((err) => {
       /** return errors in form of res.error */
-      return Observable.of({error: err});
+      return Observable.of({ error: err });
     });
   };
 
@@ -157,7 +158,8 @@ export class CollectionService implements CollectionInterface {
 
     /** Fix issue of different property names in response headers */
     this.pagination.totalPages =
-      +headers.get('x-wp-totalpages') || +headers.get('X-WP-TotalPages') || +headers.get('X-Wp-TotalPages') || +headers.get('X-Wp-Totalpages') || 0;
+      +headers.get('x-wp-totalpages') || +headers.get('X-WP-TotalPages') || +headers.get('X-Wp-TotalPages')
+       || +headers.get('X-Wp-Totalpages') || 0;
 
     this.pagination.totalObjects =
       +headers.get('x-wp-total') || +headers.get('X-WP-Total') || +headers.get('X-Wp-Total') || 0;
@@ -167,25 +169,4 @@ export class CollectionService implements CollectionInterface {
     return this.pagination;
   }
 
-}
-
-/**
- * Pagination class holds the current collection response pagination and links
- */
-export class WpPagination {
-  /** Pagination holds the navigation data and links provided from WP API response header*/
-  constructor(public currentPage: number = 1,
-              public totalPages: number = 0,
-              public totalObjects: number = 0,
-              public links?: any) {
-
-  }
-
-  get hasMore(): boolean {
-    return this.currentPage < this.totalPages;
-  }
-
-  get hasPrev(): boolean {
-    return this.currentPage > 1;
-  }
 }

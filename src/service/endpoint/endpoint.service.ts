@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {EndpointInterface} from './endpoint.interface';
-import {CollectionService} from '../collection/collection.service';
-import {ModelService} from '../model/model.service';
-import {WpHttp} from '../../classes/wp-http.class';
-import {WpEndpoint} from '../../classes/wp-endpoints';
+import { EndpointInterface } from './endpoint.interface';
+import { CollectionService } from '../collection/collection.service';
+import { ModelService } from '../model/model.service';
+import { WpHttp } from '../../classes/wp-http.class';
+import { WpEndpoint } from '../../classes/wp-endpoints';
 
 @Injectable()
 export class EndpointService implements EndpointInterface {

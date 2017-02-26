@@ -1,7 +1,7 @@
-import {Injectable, Optional} from '@angular/core';
-import {Headers} from "@angular/http";
+import { Injectable, Optional } from '@angular/core';
+import { Headers } from '@angular/http';
 
-import {ConfigInterface} from './config.interface';
+import { ConfigInterface } from './config.interface';
 
 @Injectable()
 export class ConfigService implements ConfigInterface {
@@ -11,7 +11,7 @@ export class ConfigService implements ConfigInterface {
   private authType: string;
   private authKeys: string;
 
-  constructor(@Optional() baseUrl: string) {
+  constructor( @Optional() baseUrl: string) {
     this.baseUrl = baseUrl;
   }
 

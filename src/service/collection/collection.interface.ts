@@ -1,5 +1,5 @@
-import {Observable} from 'rxjs/Observable';
-import {WpPagination} from "./collection.service";
+import { Observable } from 'rxjs/Observable';
+import { WpPagination } from '../../classes/wp-pagination.class';
 
 export interface CollectionInterface {
 

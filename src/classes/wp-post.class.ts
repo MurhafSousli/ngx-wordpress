@@ -1,46 +1,64 @@
-import {WpUser} from "./wp-user.interface";
-import {IPost} from "./post.interface";
+import { WpUser } from './wp-user.interface';
+import { IPost } from './post.interface';
 
 export class WpPost {
 
-  constructor(public post: IPost) {
+  constructor(private post: IPost) {
   }
 
-  get(property: string){
-    if(this.post[property]) return this.post[property];
+  get(property: string) {
+    if (this.post[property]) {
+      return this.post[property];
+    }
   }
 
   id(): string {
-    if (this.post.id) return this.post.id;
+    if (this.post.id) {
+      return this.post.id;
+    }
   }
 
   slug(): string {
-    if (this.post.slug) return this.post.slug;
+    if (this.post.slug) {
+      return this.post.slug;
+    }
   }
 
   title(): string {
-    if (this.post.title) return this.post.title.rendered;
+    if (this.post.title) {
+      return this.post.title.rendered;
+    }
   }
 
   content(): string {
-    if (this.post.content) return this.post.content.rendered;
+    if (this.post.content) {
+      return this.post.content.rendered;
+    }
   }
 
   excerpt(): string {
     /** filter excerpt from the links */
-    if (this.post.excerpt) return (<string>this.post.excerpt.rendered).replace(/<a\b[^>]*>(.*?)<\/a>/i, "");
+    if (this.post.excerpt) {
+      return (<string>this.post.excerpt.rendered).replace(/<a\b[^>]*>(.*?)<\/a>/i, '');
+    }
   }
 
   date(): string {
-    if (this.post.date) return this.post.date;
+    if (this.post.date) {
+      return this.post.date;
+    }
   }
 
   link(): string {
-    if (this.post.link) return this.post.link;
+    if (this.post.link) {
+      return this.post.link;
+    }
   }
 
   type(): string {
-    if (this.post.type) return this.post.type;
+    if (this.post.type) {
+      return this.post.type;
+    }
   }
 
   categories(): any {
@@ -56,17 +74,22 @@ export class WpPost {
   }
 
   tags(): any {
-    if (this.post._embedded && this.post._embedded['wp:term'])
+    if (this.post._embedded && this.post._embedded['wp:term']) {
       return this.post._embedded['wp:term'][1];
+    }
   }
 
   author(): WpUser {
-    if (this.post._embedded)  return <WpUser>this.post._embedded.author;
+    if (this.post._embedded) {
+      return <WpUser>this.post._embedded.author;
+    }
   }
 
   /** featuredMedia(): check if has featured image, return false | number */
   featuredMedia(): boolean | number {
-    if (this.post.featured_media)  return +this.post.featured_media;
+    if (this.post.featured_media) {
+      return +this.post.featured_media;
+    }
   }
 
   /**
@@ -83,12 +106,9 @@ export class WpPost {
         }
         else {
           /** if the desired size was not found, return the full size */
-          return featuredImage.media_details.sizes["full"].source_url;
+          return featuredImage.media_details.sizes['full'].source_url;
         }
       }
     }
   }
-
 }
-
-

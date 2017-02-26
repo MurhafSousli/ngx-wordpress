@@ -1,5 +1,5 @@
-import {ModelService} from "../model/model.service";
-import {CollectionService} from "../collection/collection.service";
+import { ModelService } from '../model/model.service';
+import { CollectionService } from '../collection/collection.service';
 
 export interface EndpointInterface {
 

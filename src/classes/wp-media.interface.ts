@@ -1,4 +1,4 @@
-export interface WpMedia{
+export interface WpMedia {
     id;
     date;
     date_gmt;

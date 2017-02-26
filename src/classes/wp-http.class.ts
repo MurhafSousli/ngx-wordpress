@@ -1,8 +1,9 @@
-import {Injectable} from '@angular/core';
-import {Http, RequestOptions, RequestOptionsArgs, ConnectionBackend} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { Http, RequestOptions, RequestOptionsArgs, ConnectionBackend } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
-import {ConfigService} from "../service/config/config.service";
+import { ConfigService } from '../service/config/config.service';
+import { Helper } from './helper.functions';
 
 @Injectable()
 export class WpHttp extends Http {
@@ -38,34 +39,20 @@ export class WpHttp extends Http {
 
   /** Get authKeys in headers for all requests */
   private getOptions(): RequestOptionsArgs {
-    return {headers: this.config.getAuth()};
+    return { headers: this.config.getAuth() };
   }
 
   /** Serialize url endpoint and queryArgs */
-  private getUrl (endpoint: string, args?): string {
+  private getUrl(endpoint: string, args?): string {
     let url = this.config.baseUrl + endpoint;
     if (args) {
       /** add args to url */
-      url += '?' + serialize(args);
+      url += '?' + Helper.serialize(args);
     }
-    if(this.config.debug){
+    if (this.config.debug) {
       console.log('[WpService]: ', url);
     }
     return url;
   }
 
 }
-
-let serialize = (obj, prefix?): string => {
-  let str = [];
-  for (let p in obj) {
-    if (obj.hasOwnProperty(p) && obj[p]) {
-      let k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
-      str.push(typeof v == "object" ?
-        serialize(v, k) :
-      encodeURIComponent(k) + "=" + encodeURIComponent(v));
-    }
-  }
-  return str.join("&");
-};
-

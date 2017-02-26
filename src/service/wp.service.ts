@@ -4,17 +4,18 @@
  *  by @MurhafSousli
  */
 
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {WpInterface} from "./wp.interface";
-import {WpHttp} from "../classes/wp-http.class";
-import {EndpointService} from "./endpoint/endpoint.service";
-import {AuthService} from "./authentication/auth.service";
+import { WpInterface } from './wp.interface';
+import { WpHttp } from '../classes/wp-http.class';
+import { EndpointService } from './endpoint/endpoint.service';
+import { AuthService } from './authentication/auth.service';
+import { ConfigService } from './config/config.service';
 
 @Injectable()
 export class WpService implements WpInterface {
 
-  constructor(private http: WpHttp) {
+  constructor(private http: WpHttp, private config: ConfigService) {
   }
   /**
    * Collection Service
@@ -34,9 +35,7 @@ export class WpService implements WpInterface {
    * Authenticate Service
    * @returns {AuthService}
    */
-  // auth(): AuthService{
-  //   return new AuthService(this.http);
-  // }
-
-
+  auth(): AuthService {
+    return new AuthService(this.http, this.config);
+  }
 }
