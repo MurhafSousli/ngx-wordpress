@@ -1,12 +1,9 @@
-import {Headers} from "@angular/http";
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { Headers } from '@angular/http';
 
 export interface ConfigInterface {
 
   baseUrl: string;
-  timeOut: number;
-  loading: BehaviorSubject<boolean>;
-  errors: BehaviorSubject<any>;
+  debug: boolean;
   getAuth(): Headers;
-  setAuth(keys,type);
+  setAuth(keys, type);
 }

@@ -1,69 +1,70 @@
-import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
 
-import {CommonModule} from '@angular/common';
-import {NgModule} from '@angular/core';
-import {HttpModule, RequestOptions, XHRBackend} from "@angular/http";
+import { NgModule, ModuleWithProviders } from '@angular/core';
+import { HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 
 /** Services */
-import {WpService} from "./service/wp.service";
-import {ConfigService} from "./service/config/config.service";
+import { WpService } from './service/wp.service';
+import { ConfigService } from './service/config/config.service';
 
-/** components */
-import {WpCollectionComponent} from './components/collection.component';
-import {WpModelComponent} from './components/model.component';
+/** directive */
+import { CollectionDirective } from './directives/collection.directive';
+import { ModelDirective } from './directives/model.directive';
 
 /** helpers */
-import {WpHttp} from './helpers/wp-http.class';
-import {WpQueryArgs} from './helpers/wp-query.class';
-import {WpPost} from './helpers/wp-post.class';
-import {WpUser} from './helpers/wp-user.interface';
-import {WpEndpoint} from './helpers/wp-endpoints';
-import {WpPagination} from './service/collection/collection.service';
-import {CollectionResponse} from './service/collection/collection.interface';
-import {ModelResponse} from './service/model/model.interface';
+import { WpHttp } from './classes/wp-http.class';
+import { WpPost } from './classes/wp-post.class';
+import { WpUser } from './classes/wp-user.interface';
+import { WpEndpoint } from './classes/wp-endpoints';
+import { WpPagination } from './classes/wp-pagination.class';
+import { CollectionResponse } from './service/collection/collection.interface';
+import { ModelResponse } from './service/model/model.interface';
 
 /** Make AOT compiler happy */
-export function wpHttpFactory(backend: XHRBackend, defaultOptions: RequestOptions, wpConfig: ConfigService) {
-    return new WpHttp(backend, defaultOptions, wpConfig);
+function wpHttpFactory(backend: XHRBackend, defaultOptions: RequestOptions, wpConfig: ConfigService) {
+  return new WpHttp(backend, defaultOptions, wpConfig);
 }
 
 @NgModule({
   declarations: [
-    WpCollectionComponent,
-    WpModelComponent
+    CollectionDirective,
+    ModelDirective
   ],
   imports: [
-    CommonModule,
     HttpModule
   ],
-  providers: [
-    WpService,
-    ConfigService,
-    {
-      provide: WpHttp,
-      useFactory: wpHttpFactory,
-      deps: [XHRBackend, RequestOptions, ConfigService]
-    }
-  ],
   exports: [
-    WpCollectionComponent,
-    WpModelComponent
+    CollectionDirective,
+    ModelDirective
   ]
 })
 export class WordPressModule {
+  static forRoot(url: string): ModuleWithProviders {
+
+    return {
+      ngModule: WordPressModule,
+      providers: [
+        WpService,
+        { provide: ConfigService, useValue: new ConfigService(url) },
+        {
+          provide: WpHttp,
+          useFactory: wpHttpFactory,
+          deps: [XHRBackend, RequestOptions, ConfigService]
+        }
+      ]
+    };
+  }
+
 }
 
 export {
   WpService,
-  WpCollectionComponent,
-  WpModelComponent,
+  CollectionDirective,
+  ModelDirective,
 
-  WpQueryArgs,
   WpPost,
   WpUser,
   WpEndpoint,

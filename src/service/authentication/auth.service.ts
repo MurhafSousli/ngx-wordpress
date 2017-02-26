@@ -1,18 +1,18 @@
 /**
  *  Authentication Service
  */
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs/Observable";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
-import {AuthInterface} from "./auth.interface";
-import {ConfigService, AuthType} from "../config/config.service";
-import {WpEndpoint} from '../../helpers/wp-endpoints';
-import {WpHttp} from "../../helpers/wp-http.class";
+import { AuthInterface } from './auth.interface';
+import { WpEndpoint } from '../../classes/wp-endpoints';
+import { WpHttp } from '../../classes/wp-http.class';
+import { ConfigService } from '../config/config.service';
 
 @Injectable()
 export class AuthService implements AuthInterface {
 
-  constructor(private _http: WpHttp, private _config: ConfigService) {
+  constructor(private http: WpHttp, private config: ConfigService) {
 
   }
 
@@ -20,8 +20,8 @@ export class AuthService implements AuthInterface {
 
     /** Encode user keys */
     let encodedCred = btoa(username + ':' + password);
-    return this.login(encodedCred, AuthType.basic).map(
-      (user)=> {
+    return this.login(encodedCred, 'basic').map(
+      (user) => {
         if (user) {
           /** if login success, store key in localStorage */
           if (remember) {
@@ -39,33 +39,25 @@ export class AuthService implements AuthInterface {
 
     let nonce = window['wpApiSettings'].nonce || undefined;
     if (nonce) {
-      return this.login(nonce, AuthType.cookies);
+      return this.login(nonce, 'cookies');
     }
   }
 
-  private login(keys: string, type: AuthType): Observable<any> {
+  private login(keys: string, type: string): Observable<any> {
 
-    this._config.setAuth(keys, type);
-
-    return this._http.get(WpEndpoint.authentication).map(
-      (res)=> {
+    return this.http.get(WpEndpoint.authentication).map(
+      (res) => {
         /** if login fail, send error message */
         if (res && res.message) {
-          this._config.errors.next(res.message);
-          return undefined;
+          return Observable.throw(res.messag);
         }
-        else {
-          this._config.setAuth(keys, type);
-          return res.json().body;
-        }
+        this.config.setAuth(keys, type);
+        return res.json().body;
       });
   }
 
   logout() {
-    this._config.setAuth(undefined, undefined);
+    this.config.setAuth(undefined, undefined);
   }
 
 }
-
-
-

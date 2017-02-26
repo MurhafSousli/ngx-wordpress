@@ -4,62 +4,38 @@
  *  by @MurhafSousli
  */
 
-import {Injectable} from '@angular/core';
-import {Observable} from "rxjs/Observable";
+import { Injectable } from '@angular/core';
 
-import {WpInterface} from "./wp.interface";
-import {WpHttp} from "../helpers/wp-http.class";
-import {EndpointService} from "./endpoint/endpoint.service";
-import {ConfigService} from "./config/config.service";
-import {AuthService} from "./authentication/auth.service";
-import {WpEndpoint} from '../helpers/wp-endpoints';
+import { WpInterface } from './wp.interface';
+import { WpHttp } from '../classes/wp-http.class';
+import { EndpointService } from './endpoint/endpoint.service';
+import { AuthService } from './authentication/auth.service';
+import { ConfigService } from './config/config.service';
 
 @Injectable()
 export class WpService implements WpInterface {
 
-  constructor(private _http: WpHttp, public config: ConfigService) {
-  }
-  /**
-   * Discover WP API
-   * @param url
-   * @returns {any}
-   */
-  discover(url: string): Observable<any> {
-    return this._http.direct(url + WpEndpoint.discover).map((res)=> {
-      if (res) {
-        /** discovery success */
-        this.config.baseUrl = url;
-        return res.json();
-      }
-    });
-  }
-  /**
-   * Direct Link
-   * @param url
-   * @returns {any}
-   */
-  link(url: string): Observable<any> {
-    return this._http.direct(url).map((res)=> res.json());
+  constructor(private http: WpHttp, private config: ConfigService) {
   }
   /**
    * Collection Service
    * @returns {EndpointService}
    */
   collection(): EndpointService {
-    return new EndpointService(this._http, 'collection');
+    return new EndpointService(this.http, 'collection');
   }
   /**
    * Model Service
    * @returns {EndpointService}
    */
   model(): EndpointService {
-    return new EndpointService(this._http, 'model');
+    return new EndpointService(this.http, 'model');
   }
   /**
    * Authenticate Service
    * @returns {AuthService}
    */
-  auth(): AuthService{
-    return new AuthService(this._http, this.config);
+  auth(): AuthService {
+    return new AuthService(this.http, this.config);
   }
 }

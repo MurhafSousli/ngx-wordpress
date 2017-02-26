@@ -1,77 +1,70 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {EndpointInterface} from "../endpoint/endpoint.interface";
-import {CollectionService} from "../collection/collection.service";
-import {ModelService} from "../model/model.service";
-import {WpHttp} from "../../helpers/wp-http.class";
-import {WpEndpoint} from "../../helpers/wp-endpoints";
+import { EndpointInterface } from './endpoint.interface';
+import { CollectionService } from '../collection/collection.service';
+import { ModelService } from '../model/model.service';
+import { WpHttp } from '../../classes/wp-http.class';
+import { WpEndpoint } from '../../classes/wp-endpoints';
 
 @Injectable()
 export class EndpointService implements EndpointInterface {
 
-    constructor(private _http: WpHttp, private _type: string) {
+  constructor(private http: WpHttp, private type: string) {
+  }
+
+  /**
+   * Switch service type (any)
+   * @param endpoint {string}
+   * @returns {ModelService | CollectionService}
+   */
+  private switcher(endpoint: string): ModelService | CollectionService {
+    if (this.type === 'collection') {
+      return new CollectionService(this.http, endpoint);
     }
+    return new ModelService(this.http, endpoint);
+  }
 
-    /**
-     * Switch service type (any)
-     * @param endpoint
-     * @returns {any}
-     */
-    private swithcer(endpoint:any): any{
-        if(this._type === 'collection'){
-            return new CollectionService(this._http, endpoint);
-        }
-        return new ModelService(this._http, endpoint);
-    }
+  endpoint(endpoint: string) {
+    return this.switcher(endpoint);
+  }
 
-    public endpoint = (endpoint: string): any => {
-        return this.swithcer(endpoint);
-    };
+  posts() {
+    return this.switcher(WpEndpoint.posts);
+  }
 
-    public posts = ():  any => {
-        let endpoint = WpEndpoint.posts;
-        return this.swithcer(endpoint);
-    };
-    public users = ():  any=> {
-        let endpoint = WpEndpoint.users;
-        return this.swithcer(endpoint);
-    };
-    public categories = ():  any => {
-        let endpoint = WpEndpoint.categories;
-        return this.swithcer(endpoint);
-    };
-    public pages = ():  any=> {
-        let endpoint = WpEndpoint.pages;
-        return this.swithcer(endpoint);
-    };
+  users() {
+    return this.switcher(WpEndpoint.users);
+  }
 
-    public tags = ():  any=> {
-        let endpoint = WpEndpoint.tags;
-        return this.swithcer(endpoint);
-    };
+  categories() {
+    return this.switcher(WpEndpoint.categories);
+  }
 
-    public comments = ():  any=> {
-        let endpoint = WpEndpoint.comments;
-        return this.swithcer(endpoint);
-    };
+  pages() {
+    return this.switcher(WpEndpoint.pages);
+  }
 
-    public media = ():  any=> {
-        let endpoint = WpEndpoint.media;
-        return this.swithcer(endpoint);
-    };
+  tags() {
+    return this.switcher(WpEndpoint.tags);
+  }
 
-    public taxonomies = ():  any => {
-        let endpoint = WpEndpoint.taxonomies;
-        return this.swithcer(endpoint);
-    };
+  comments() {
+    return this.switcher(WpEndpoint.comments);
+  }
 
-    public statuses = ():  any=> {
-        let endpoint = WpEndpoint.statuses;
-        return  this.swithcer(endpoint);
-    };
+  media() {
+    return this.switcher(WpEndpoint.media);
+  }
 
-    public types = ():  any=> {
-        let endpoint = WpEndpoint.types;
-        return this.swithcer(endpoint);
-    };
+  taxonomies() {
+    return this.switcher(WpEndpoint.taxonomies);
+  }
+
+  statuses() {
+    return this.switcher(WpEndpoint.statuses);
+  };
+
+  types() {
+    return this.switcher(WpEndpoint.types);
+  }
 }
