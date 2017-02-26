@@ -1,3 +1,5 @@
+import { Headers } from '@angular/http';
+
 export module Helper {
 
     export const serialize = (obj, prefix?): string => {
@@ -11,5 +13,21 @@ export module Helper {
             }
         }
         return str.join('&');
+    };
+
+    export const basicHeaders = (keys: string): Headers => {
+        let headers = new Headers();
+        if (keys) {
+            headers.append('Authorization', 'Basic ' + keys);
+        }
+        return headers;
+    };
+
+    export const cookiesHeaders = (keys: string): Headers => {
+        let headers = new Headers();
+        if (keys) {
+            headers.append('X-WP-Nonce', keys);
+        }
+        return headers;
     };
 }

@@ -4,18 +4,18 @@
 
  - feat(CollectionDirective) Collection directive
  - feat(ModelDirective) Model directive 
- - docs(Readme, Changelog)
- - feat(ConfigService): debug to log requests url to console.
- - feat(build): support systemjs
- - refactor(build system)
+ - docs(Readme): docs for version 3.x
+ - feat(ConfigService): Use `configService.debug = true;` to log WP requests' URLs to console.
+ - feat(build): Support systemjs
+ - refactor(gulp.js): improve build system
 
  ###Breaking Changes: 
 
  - Components are replaced with directives
  - ConfigService:
-    - timeout removed
-    - loading removed
-    - errors removed
+    - requests' timeout removed
+    - loading notifier removed
+    - errors notifier removed
 
 ##2.1.6
 

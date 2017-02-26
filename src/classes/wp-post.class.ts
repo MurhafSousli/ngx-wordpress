@@ -1,4 +1,5 @@
 import { WpUser } from './wp-user.interface';
+import { WpMedia } from './wp-media.interface';
 import { IPost } from './post.interface';
 
 export class WpPost {
@@ -99,11 +100,13 @@ export class WpPost {
   featuredImageUrl(size: string): string {
     if (this.featuredMedia() && this.post._embedded) {
 
-      let featuredImage = this.post._embedded['wp:featuredmedia'][0];
+      let featuredImage: WpMedia = this.post._embedded['wp:featuredmedia'][0];
       if (featuredImage) {
+        /** Get featuredImage of size (size) */
         if (featuredImage.media_details.sizes[size]) {
           return featuredImage.media_details.sizes[size].source_url;
         }
+        /** If featuredImage size is invalid, return the original one */
         else {
           /** if the desired size was not found, return the full size */
           return featuredImage.media_details.sizes['full'].source_url;

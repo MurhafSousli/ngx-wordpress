@@ -2,6 +2,7 @@ import { Injectable, Optional } from '@angular/core';
 import { Headers } from '@angular/http';
 
 import { ConfigInterface } from './config.interface';
+import { Helper } from '../../classes/helper.functions';
 
 @Injectable()
 export class ConfigService implements ConfigInterface {
@@ -19,10 +20,10 @@ export class ConfigService implements ConfigInterface {
   getAuth(): Headers {
     if (this.authKeys) {
       if (this.authKeys.toLowerCase() === 'cookies') {
-        return cookiesHeaders(this.authKeys);
+        return Helper.cookiesHeaders(this.authKeys);
       }
       if (this.authKeys.toLowerCase() === 'basic') {
-        return basicHeaders(this.authKeys);
+        return Helper.basicHeaders(this.authKeys);
       }
     }
     return undefined;
@@ -35,19 +36,4 @@ export class ConfigService implements ConfigInterface {
 
 }
 
-function basicHeaders(keys: string): Headers {
-  let headers = new Headers();
-  if (keys) {
-    headers.append('Authorization', 'Basic ' + keys);
-  }
-  return headers;
-}
-
-function cookiesHeaders(keys: string): Headers {
-  let headers = new Headers();
-  if (keys) {
-    headers.append('X-WP-Nonce', keys);
-  }
-  return headers;
-}
 

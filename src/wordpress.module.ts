@@ -43,7 +43,7 @@ function wpHttpFactory(backend: XHRBackend, defaultOptions: RequestOptions, wpCo
 })
 export class WordPressModule {
   static forRoot(url: string): ModuleWithProviders {
-    console.log('WP forRoot', url);
+
     return {
       ngModule: WordPressModule,
       providers: [
