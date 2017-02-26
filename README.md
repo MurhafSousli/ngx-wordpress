@@ -7,21 +7,13 @@
 
 This library is designed to make it easy for your Angular application to request specific resources from a WordPress install.
 
-## Requirments
-
-**Wordpress** installation.
-
-## Installation
-
-Install it with npm
-
-`npm install ng2-wp-api --save`
- 
 
 ## Table of Contents
  
  - [Live example that uses ng2-wp-api](https://ontrava.com)
  - [Features](#features)
+ - [Requirments](#requirments)
+ - [Installation](#installation)
  - [Usage](#usage)
     - [WP Directives](#directives)
         - [Collection Directive](#collectionDir)
@@ -37,6 +29,7 @@ Install it with npm
  - [Author](#author) 
  - [License](#license)  
 
+ 
 <a name="features"/>
 ## Features
 
@@ -46,6 +39,19 @@ Install it with npm
 - [x] Authentication
    - [x] Basic Authentication
    - [x] Cookies Authentication
+
+<a name="requirments"/>
+## Requirments
+
+**Wordpress** installation.
+
+<a name="installation"/>
+## Installation
+
+Install it with npm
+
+`npm install ng2-wp-api --save`
+ 
 
 <a name="usage"/>
 ## Usage
@@ -64,7 +70,7 @@ imports: [
 ```
     
 <a name="directives"/>
-## Using the directives is very simple:
+## Using the directives
 
 `[wpCollection]` to specify which endpoint you want to request the resources e.g. `WpEndpoint.posts` or `WpEndpoint.pages` or `WpEndpoint.categories` ..etc
 `[wpArgs]` to specify the arguments of the requests e.g. `{ _embed: true, per_page: 4}`. for more info, check [WordPress Query parameters](https://codex.wordpress.org/Class_Reference/WP_Query#Parameters)
