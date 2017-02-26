@@ -20,19 +20,18 @@ Install it with npm
 
 ## Table of Contents
  
+ - [Live example that uses ng2-wp-api](https://ontrava.com)
  - [Features](#features)
- - [Abstract](#abstract)  
  - [Usage](#usage)
-    - [Initialization](#initialization)
-    - [Services](#services)
+    - [WP Directives](#directives)
+        - [Collection Directive](#collectionDir)
+        - [Model Directive](#modelDir)
+    - [WP Service](#service)
         - [Getting Collections](#collectionSrv)
         - [Getting Models](#modelSrv)
         - [Direct Link](#direct)
         - [Add/Update/Delete Operations](#cud)
         - [Authentication](#authentication)
-    - [Components](#components)
-        - [Collection Component](#collectionCmp)
-        - [Model Component](#modelCmp)
  - [Embedded Responses](#embedding)       
  - [Hints](#hints)    
  - [Issues](#issues)    
@@ -43,60 +42,21 @@ Install it with npm
 ## Features
 
 [](#features)This library is very flexible and easy to use, you will find everything you need included out of the box:
+- [x] WordPress Directives
 - [x] WordPress Service
-- [x] WordPress Components (an alternative to the service)
-- [x] Direct link
-- [x] Async http calls (no UI blocking)
-- [x] Useful classes to access several models and their properties
-- [x] Timeout for Http requests
-- [x] Error Notifier
-- [x] Loading Notifier
-- [x] Discovery
 - [x] Authentication
    - [x] Basic Authentication
    - [x] Cookies Authentication
   
 
-<a name="abstract"/>
-## Abstract
-
-
-#### Services:
-
- - `WpService`    One service for all operations (Access/Authenticate/Configure).
-
- ---
- 
-#### Components:
-
- - `<wp-collection>`      Inputs: args, endpoint - Output: collection response.
- - `<wp-model>`           Inputs: id, args, endpoint - Output: model response.
-
- ---
-
-#### Helper Classes:  
-
- - `WpPost`            Useful class for posts and pages (contains functions for accessing embedded posts).
- - `WpUser`            Interface for user response.
- - `WpQueryArgs`       Class for creating query arguments for collection/model.
- - `WpEndpoint`        List of default endpoints and their addresses.
-
- ---
 
 **Default Endpoints** are : `posts`, `pages`, `users`, `categories`, `tags`, `taxonomies`, `statuses`, `comments`, `media`     
 
 ```
     WpService
     ├── config 
-    |    ├── baseUrl                       ** Set WordPress URL
-    |    ├── timeOut                       ** Http requests timeout
-    |    ├── loading                       ** Listener for requests loading state
-    |    ├── errors                        ** Listener for requests errors
-    |
-    ├── discover(url)                      ** Discover if a URL has a valid API
-    |
-    ├── link(url)                          ** Http Getter with the benefits of loading and errors observables.
-    |                                         Useful for getting data from external resources
+    |    ├── baseUrl                       ** WordPress baseURL
+    |    ├── debug                         ** if enabled, Logs request URL to the console 
     |
     ├── collection()
     |    ├── endpoint(ep)
@@ -124,73 +84,77 @@ Install it with npm
 
 Add `WordPressModule` to **NgModule** `imports` array.
 
-```javascript
+```ts
 import { WordPressModule } from 'ng2-wp-api';
 
 @NgModule({
 imports: [
-    WordPressModule
+    WordPressModule.forRoot('https://example.com')
   ]
 })
+
 ```
 
-<a name="initialization"/>
-### Initialization
+    
+<a name="directives"/>
+## Using the components
 
-Set your WordPress base url in the root component
+<a name="collectionDir">
+**For collection:**
 
-```javascript
-constructor(wpService: WpService){
-}
 
-ngOnInit(){
-   wpService.config.baseUrl = "http://localhost/wordpress";
-   
-   /** Optional */
-   //catch loading state (useful for spinner)
-   wpService.config.loading.subscribe(...);
-   //catch any errors occurs in all requests
-   wpService.config.errors.subscribe(...); 
-}
+```ts
+<div class="feed" [wpCollection]="postsEndpoint" [wpArgs]="postsArgs" (wpResponse)="posts = $event.data">
+    <ul>
+      <li *ngFor="let post of posts">{{post.title.rendered}}</li>
+    </ul>
+</div>
 ```
-See [Initializing example](/examples/Initilizing WP Service.ts).
+this gist shows collection usage in depth [Collection Gist](https://gist.github.com/MurhafSousli/063e4a374ddf0f7fb87ece5e463c9071)
 
-After initializing, you can either consume the library as a service, or as a component.
+
+Get a single post by Slug
+```ts
+<div class="single-post" [wpCollection]="endpoint" [wpArgs]="{slug: 'hello-world'}" (wpResponse)="single = $event.data[0]">
+  <h1 [innerHtml]="single?.title?.rendered"></h1>
+</div>
+```
+
+<a name="modelnDir">
+**For model:**
+
+Get a single post by ID
+```ts
+<div class="single-post" [wpModel]="endpoint" [wpId]="29043" (wpResponse)="single = $event.data">
+  <h1 [innerHtml]="single?.title?.rendered"></h1>
+</div>
+```
 
 ***
 
 <a name="service"/>
 ## Using the service
 
-Import `WpService` in component constructor
-Import `WpEndpoint` to get the desired endpoint address
-
-```javascript
-import {WpService} from "ng2-wp-api";
-
-@Component({...})
-export class testComponent {
-    constructor(private wpService: WpService) {
-
-    }
-}
-```
 
 <a name="collectionSrv">
 **For collection:**
 
 A basic example of fetching 6 embedded posts:
   
-```javascript
-import {WpService,WpEndpoint,WpQueryArgs,CollectionResponse} from "ng2-wp-api";
+```ts
+import { WpService, WpEndpoint, CollectionResponse} from "ng2-wp-api";
 .
 .
-var endpoint = WpEndpoint.posts;
+endpoint = WpEndpoint.posts;
 
-var args = new WpQueryArgs({
-    perPage: 6,
-    embed: true
-});
+args = new {
+    per_page: 6,
+    _embed: true
+};
+
+constructor(private wpService: WpService) {
+
+}
 
 this.wpService.collection()
   .endpoint(endpoint)       //or posts()
@@ -205,12 +169,12 @@ this.wpService.collection()
       }
   });
 ```
-See [WpService Collection example](/examples/Collection using the service.ts)
+See [WpService Collection gist](https://gist.github.com/MurhafSousli/6c3f2fd0bf1b9a7b45e7c74d30f40137)
 
 <a name="modelSrv">
 **For model:**
 
-```javascript
+```ts
 var endpoint = WpEndpoint.posts;
 
 this.wpService.model()
@@ -226,51 +190,14 @@ this.wpService.model()
     });
 ```
 
-See [WpService Model example](/examples/Model using the service.ts)
-
-***
-    
-<a name="component"/>
-## Using the components
-
-<a name="collectionCmp">
-**For collection:**
-
-```html
-<wp-collection [args]="args" [endpoint]="endpoint" (response)="wpResponse($event)">
-<!-- Your Template Goes Here -->
-</wp-collection>
-``` 
-WpCollection component gets a new response automatically when the input `[args]` value has set/changed.
-
-See [Collection Component example](/examples/Collection using the component.ts)
-
-<a name="modelCmp">
-**For model:**
-  
-```html
-<wp-model [id]="id" [endpoint]="endpoint" (response)="wpResponse($event)">
-<!-- Your Template Goes Here -->
-<wp-model>
-```
-
-WpModel component gets a new response automatically when the input `[id]` value has set/changed.
-
-See [Model Component example](/examples/Model using the component.ts)
-
-***
-
-<a name="direct"/>
-## Direct Link
-
-If you want to do a `GET` request for any URL, Use `WpService.link(url).subscribe(...)` to get the advantage of error and loading notifiers. 
+See [WpService Model gist](https://gist.github.com/MurhafSousli/a21a52093779c2b7355f5dc5d45a484c)
 
 ***
 
 <a name="cud"/>
 ## Add/Update/Delete
 
-```javascript
+```ts
 //add new post
 wpService.model().posts().add(body);
 
@@ -290,7 +217,7 @@ wpService.model().users().delete(userId);
    
    Install and activate [Basic-Auth Plugin](https://github.com/WP-API/Basic-Auth)
    
-```javascript
+```ts
  this.wpService.auth().basic('username', 'password').subscribe(
   (loggedInUser: WpUser)=> {
     console.log(loggedInUser);
@@ -298,7 +225,7 @@ wpService.model().users().delete(userId);
 ```
 
  - Cookies Authentication:
-```javascript
+```ts
  this.wpService.auth().cookies().subscribe(
   (loggedInUser: WpUser)=> {
     console.log(loggedInUser);
@@ -313,12 +240,13 @@ The normal post response contains only the Id references which you will have to 
 
 Embedded responses are very useful to reduce the amount of http requets. you will get all the information you need in one response.
 
-Embedding is triggered by setting the `_embed=true` in WpQueryArgs, check [Linking and Embedding](http://v2.wp-api.org/reference/links.html)
+Embedding is triggered by setting the `_embed=true` in args, check [Linking and Embedding](http://v2.wp-api.org/reference/links.html)
 
 And now `WpPost` class will be useful to access the following properties:
 
 ```
 post                        **  the original object
+get(properyName)            **  get any property by its name
 id()                        **  post id                  
 title()                     **  post title
 content()                   **  post content
@@ -328,25 +256,16 @@ type()                      **  post type
 categories()                **  post categories array  
 tags()                      **  post tags array
 author()                    **  post author object (WpUser)
-featuredMedia()             **  to check if a post has a featured image
-featuredImageUrl(size)      **  to get featured image by the size, ("full", large", "medium") or 
+featuredMedia()             **  check if post has featured image
+featuredImageUrl(size)      **  get featured image by size, ("full", large", "medium") or 
                                 any other valid size you have in your WP
 ```
-other properties can be accessed from the original `post` object.
-
-```
-   var wpPost = new WpPost(originalPost);
-   wpPost.post.propertyName
-```
-where `wpPost.post` = `originalPost`, See [WpPost class source code](https://github.com/MurhafSousli/ng2-wp-api/blob/master/src/helpers/wp-post.class.ts)
-
 
 <a name="hints"/>
 ## Hints
 
  - Use `WpEndpoint` to get the default endpoints and their addresses.
  - `WpService.collection.posts().get(...)` is a equal to `WpService.Collection.endpoint(WpEndpoint.posts).get(...)`
- - Use `WpQueryArgs` class to specify your request argument.
  - Use `WpPost` class when the response is embedded, it has useful functions for accessing embedded posts.
  - `WpPost` class works for posts, pages and custom post types.
  - Use `WpUser` interface for user response.

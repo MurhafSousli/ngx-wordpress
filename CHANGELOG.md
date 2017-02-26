@@ -1,5 +1,9 @@
 #Changelog
 
+##3.0.0-beta0
+
+ - Collection and Model Directives 
+
 ##2.1.6
 
  - Support AoT
