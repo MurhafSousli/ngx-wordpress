@@ -47,37 +47,6 @@ Install it with npm
 - [x] Authentication
    - [x] Basic Authentication
    - [x] Cookies Authentication
-  
-
-
-**Default Endpoints** are : `posts`, `pages`, `users`, `categories`, `tags`, `taxonomies`, `statuses`, `comments`, `media`     
-
-```
-    WpService
-    ├── config 
-    |    ├── baseUrl                       ** WordPress baseURL
-    |    ├── debug                         ** if enabled, Logs request URL to the console 
-    |
-    ├── collection()
-    |    ├── endpoint(ep)
-    |        ├── get(args?)                ** Get Collection of endpoint type.
-    |        ├── more()                    ** Get Next page collection combined with any previous ones.
-    |        ├── next()                    ** Get Next page collection.
-    |        ├── prev()                    ** Get Prev page collection.
-    |
-    ├── model()
-    |    ├── endpoint(ep)
-    |        ├──  get(id, args?)           ** Get Model by Id.
-    |        ├──  add(body)                ** Add Model to WP.
-    |        ├──  update(id, body)         ** Update Model by Id.
-    |        ├──  delete(id)               ** Delete Model by Id.
-    |
-    ├── auth()
-    |    ├── basic(username, password)     ** Basic authentication, returns loggedInUser.
-    |    ├── cookies()                     ** Cookies authentication, returns loggedInUser.
-    |    ├── logout()                      ** Removes authentication info from all requests.
-```
-
 
 <a name="usage"/>
 ## Usage
@@ -94,14 +63,20 @@ imports: [
 })
 
 ```
-
     
 <a name="directives"/>
-## Using the directives
+## Using the directives is very simple:
+
+`[wpCollection]` to specify which endpoint you want to request the resources e.g. `WpEndpoint.posts` or `WpEndpoint.pages` or `WpEndpoint.categories` ..etc
+`[wpArgs]` to specify the arguments of the requests e.g. `{ _embed: true, per_page: 4}`. for more info, check [WordPress Query parameters](https://codex.wordpress.org/Class_Reference/WP_Query#Parameters)
+
+`(wpResponse)` Get the result of your query, which looks like this `$event {data, pagination, error}`
+`(wpLoading)` Is helpfull to display loading icon, `$event: boolean`
+
+To get full control on the directive, use the `@ViewChild()
 
 <a name="collectionDir">
 **For collection:**
-
 
 ```ts
 <div class="feed" [wpCollection]="postsEndpoint" [wpArgs]="postsArgs" (wpResponse)="posts = $event.data">
@@ -139,34 +114,30 @@ See collection usage in depth [Collection Gist](https://gist.github.com/MurhafSo
 <a name="collectionSrv">
 **For collection:**
 
-A basic example of fetching 6 embedded posts:
+A basic example of getting 6 embedded posts:
   
 ```ts
-import { WpService, WpEndpoint, CollectionResponse} from "ng2-wp-api";
-.
-.
+/** Posts Response */
+posts;
+/** Posts Endpoint */
 endpoint = WpEndpoint.posts;
-
+/** Posts Args */
 args = new {
     per_page: 6,
     _embed: true
 };
 
-constructor(private wpService: WpService) {
-
-}
-
 this.wpService.collection()
   .endpoint(endpoint)       //or posts()
   .get(args)
   .subscribe((res: CollectionResponse) => {
-      if(res.error){
-        console.log(res.error);
-      }
-      else{
-        this.data = res.data;
-        this.pagination = res.pagination;
-      }
+    if(res.error){
+      console.log(res.error);
+    }
+    else{
+      this.posts = res.data;
+      this.pagination = res.pagination;
+    }
   });
 ```
 See [WpService Collection gist](https://gist.github.com/MurhafSousli/6c3f2fd0bf1b9a7b45e7c74d30f40137)
@@ -175,19 +146,22 @@ See [WpService Collection gist](https://gist.github.com/MurhafSousli/6c3f2fd0bf1
 **For model:**
 
 ```ts
-var endpoint = WpEndpoint.posts;
+/** Post Response */
+post;
+/** Post Endpoint */
+endpoint = WpEndpoint.posts;
 
 this.wpService.model()
-    .endpoint(endpoint)     //or posts() or pages() or users() ..etc
-    .get(id)
-    .subscribe((res: ModelResponse) => {
-      if(res.error){
-        console.log(res.error);
-      }
-      else{
-        this.data = res.data;
-      }
-    });
+  .endpoint(endpoint)     //or posts() or pages() or users() ..etc
+  .get(id)
+  .subscribe((res: ModelResponse) => {
+    if(res.error){
+      console.log(res.error);
+    }
+    else{
+      this.post = res.data;
+    }
+  });
 ```
 
 See [WpService Model gist](https://gist.github.com/MurhafSousli/a21a52093779c2b7355f5dc5d45a484c)
@@ -231,6 +205,37 @@ wpService.model().users().delete(userId);
     console.log(loggedInUser);
   });
 ```
+
+## WpService Summary
+
+**Default Endpoints** are : `posts`, `pages`, `users`, `categories`, `tags`, `taxonomies`, `statuses`, `comments`, `media`     
+
+```
+    WpService
+    ├── config 
+    |    ├── baseUrl                       ** WordPress baseURL
+    |    ├── debug                         ** if enabled, Logs request URL to the console 
+    |
+    ├── collection()
+    |    ├── endpoint(ep)
+    |        ├── get(args?)                ** Get Collection of endpoint type.
+    |        ├── more()                    ** Get Next page collection combined with any previous ones.
+    |        ├── next()                    ** Get Next page collection.
+    |        ├── prev()                    ** Get Prev page collection.
+    |
+    ├── model()
+    |    ├── endpoint(ep)
+    |        ├──  get(id, args?)           ** Get Model by Id.
+    |        ├──  add(body)                ** Add Model to WP.
+    |        ├──  update(id, body)         ** Update Model by Id.
+    |        ├──  delete(id)               ** Delete Model by Id.
+    |
+    ├── auth()
+    |    ├── basic(username, password)     ** Basic authentication, returns loggedInUser.
+    |    ├── cookies()                     ** Cookies authentication, returns loggedInUser.
+    |    ├── logout()                      ** Removes authentication info from all requests.
+```
+
 
 <a name="embedding"/>
 ## Embedded Responses
