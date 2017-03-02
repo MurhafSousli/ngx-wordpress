@@ -33,7 +33,7 @@ This library is designed to make it easy for your Angular application to request
 <a name="requirments"/>
 ## Requirments
 
-**Wordpress** installation.
+**Wordpress** setup.
 
 <a name="installation"/>
 ## Installation
@@ -66,13 +66,11 @@ imports: [
 
  - `[wpArgs]` pass query arguments e.g. `{ _embed: true, per_page: 4}`. more info, check [WordPress Query parameters](https://codex.wordpress.org/Class_Reference/WP_Query#Parameters)
 
- - `(wpResponse)` WP response for your query, e.g. `$event" {data, pagination, error}`
+ - `(wpResponse)` WP response for your query, e.g. `$event": {data, pagination, error}`
 
  - `(wpLoading)` helpfull for displaying loading icon, `$event: boolean`
 
  - Use the `@ViewChild(CollectionDirective)` to access to directive functions e.g. `get()`, `more()`, `prev()`, `next()` 
-
- ###Examples:
 
 <a name="collectionDir">
 **For collection:**
@@ -84,7 +82,7 @@ imports: [
     </ul>
 </div>
 ```
-See collection usage in depth [Collection Gist](https://gist.github.com/MurhafSousli/063e4a374ddf0f7fb87ece5e463c9071)
+See [Directive Collection usage](https://gist.github.com/MurhafSousli/063e4a374ddf0f7fb87ece5e463c9071) in depth.
 
 
  - Get a single post by Slug
@@ -139,7 +137,7 @@ this.wpService.collection()
     }
   });
 ```
-See [WpService Collection gist](https://gist.github.com/MurhafSousli/6c3f2fd0bf1b9a7b45e7c74d30f40137)
+See [WpService Collection usage](https://gist.github.com/MurhafSousli/6c3f2fd0bf1b9a7b45e7c74d30f40137)
 
 <a name="modelSrv">
 **For model:**
@@ -163,7 +161,7 @@ this.wpService.model()
   });
 ```
 
-See [WpService Model gist](https://gist.github.com/MurhafSousli/a21a52093779c2b7355f5dc5d45a484c)
+See [WpService Model usage](https://gist.github.com/MurhafSousli/a21a52093779c2b7355f5dc5d45a484c)
 
 ***
 
@@ -227,17 +225,19 @@ wpService.model().users().delete(userId);
     |
     ├── model()
     |    ├── endpoint(ep)
-    |        ├──  get(id, args?)           ** Get Model by Id.
-    |        ├──  add(body)                ** Add Model to WP.
-    |        ├──  update(id, body)         ** Update Model by Id.
-    |        ├──  delete(id)               ** Delete Model by Id.
+    |        ├── get(id, args?)            ** Get Model by Id.
+    |        ├── add(body)                 ** Add Model to WP.
+    |        ├── update(id, body)          ** Update Model by Id.
+    |        ├── delete(id)                ** Delete Model by Id.
     |
     ├── auth()
     |    ├── basic(username, password)     ** Basic authentication, returns loggedInUser.
     |    ├── cookies()                     ** Cookies authentication, returns loggedInUser.
     |    ├── logout()                      ** Removes authentication info from all requests.
     |
-    |    ├── photon()                      ** Get post(s) images using [Photon](https://developer.wordpress.com/docs/photon/) service. 
+    |    ├── photon()                      ** Get post(s) images using photon service. 
+    |        ├── getImage(post, propName)
+    |        ├── getByQuery(post, domain, photonArgs)
 ```
 
 
@@ -249,7 +249,7 @@ The normal post response contains only the Id references which you will have to 
 
 Embedded responses are very useful to reduce the amount of http requets. you will get all the information you need in one response.
 
-Embedding is triggered by setting the `_embed=true` in args, check [Linking and Embedding](http://v2.wp-api.org/reference/links.html)
+Embedding is triggered by setting the `_embed=true` in args, check [Linking and Embedding](https://developer.wordpress.org/rest-api/using-the-rest-api/linking-and-embedding/)
 
 And now `WpPost` class will be useful to access the following properties:
 
@@ -274,9 +274,9 @@ featuredImageUrl(size)      **  get featured image by size, ("full", large", "me
 ```
 
 <a name="photon"/>
-##Photon
+##[Photon](https://developer.wordpress.com/docs/photon/) 
 
-In your root component, define photon queries that you would like to use as an object using the function `setPhotonQuery(name, query)`
+In your root component, define photon arguments that you would like to use as an object using the function `setPhotonQuery(name, args)`
 
 ```ts
     constructor(private wp: WpService){ 
@@ -287,14 +287,14 @@ In your root component, define photon queries that you would like to use as an o
 ```
 Check [Photon API](https://developer.wordpress.com/docs/photon/api/) for the URL parameters full list.
 
-Now in your post component, once you get the post object, you can pass it to photon function `wp.photon().getImage(post, queryName)`
+Now in your post component, once you get the post object, you can pass it to photon function `wp.photon().getImage(post, argsName)`
 
 ```ts
     <img [src]="wp.photon().getImage(post, 'large')" />
     <img [src]="wp.photon().getImage(post, 'cropped')" />
     <img [src]="wp.photon().getImage(post, 'resized')" />
 ```
-You can also query photon directly using the function `wp.photon().getByQuery(post, domain, photonQuery)`, where domain is `localhost:4200` (without the `http://`)
+You can also query photon directly using the function `wp.photon().getByQuery(post, domain, photonArgs)`, where domain is `localhost:4200` (without the `http://`)
 
 ```ts
     <img [src]="wp.photon().getByQuery(post, 'example.com', { w: 800, h: 400})" /> 
