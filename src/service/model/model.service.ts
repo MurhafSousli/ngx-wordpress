@@ -20,7 +20,9 @@ export class ModelService implements ModelInterface {
   get(id: number, args?): Observable<ModelResponse> {
 
     return this.http.get(this.endpoint + id, args)
-      .map(res => Observable.of({ data: res.json() }))
+      .map(res => {
+        return { data: res.json() };
+      })
       .catch(err => Observable.of({ error: err }));
   };
   /**
@@ -31,7 +33,9 @@ export class ModelService implements ModelInterface {
   add(body?: any): Observable<ModelResponse> {
 
     return this.http.post(this.endpoint, body)
-      .map(res => Observable.of({ data: res.json() }))
+      .map(res => {
+        return { data: res.json() };
+      })
       .catch(err => Observable.of({ error: err }));
   };
   /**
@@ -43,7 +47,9 @@ export class ModelService implements ModelInterface {
   update(id: number, body?): Observable<ModelResponse> {
 
     return this.http.put(this.endpoint + id, body)
-      .map(res => Observable.of({ data: res.json() }))
+      .map(res => {
+        return { data: res.json() };
+      })
       .catch(err => Observable.of({ error: err }));
   };
   /**

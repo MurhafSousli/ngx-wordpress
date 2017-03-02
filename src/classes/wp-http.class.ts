@@ -9,7 +9,6 @@ import { Helper } from './helper.functions';
 export class WpHttp extends Http {
 
   constructor(backend: ConnectionBackend, defaultOptions: RequestOptions, private config: ConfigService) {
-
     super(backend, defaultOptions);
   }
 
@@ -44,13 +43,11 @@ export class WpHttp extends Http {
 
   /** Serialize url endpoint and queryArgs */
   private getUrl(endpoint: string, args?): string {
+
     let url = this.config.baseUrl + endpoint;
     if (args) {
       /** add args to url */
       url += '?' + Helper.serialize(args);
-    }
-    if (this.config.debug) {
-      console.log('[WpService]: ', url);
     }
     return url;
   }
