@@ -3,7 +3,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
 
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule, ModuleWithProviders, OpaqueToken } from '@angular/core';
 import { HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 
 /** Services */
@@ -23,10 +23,19 @@ import { WpPagination } from './classes/wp-pagination.class';
 import { CollectionResponse } from './service/collection/collection.interface';
 import { ModelResponse } from './service/model/model.interface';
 
-/** Make AOT compiler happy */
-function wpHttpFactory(backend: XHRBackend, defaultOptions: RequestOptions, wpConfig: ConfigService) {
-  return new WpHttp(backend, defaultOptions, wpConfig);
+/** Provide URL for ConfigService */
+export const URL = new OpaqueToken('url');
+
+/** Initialize ConfigService with URL */
+export function wpConfigFactory(url: string) {
+  return new ConfigService(url);
 }
+
+/** Initialize WpHttp with ConfigService */
+export function wpHttpFactory(backend: XHRBackend, defaultOptions: RequestOptions, config: ConfigService) {
+  return new WpHttp(backend, defaultOptions, config);
+}
+
 
 @NgModule({
   declarations: [
@@ -42,18 +51,24 @@ function wpHttpFactory(backend: XHRBackend, defaultOptions: RequestOptions, wpCo
   ]
 })
 export class WordPressModule {
+
   static forRoot(url: string): ModuleWithProviders {
 
     return {
       ngModule: WordPressModule,
       providers: [
-        WpService,
-        { provide: ConfigService, useValue: new ConfigService(url) },
+        { provide: URL, useValue: url },
+        {
+          provide: ConfigService,
+          useFactory: wpConfigFactory,
+          deps: [URL]
+        },
         {
           provide: WpHttp,
           useFactory: wpHttpFactory,
           deps: [XHRBackend, RequestOptions, ConfigService]
-        }
+        },
+        WpService
       ]
     };
   }
@@ -62,7 +77,6 @@ export class WordPressModule {
 
 export {
   WpService,
-  ConfigService,
   CollectionDirective,
   ModelDirective,
 

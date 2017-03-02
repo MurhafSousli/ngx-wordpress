@@ -2,6 +2,11 @@ import { Headers } from '@angular/http';
 
 export module Helper {
 
+    export const domain = (url: string) => {
+        let matches = url.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i);
+        return matches && matches[1];
+    };
+
     export const serialize = (obj, prefix?): string => {
         let str = [];
         for (let p in obj) {

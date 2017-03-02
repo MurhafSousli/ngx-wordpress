@@ -4,7 +4,7 @@ import { IPost } from './post.interface';
 
 export class WpPost {
 
-  constructor(private post: IPost) {
+  constructor(private post: IPost, private domain?: string, private photonSizes?) {
   }
 
   get(property: string) {
@@ -97,7 +97,7 @@ export class WpPost {
    * get post featured image url
    * @params {string} size -
    */
-  featuredImageUrl(size: string): string {
+  featuredImageUrl(size?: string): string {
     if (this.featuredMedia() && this.post._embedded) {
 
       let featuredImage: WpMedia = this.post._embedded['wp:featuredmedia'][0];

@@ -11,7 +11,6 @@ This library is designed to make it easy for your Angular application to request
 ## Table of Contents
  
  - [Live example that uses ng2-wp-api](https://ontrava.com)
- - [Features](#features)
  - [Requirments](#requirments)
  - [Installation](#installation)
  - [Usage](#usage)
@@ -23,22 +22,13 @@ This library is designed to make it easy for your Angular application to request
         - [Getting a Model](#modelSrv)
         - [Add/Update/Delete Operations](#cud)
         - [Authentication](#authentication)
- - [Embedded Responses](#embedding)       
+ - [Embedded Responses](#embedding)    
+ - [Photon Images](#photon)   
  - [Hints](#hints)    
  - [Issues](#issues)    
  - [Author](#author) 
  - [License](#license)  
 
- 
-<a name="features"/>
-## Features
-
-[](#features)This library is very flexible and easy to use, you will find everything you need included out of the box:
-- [x] WordPress Directives
-- [x] WordPress Service
-- [x] Authentication
-   - [x] Basic Authentication
-   - [x] Cookies Authentication
 
 <a name="requirments"/>
 ## Requirments
@@ -72,15 +62,17 @@ imports: [
 <a name="directives"/>
 ## Using the directives
 
-`[wpCollection]` to specify which endpoint you want to request the resources e.g. `WpEndpoint.posts`, `WpEndpoint.pages`, `WpEndpoint.categories` ..etc
+ - `[wpCollection]` pass the endpoint e.g. `WpEndpoint.posts`, `WpEndpoint.pages`, `WpEndpoint.categories` ..etc
 
-`[wpArgs]` to specify the arguments of the requests e.g. `{ _embed: true, per_page: 4}`. for more info, check [WordPress Query parameters](https://codex.wordpress.org/Class_Reference/WP_Query#Parameters)
+ - `[wpArgs]` pass query arguments e.g. `{ _embed: true, per_page: 4}`. more info, check [WordPress Query parameters](https://codex.wordpress.org/Class_Reference/WP_Query#Parameters)
 
-`(wpResponse)` Get the result of your query, which looks like this `$event {data, pagination, error}`
+ - `(wpResponse)` WP response for your query, e.g. `$event" {data, pagination, error}`
 
-`(wpLoading)` Is helpfull to display loading icon, `$event: boolean`
+ - `(wpLoading)` helpfull for displaying loading icon, `$event: boolean`
 
-To get full control on the directive, use the `@ViewChild()
+ - Use the `@ViewChild(CollectionDirective)` to access to directive functions e.g. `get()`, `more()`, `prev()`, `next()` 
+
+ ###Examples:
 
 <a name="collectionDir">
 **For collection:**
@@ -213,6 +205,8 @@ wpService.model().users().delete(userId);
   });
 ```
 
+***
+
 ## WpService Summary
 
 **Default Endpoints** are : `posts`, `pages`, `users`, `categories`, `tags`, `taxonomies`, `statuses`, `comments`, `media`     
@@ -220,8 +214,9 @@ wpService.model().users().delete(userId);
 ```
     WpService
     ├── config 
-    |    ├── baseUrl                       ** WordPress baseURL
-    |    ├── debug                         ** if enabled, Logs request URL to the console 
+    |    ├── baseUrl                       ** WordPress baseURL 
+    |    ├── debug                         ** If enabled, Logs requested URL to the console 
+    |    ├── setPhotonQuery(name, args)    ** Register Photon queries
     |
     ├── collection()
     |    ├── endpoint(ep)
@@ -241,6 +236,8 @@ wpService.model().users().delete(userId);
     |    ├── basic(username, password)     ** Basic authentication, returns loggedInUser.
     |    ├── cookies()                     ** Cookies authentication, returns loggedInUser.
     |    ├── logout()                      ** Removes authentication info from all requests.
+    |
+    |    ├── photon()                      ** Get post(s) images using [Photon](https://developer.wordpress.com/docs/photon/) service. 
 ```
 
 
@@ -259,18 +256,48 @@ And now `WpPost` class will be useful to access the following properties:
 ```
 post                        **  the original object
 get(properyName)            **  get any property by its name
-id()                        **  post id                  
+id()                        **  post id     
+slug()                      **  post slug             
 title()                     **  post title
 content()                   **  post content
 excerpt()                   **  post excerpt without the (read more) link
 date()                      **  post date
+link()                      **  post link
 type()                      **  post type 
 categories()                **  post categories array  
 tags()                      **  post tags array
+format()                    **  post format
 author()                    **  post author object (WpUser)
 featuredMedia()             **  check if post has featured image
 featuredImageUrl(size)      **  get featured image by size, ("full", large", "medium") or 
                                 any other valid size you have in your WP
+```
+
+<a name="photon"/>
+##Photon
+
+In your root component, define photon queries that you would like to use as an object using the function `setPhotonQuery(name, query)`
+
+```ts
+    constructor(private wp: WpService){ 
+      wp.config.setPhotonQuery('large', { w: 1000, h: 400 });
+      wp.config.setPhotonQuery('cropped', { crop: "160px,25,1400px,60" });
+      wp.config.setPhotonQuery('resized', { resize: "400,220" });
+    }
+```
+Check [Photon API](https://developer.wordpress.com/docs/photon/api/) for the URL parameters full list.
+
+Now in your post component, once you get the post object, you can pass it to photon function `wp.photon().getImage(post, queryName)`
+
+```ts
+    <img [src]="wp.photon().getImage(post, 'large')" />
+    <img [src]="wp.photon().getImage(post, 'cropped')" />
+    <img [src]="wp.photon().getImage(post, 'resized')" />
+```
+You can also query photon directly using the function `wp.photon().getByQuery(post, domain, photonQuery)`, where domain is `localhost:4200` (without the `http://`)
+
+```ts
+    <img [src]="wp.photon().getByQuery(post, 'example.com', { w: 800, h: 400})" /> 
 ```
 
 <a name="hints"/>
