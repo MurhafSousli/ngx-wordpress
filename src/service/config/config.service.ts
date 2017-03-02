@@ -40,12 +40,10 @@ export class ConfigService implements ConfigInterface {
     this.authKeys = keys;
     this.authType = type;
   }
-  
+
   /** Register Photon queries */
   setPhotonQuery(queryName: string, queryArgs){
     this.photonQueries[queryName] = Helper.serialize(queryArgs);
   }
 
 }
-
-
