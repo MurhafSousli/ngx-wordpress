@@ -11,6 +11,7 @@ import { WpHttp } from '../classes/wp-http.class';
 import { EndpointService } from './endpoint/endpoint.service';
 import { AuthService } from './authentication/auth.service';
 import { ConfigService } from './config/config.service';
+import { PhotonService } from './photon/photon.service';
 
 @Injectable()
 export class WpService implements WpInterface {
@@ -35,7 +36,13 @@ export class WpService implements WpInterface {
    * Authenticate Service
    * @returns {AuthService}
    */
-  auth(): AuthService {
+  auth() {
     return new AuthService(this.http, this.config);
+  }
+  /**
+   * Photon Service
+   */
+  photon(args?){
+    return new PhotonService(this.config);
   }
 }

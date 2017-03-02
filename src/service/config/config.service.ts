@@ -7,12 +7,20 @@ import { Helper } from '../../classes/helper.functions';
 @Injectable()
 export class ConfigService implements ConfigInterface {
 
+  /** BaseUrl text e.g 'https://example.com */
   baseUrl: string;
+  /** Domain text e.g 'example.com' (useful for photon feature) */
+  domain: string;
+  /** Log all http requests to console */
   debug: boolean;
+  /** Photon registered queries */
+  photonQueries = {};
+
   private authType: string;
   private authKeys: string;
 
-  constructor( @Optional() baseUrl: string) {
+  constructor(@Optional() baseUrl: string) {
+    this.domain = Helper.domain(baseUrl);
     this.baseUrl = baseUrl;
   }
 
@@ -26,12 +34,16 @@ export class ConfigService implements ConfigInterface {
         return Helper.basicHeaders(this.authKeys);
       }
     }
-    return undefined;
   }
 
   setAuth(keys: string, type: string) {
     this.authKeys = keys;
     this.authType = type;
+  }
+  
+  /** Register Photon queries */
+  setPhotonQuery(queryName: string, queryArgs){
+    this.photonQueries[queryName] = Helper.serialize(queryArgs);
   }
 
 }

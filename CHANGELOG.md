@@ -1,5 +1,10 @@
 #Changelog
 
+##3.0.0-beta2
+
+ - feat(Photon): now you can use photon cdn to get images, closes [#16](https://github.com/MurhafSousli/ng2-wp-api/issues/16)
+ - fix(Aot) closes [#16](https://github.com/MurhafSousli/ng2-wp-api/issues/16)
+
 ##3.0.0-beta1
 
  - feat(CollectionDirective) Collection directive
@@ -10,7 +15,9 @@
  - refactor(gulp.js): improve build system
 
  ###Breaking Changes: 
-
+ 
+ - WpQueryArgs removed, use an object instead
+ - DirectLink removed
  - Components are replaced with directives
  - ConfigService:
     - requests' timeout removed
