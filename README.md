@@ -234,7 +234,7 @@ wpService.model().users().delete(userId);
     |    ├── basic(username, password)     ** Basic authentication, returns loggedInUser.
     |    ├── cookies()                     ** Cookies authentication, returns loggedInUser.
     |    ├── logout()                      ** Removes authentication info from all requests.
-    |
+    |    |
     |    ├── photon()                      ** Get post(s) images using photon service. 
     |        ├── getImage(post, propName)
     |        ├── getByQuery(post, domain, photonArgs)
