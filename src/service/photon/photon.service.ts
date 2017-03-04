@@ -1,6 +1,6 @@
-import {ConfigService} from '../config/config.service';
-import {WpPost} from '../../classes/wp-post.class';
-import {Helper} from '../../classes/helper.functions';
+import { ConfigService } from '../config/config.service';
+import { WpPost } from '../../classes/wp-post.class';
+import { Helper } from '../../classes/helper.functions';
 
 export class PhotonService {
 
@@ -13,20 +13,18 @@ export class PhotonService {
 
             if (this.config.photonQueries[queryName]) {
 
-                console.log(this.config.photonQueries[queryName]);
                 let featuredImage = post.get('_embedded')['wp:featuredmedia'][0];
-
                 return 'https://i0.wp.com/' + this.config.domain + '/wp-content/uploads/' +
                     `${featuredImage.media_details.file}?${this.config.photonQueries[queryName]}`;
 
             } else if (this.config.domain) {
                 console.error(`[Photon]: queryName is not registered, make sure you set your query first`);
             }
-            else if(post.featuredMedia()){
+            else if (post.featuredMedia()) {
                 console.warn(`[Photon] "${post.title().substring(0, 9)}..." does not have featured image`)
             }
-            else{
-                 console.warn(`[Photon] Your WP post object doesn't have _embedded properties `);
+            else {
+                console.warn(`[Photon] Your WP post object doesn't have _embedded properties `);
             }
         }
     }
@@ -39,11 +37,16 @@ export class PhotonService {
         if (domain && queryArgs && post.featuredMedia() && post.get('_embedded')) {
 
             let query = Helper.serialize(queryArgs);
-            console.log(query);
             let featuredImage = post.get('_embedded')['wp:featuredmedia'][0];
             return `https://i0.wp.com/${domain}/wp-content/uploads/${featuredImage.media_details.file}?${query}`;
-        } else {
-            console.error('[Photon]: invalid request');
+        } else if (this.config.domain) {
+            console.error(`[Photon]: queryName is not registered, make sure you set your query first`);
+        }
+        else if (post.featuredMedia()) {
+            console.warn(`[Photon] "${post.title().substring(0, 9)}..." does not have featured image`)
+        }
+        else {
+            console.warn(`[Photon] Your WP post object doesn't have _embedded properties `);
         }
     }
 }
