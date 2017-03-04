@@ -19,8 +19,14 @@ export class PhotonService {
                 return 'https://i0.wp.com/' + this.config.domain + '/wp-content/uploads/' +
                     `${featuredImage.media_details.file}?${this.config.photonQueries[queryName]}`;
 
-            } else {
+            } else if (this.config.domain) {
                 console.error(`[Photon]: queryName is not registered, make sure you set your query first`);
+            }
+            else if(post.featuredMedia()){
+                console.warn(`[Photon] "${post.title().substring(0, 9)}..." does not have featured image`)
+            }
+            else{
+                 console.warn(`[Photon] Your WP post object doesn't have _embedded properties `);
             }
         }
     }
