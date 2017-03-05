@@ -1,6 +1,6 @@
 {
   "name": "ng2-wp-api",
-  "version": "3.0.0-beta2",
+  "version": "3.0.0",
   "description": "WordPress Module for Angular",
   "repository": {
     "type": "git",

@@ -46,7 +46,7 @@ Install it with npm
 <a name="usage"/>
 ## Usage
 
-Import **ShareButtonsModule** in your module
+Import **ShareButtonsModule** in root module
 
 ```ts
 import { WordPressModule } from 'ng2-wp-api';
@@ -66,7 +66,7 @@ imports: [
 
  - `[wpArgs]` pass query arguments e.g. `{ _embed: true, per_page: 4}`. more info, check [WordPress Query parameters](https://codex.wordpress.org/Class_Reference/WP_Query#Parameters)
 
- - `(wpResponse)` WP response for your query, e.g. `$event": {data, pagination, error}`
+ - `(wpResponse)` WP response for the query, e.g. `$event": {data, pagination, error}`
 
  - `(wpLoading)` helpfull for displaying loading icon, `$event: boolean`
 
@@ -213,8 +213,7 @@ wpService.model().users().delete(userId);
     WpService
     ├── config 
     |    ├── baseUrl                       ** WordPress baseURL 
-    |    ├── debug                         ** If enabled, Logs requested URL to the console 
-    |    ├── setPhotonQuery(name, args)    ** Register Photon queries
+    |    ├── debug                         ** If enabled, Logs requested URL to the console
     |
     ├── collection()
     |    ├── endpoint(ep)
@@ -270,45 +269,68 @@ format()                    **  post format
 author()                    **  post author object (WpUser)
 featuredMedia()             **  check if post has featured image
 featuredImageUrl(size)      **  get featured image by size, ("full", large", "medium") or 
-                                any other valid size you have in your WP
+                                any other available size in WP
 ```
 
 <a name="photon"/>
 ##[Photon](https://developer.wordpress.com/docs/photon/) 
 
-In your root component, define photon arguments that you would like to use as an object using the function `setPhotonQuery(name, args)`
+To configure photon options, initialize them in the root module.
 
 ```ts
-    constructor(private wp: WpService){ 
-      wp.config.setPhotonQuery('large', { w: 1000, h: 400 });
-      wp.config.setPhotonQuery('cropped', { crop: "160px,25,1400px,60" });
-      wp.config.setPhotonQuery('resized', { resize: "400,220" });
-    }
+export function photonOptions() {
+  return [
+    { 'key': 'large', 'value': { w: 800, h: 360 } },
+    { 'key': 'cropped', 'value': { crop: "160px,25,1400px,60" } }و
+    { 'key': 'resized', 'value': { resize: "400,220" } }
+  ]
+}
+
+imports: [
+    WordPressModule.forRoot('https://example.com', photonOptions())
+  ]
+})
 ```
-Check [Photon API](https://developer.wordpress.com/docs/photon/api/) for the URL parameters full list.
+*Check [Photon API](https://developer.wordpress.com/docs/photon/api/) for the parameters.*
 
-Now in your post component, once you get the post object, you can pass it to photon function `wp.photon().getImage(post, argsName)`
+Then inject `WpService` in the component you want to call photon from:
 
 ```ts
-    <img [src]="wp.photon().getImage(post, 'large')" />
-    <img [src]="wp.photon().getImage(post, 'cropped')" />
-    <img [src]="wp.photon().getImage(post, 'resized')" />
+constructor(private wp: WpService){ 
+}
 ```
-You can also query photon directly using the function `wp.photon().getByQuery(post, domain, photonArgs)`, where domain is `localhost:4200` (without the `http://`)
+
+In the template call photon for the post object with the option defined in the module `wp.photon().getImage(post, option)`
 
 ```ts
-    <img [src]="wp.photon().getByQuery(post, 'example.com', { w: 800, h: 400})" /> 
+<img [src]="wp.photon().getImage(post, 'large')" />
+<img [src]="wp.photon().getImage(post, 'cropped')" />
+<img [src]="wp.photon().getImage(post, 'resized')" />
+```
+You can also query photon directly using the function `wp.photon().getByQuery(post, photonArgs)`
+
+```ts
+<img [src]="wp.photon().getByArgs(post, { w: 800, h: 400})" /> 
 ```
 
 <a name="hints"/>
 ## Hints
+
+ - For debug mode use:
+```ts
+imports: [
+    WordPressModule.forRoot('https://example.com', null, true)
+    /** if you are using photon use this */
+    // WordPressModule.forRoot('https://example.com', photonArgs(), true) 
+]
+```
 
  - Use `WpEndpoint` to get the default endpoints and their addresses.
  - `WpService.collection.posts().get(...)` is a equal to `WpService.Collection.endpoint(WpEndpoint.posts).get(...)`
  - Use `WpPost` class when the response is embedded, it has useful functions for accessing embedded posts.
  - `WpPost` class works for posts, pages and custom post types.
  - Use `WpUser` interface for user response.
- - If you struggle with specifying your query arguments, check [WordPress Query parameters](https://codex.wordpress.org/Class_Reference/WP_Query#Parameters) to get a better idea.
+ - If you struggle with specifying query arguments, check [WordPress Query parameters](https://codex.wordpress.org/Class_Reference/WP_Query#Parameters) to get a better idea.
 
 <a name="issues"/>
 ## Issues

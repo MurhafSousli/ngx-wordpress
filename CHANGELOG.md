@@ -1,5 +1,14 @@
 #Changelog
 
+##3.0.0
+
+ - refactor(WordPressModule) initialize Photon options from `WordPressModule.forRoot(baseUrl, photonArgs(), debug)`
+ - feat(PhotonService) exceptions
+
+ **Breaking changes**:
+
+  - `WpService.config.setPhotonQuery()` is removed, intializing photon is done from `WordPressModule`
+
 ##3.0.0-beta2
 
  - feat(Photon): now you can use photon cdn to get images, closes [#16](https://github.com/MurhafSousli/ng2-wp-api/issues/16)

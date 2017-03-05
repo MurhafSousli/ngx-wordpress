@@ -9,6 +9,7 @@ import { HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 /** Services */
 import { WpService } from './service/wp.service';
 import { ConfigService } from './service/config/config.service';
+import { PhotonService } from './service/photon/photon.service';
 
 /** directive */
 import { CollectionDirective } from './directives/collection.directive';
@@ -23,12 +24,14 @@ import { WpPagination } from './classes/wp-pagination.class';
 import { CollectionResponse } from './service/collection/collection.interface';
 import { ModelResponse } from './service/model/model.interface';
 
-/** Provide URL for ConfigService */
+/** Provide ConfigService parameters providers */
 export const URL = new OpaqueToken('url');
+export const PHOTON = new OpaqueToken('photon');
+export const DEBUG = new OpaqueToken('debug');
 
 /** Initialize ConfigService with URL */
-export function wpConfigFactory(url: string) {
-  return new ConfigService(url);
+export function wpConfigFactory(url: string, photon: any, debug: boolean) {
+  return new ConfigService(url, photon, debug);
 }
 
 /** Initialize WpHttp with ConfigService */
@@ -52,27 +55,29 @@ export function wpHttpFactory(backend: XHRBackend, defaultOptions: RequestOption
 })
 export class WordPressModule {
 
-  static forRoot(url: string): ModuleWithProviders {
+  static forRoot(url: string, photon?, debug?: boolean): ModuleWithProviders {
 
     return {
       ngModule: WordPressModule,
       providers: [
         { provide: URL, useValue: url },
+        { provide: PHOTON, useValue: photon },
+        { provide: DEBUG, useValue: debug },
         {
           provide: ConfigService,
           useFactory: wpConfigFactory,
-          deps: [URL]
+          deps: [URL, PHOTON, DEBUG]
         },
         {
           provide: WpHttp,
           useFactory: wpHttpFactory,
           deps: [XHRBackend, RequestOptions, ConfigService]
         },
-        WpService
+        WpService,
+        PhotonService
       ]
     };
   }
-
 }
 
 export {

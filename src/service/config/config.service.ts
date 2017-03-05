@@ -13,15 +13,36 @@ export class ConfigService implements ConfigInterface {
   domain: string;
   /** Log all http requests to console */
   debug: boolean;
-  /** Photon registered queries */
-  photonQueries = {};
+  /** Photon registered query argyments */
+  photonArgs = {};
 
   private authType: string;
   private authKeys: string;
 
-  constructor(@Optional() baseUrl: string) {
-    this.domain = Helper.domain(baseUrl);
-    this.baseUrl = baseUrl;
+  constructor( @Optional() baseUrl: string, @Optional() photonOptions: any, @Optional() debug: boolean) {
+
+    if (!baseUrl) {
+      throw new Error(`[WordPressModule]: Please enter your WordPress base URL e.g.[WordPressModule.forRoot('http:example.com')]`);
+    }
+    else {
+      /** Set WordPress baseUrl and Domain */
+      this.domain = Helper.domain(baseUrl);
+      this.baseUrl = baseUrl;
+      /** Debug mode */
+      if (debug) {
+        console.log('[WordPressModule]: debugging mode.');
+        this.debug = debug;
+      }
+      /** Register Photon options */
+      if (this.photonArgs) {
+        photonOptions.map((option) => {
+          this.photonArgs[option.key] = Helper.serialize(option.value);
+        });
+        if (this.debug) {
+          console.log('[WordPressModule]: Photon has been set.');
+        }
+      }
+    }
   }
 
   /** Get authentication key for HTTP Headers {cookies | basic auth} */
@@ -41,9 +62,5 @@ export class ConfigService implements ConfigInterface {
     this.authType = type;
   }
 
-  /** Register Photon queries */
-  setPhotonQuery(queryName: string, queryArgs){
-    this.photonQueries[queryName] = Helper.serialize(queryArgs);
-  }
 
 }
