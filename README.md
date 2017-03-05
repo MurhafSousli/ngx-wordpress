@@ -275,7 +275,7 @@ featuredImageUrl(size)      **  get featured image by size, ("full", large", "me
 <a name="photon"/>
 ##[Photon](https://developer.wordpress.com/docs/photon/) 
 
-To configure photon options, initialize set them in the root module.
+To configure photon options, initialize them in the root module.
 
 ```ts
 export function photonOptions() {
@@ -291,26 +291,26 @@ imports: [
   ]
 })
 ```
-Check [Photon API](https://developer.wordpress.com/docs/photon/api/) for the URL parameters full list.
+*Check [Photon API](https://developer.wordpress.com/docs/photon/api/) for the parameters.*
 
 Then inject `WpService` in the component you want to call photon from:
 
 ```ts
-    constructor(private wp: WpService){ 
-    }
+constructor(private wp: WpService){ 
+}
 ```
 
 In the template call photon for the post object with the option defined in the module `wp.photon().getImage(post, option)`
 
 ```ts
-    <img [src]="wp.photon().getImage(post, 'large')" />
-    <img [src]="wp.photon().getImage(post, 'cropped')" />
-    <img [src]="wp.photon().getImage(post, 'resized')" />
+<img [src]="wp.photon().getImage(post, 'large')" />
+<img [src]="wp.photon().getImage(post, 'cropped')" />
+<img [src]="wp.photon().getImage(post, 'resized')" />
 ```
 You can also query photon directly using the function `wp.photon().getByQuery(post, photonArgs)`
 
 ```ts
-    <img [src]="wp.photon().getByArgs(post, { w: 800, h: 400})" /> 
+<img [src]="wp.photon().getByArgs(post, { w: 800, h: 400})" /> 
 ```
 
 <a name="hints"/>
