@@ -58,6 +58,17 @@ imports: [
 })
 
 ```
+Also add it in the child module that uses it (without forRoot)
+
+```ts
+@NgModule({
+  imports: [
+      WordPressModule
+  ]
+})
+export class BlogModule { }
+
+```
     
 <a name="directives"/>
 ## Using the directives
