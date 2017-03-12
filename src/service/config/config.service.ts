@@ -34,7 +34,7 @@ export class ConfigService implements ConfigInterface {
         this.debug = debug;
       }
       /** Register Photon options */
-      if (this.photonArgs) {
+      if (photonOptions) {
         photonOptions.map((option) => {
           this.photonArgs[option.key] = Helper.serialize(option.value);
         });

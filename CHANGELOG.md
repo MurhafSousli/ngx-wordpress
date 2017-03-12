@@ -1,5 +1,9 @@
 #Changelog
 
+##3.0.1
+
+ - fix(ConfigService): check if photonOptions is defined, closes [#27](https://github.com/MurhafSousli/ng2-wp-api/issues/27)
+
 ##3.0.0
 
  - refactor(WordPressModule) initialize Photon options from `WordPressModule.forRoot(baseUrl, photonArgs(), debug)`
