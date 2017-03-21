@@ -31,11 +31,13 @@ This library is designed to make it easy for your Angular application to request
 
 
 <a name="requirments"/>
+
 ## Requirments
 
 **Wordpress** setup.
 
 <a name="installation"/>
+
 ## Installation
 
 Install it with npm
@@ -44,6 +46,7 @@ Install it with npm
  
 
 <a name="usage"/>
+
 ## Usage
 
 Import **ShareButtonsModule** in root module
@@ -71,6 +74,7 @@ export class BlogModule { }
 ```
     
 <a name="directives"/>
+
 ## Using the directives
 
  - `[wpCollection]` pass the endpoint e.g. `WpEndpoint.posts`, `WpEndpoint.pages`, `WpEndpoint.categories` ..etc
@@ -84,6 +88,7 @@ export class BlogModule { }
  - Use the `@ViewChild(CollectionDirective)` to access to directive functions e.g. `get()`, `more()`, `prev()`, `next()` 
 
 <a name="collectionDir">
+
 **For collection:**
 
 ```ts
@@ -104,6 +109,7 @@ See [Directive Collection usage](https://gist.github.com/MurhafSousli/063e4a374d
 ```
 
 <a name="modelDir">
+
 **For model:**
 
  - Get a single post by ID
@@ -116,10 +122,12 @@ See [Directive Collection usage](https://gist.github.com/MurhafSousli/063e4a374d
 ***
 
 <a name="service"/>
+
 ## Using the service
 
 
 <a name="collectionSrv">
+
 **For collection:**
 
 A basic example of getting 6 embedded posts:
@@ -151,6 +159,7 @@ this.wpService.collection()
 See [WpService Collection usage](https://gist.github.com/MurhafSousli/6c3f2fd0bf1b9a7b45e7c74d30f40137)
 
 <a name="modelSrv">
+
 **For model:**
 
 ```ts
@@ -177,6 +186,7 @@ See [WpService Model usage](https://gist.github.com/MurhafSousli/a21a52093779c2b
 ***
 
 <a name="cud"/>
+
 ## Add/Update/Delete
 
 ```ts
@@ -193,6 +203,7 @@ wpService.model().users().delete(userId);
 ***
 
 <a name="authentication"/>
+
 ## Authentication
 
  - Basic Authentication: 
@@ -252,6 +263,7 @@ wpService.model().users().delete(userId);
 
 
 <a name="embedding"/>
+
 ## Embedded Responses
 
 Usually when displaying a post, you want to display post's featured image, categories, tags, author and comments.
@@ -284,6 +296,7 @@ featuredImageUrl(size)      **  get featured image by size, ("full", large", "me
 ```
 
 <a name="photon"/>
+
 ##[Photon](https://developer.wordpress.com/docs/photon/) 
 
 To configure photon options, initialize them in the root module.
@@ -325,6 +338,7 @@ You can also query photon directly using the function `wp.photon().getByQuery(po
 ```
 
 <a name="hints"/>
+
 ## Hints
 
  - For debug mode use:
@@ -344,11 +358,13 @@ imports: [
  - If you struggle with specifying query arguments, check [WordPress Query parameters](https://codex.wordpress.org/Class_Reference/WP_Query#Parameters) to get a better idea.
 
 <a name="issues"/>
+
 ## Issues
 
 If you identify any errors in the library, or have an idea for an improvement, please open an [issue](https://github.com/MurhafSousli/ng2-wp-api/issues). I am excited to see what the community thinks of this project, and I would love your input!
 
 <a name="author"/>
+
 ## Author
 
  **[Murhaf Sousli](http://murhafsousli.com)**
@@ -357,6 +373,7 @@ If you identify any errors in the library, or have an idea for an improvement, p
  - [twitter/murhafsousli](https://twitter.com/MurhafSousli)
 
 <a name="license"/>
+
 ## License
 
 [![npm](https://img.shields.io/npm/l/express.svg?maxAge=2592000)](/LICENSE)
