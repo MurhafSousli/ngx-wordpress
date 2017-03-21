@@ -297,7 +297,7 @@ featuredImageUrl(size)      **  get featured image by size, ("full", large", "me
 
 <a name="photon"/>
 
-##[Photon](https://developer.wordpress.com/docs/photon/) 
+## [Photon](https://developer.wordpress.com/docs/photon/) 
 
 To configure photon options, initialize them in the root module.
 
