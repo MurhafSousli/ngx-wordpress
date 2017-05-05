@@ -9,13 +9,12 @@ ___
 
 [![npm](https://img.shields.io/npm/v/ngx-wordpress.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/ngx-wordpress)
 [![Build Status](https://travis-ci.org/MurhafSousli/ngx-wordpress.svg?branch=master)](https://travis-ci.org/MurhafSousli/ngx-wordpress)
-[![npm](https://img.shields.io/npm/dt/ngx-wordpress.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/ngx-wordpress)
+[![npm](https://img.shields.io/npm/l/express.svg?maxAge=2592000)](/LICENSE)
 
 
 ## Table of Contents
  
  - [Live example that uses ngx-wordpress](https://ontrava.com)
- - [Requirments](#requirments)
  - [Installation](#installation)
  - [Usage](#usage)
     - [WP Directives](#directives)
@@ -30,15 +29,8 @@ ___
  - [Photon Images](#photon)   
  - [Hints](#hints)    
  - [Issues](#issues)    
- - [Author](#author) 
- - [License](#license)  
+ - [Author](#author)
 
-
-<a name="requirments"/>
-
-## Requirments
-
-**Wordpress** setup.
 
 <a name="installation"/>
 
@@ -46,7 +38,7 @@ ___
 
 Install it with npm
 
-`npm install ngx-wordpress --save`
+`npm install --save ngx-wordpress`
  
 
 <a name="usage"/>
@@ -365,10 +357,5 @@ If you identify any errors in the library, or have an idea for an improvement, p
  - [github/murhafsousli](https://github.com/MurhafSousli)
  - [twitter/murhafsousli](https://twitter.com/MurhafSousli)
 
-<a name="license"/>
-
-## License
-
-[![npm](https://img.shields.io/npm/l/express.svg?maxAge=2592000)](/LICENSE)
 
 
