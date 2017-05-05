@@ -15,7 +15,7 @@ export class PhotonService {
             return;
         }
         if (!photonKey) {
-            console.warn('[Photon]: queryName is not registerd!');
+            console.warn('[Photon]: queryName is not registered!');
             return;
         }
         if (!this.config.photonArgs[photonKey]) {
@@ -27,15 +27,12 @@ export class PhotonService {
             return;
         }
 
-        let photonArgs = this.config.photonArgs[photonKey];
-        let featuredImage = post.get('_embedded')['wp:featuredmedia'][0];
-        let link = 'https://i0.wp.com/' + this.config.domain + '/wp-content/uploads/' +
-            `${featuredImage.media_details.file}?${photonArgs}`;
-        return link;
-
+        const photonArgs = this.config.photonArgs[photonKey];
+        const featuredImage = post.get('_embedded')['wp:featuredmedia'][0];
+        return `https://i0.wp.com/${this.config.domain}/wp-content/uploads/${featuredImage.media_details.file}?${photonArgs}`;
     }
 
-/**
+    /**
      * get image using photon
      * @params {WpPost, string, any}
      */

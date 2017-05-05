@@ -7,6 +7,7 @@ export module Helper {
         return matches && matches[1];
     };
 
+    /** Serialize query arguments */
     export const serialize = (obj, prefix?): string => {
         let str = [];
         for (let p in obj) {
