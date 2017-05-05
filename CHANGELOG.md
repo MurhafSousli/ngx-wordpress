@@ -1,10 +1,14 @@
 #Changelog
 
-##3.0.1
+## 4.0.0
+
+ - Rename npm package to `ngx-wordpress`
+
+## 3.0.1
 
  - fix(ConfigService): check if photonOptions is defined, closes [#27](https://github.com/MurhafSousli/ng2-wp-api/issues/27)
 
-##3.0.0
+## 3.0.0
 
  - refactor(WordPressModule) initialize Photon options from `WordPressModule.forRoot(baseUrl, photonArgs(), debug)`
  - feat(PhotonService) exceptions
@@ -13,12 +17,12 @@
 
   - `WpService.config.setPhotonQuery()` is removed, intializing photon is done from `WordPressModule`
 
-##3.0.0-beta2
+## 3.0.0-beta2
 
  - feat(Photon): now you can use photon cdn to get images, closes [#16](https://github.com/MurhafSousli/ng2-wp-api/issues/16)
  - fix(Aot) closes [#16](https://github.com/MurhafSousli/ng2-wp-api/issues/16)
 
-##3.0.0-beta1
+## 3.0.0-beta1
 
  - feat(CollectionDirective) Collection directive
  - feat(ModelDirective) Model directive 
@@ -27,7 +31,7 @@
  - feat(build): Support systemjs
  - refactor(gulp.js): improve build system
 
- ###Breaking Changes: 
+ ### Breaking Changes: 
  
  - WpQueryArgs removed, use an object instead
  - DirectLink removed
@@ -37,7 +41,7 @@
     - loading notifier removed
     - errors notifier removed
 
-##2.1.6
+## 2.1.6
 
  - (refactor) code is simplified
  - Support AoT
@@ -45,24 +49,24 @@
  - Cleanup
  - Demo folder
 
-##2.1.5
+## 2.1.5
 
 ###Bugs:
 
  - Fixes: `timeout` is not a function error, closes ([#4](https://github.com/MurhafSousli/ng2-wp-api/issues/4))
 
-##2.1.2
+## 2.1.2
     
-###Bugs:
+### Bugs:
 
  - Fixes `WpHttp`: used to return `Observable.empty()` instead of `Observable.throw(err)`.
     
-###Improvements:
+### Improvements:
 
  - ModelResponse interface for `WpService.Model()` responses.
  - Errors can be caught from the response for both `CollectionResponse` and `ModelResponse` with `res.error`
 
-###Breaking Changes: 
+### Breaking Changes: 
 
  - WpService.Model():  model response is now wrapped in ModelResponse object. 
  
@@ -84,7 +88,7 @@
     });
     ```
 
-##2.1.0
+## 2.1.0
 
 Use `WpService.config` instead of `WpConfig` to keep all usages in one service.
     
@@ -95,7 +99,7 @@ Use `WpService.config` instead of `WpConfig` to keep all usages in one service.
     `WpService.auth().basic(username,password).subscribe(...)`
 
     
-###Features:
+### Features:
 
 - WpService.Collection(): Added `next()` and `prev()` functions
 
@@ -112,7 +116,7 @@ Use `WpService.config` instead of `WpConfig` to keep all usages in one service.
 - Cookies Authentication:
 `WpService.auth().cookies().subscribe(...)`
 
-###Breaking Changes:
+### Breaking Changes:
 
 All helper classes has been prefixed with `Wp`
 - `Post` is now `WpPost`
@@ -122,18 +126,18 @@ All helper classes has been prefixed with `Wp`
 - `WpHelper` is deprecated.
 - `authentication` notifier is deprecated from `WpConfig`.
 
-##2.0.1
+## 2.0.1
 
 No changes.
 - added keywords to `package.json`
 
-##2.0.0
+## 2.0.0
 
 The service has been rewritten from scratch
 
-##1.2.9
+## 1.2.9
 
-###BREAKING CHANGES: 
+### BREAKING CHANGES: 
 
 * **Before**:
     ```
@@ -145,8 +149,8 @@ The service has been rewritten from scratch
     ```
 
 
-##1.2.7
+## 1.2.7
 
-###Bug Fixes: 
+### Bug Fixes: 
 
 * Collection response headers: fix property name for `X-WP-Total` and `X-Wp-Totalpages`

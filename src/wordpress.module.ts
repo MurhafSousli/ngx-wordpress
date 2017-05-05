@@ -3,7 +3,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
 
-import { NgModule, ModuleWithProviders, OpaqueToken } from '@angular/core';
+import { NgModule, ModuleWithProviders, InjectionToken } from '@angular/core';
 import { HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 
 /** Services */
@@ -25,9 +25,9 @@ import { CollectionResponse } from './service/collection/collection.interface';
 import { ModelResponse } from './service/model/model.interface';
 
 /** Provide ConfigService parameters providers */
-export const URL = new OpaqueToken('url');
-export const PHOTON = new OpaqueToken('photon');
-export const DEBUG = new OpaqueToken('debug');
+export const CONFIG = new InjectionToken<string>('url');
+export const PHOTON = new InjectionToken<any>('photon');
+export const DEBUG = new InjectionToken<boolean>('debug');
 
 /** Initialize ConfigService with URL */
 export function wpConfigFactory(url: string, photon: any, debug: boolean) {
@@ -84,7 +84,6 @@ export {
   WpService,
   CollectionDirective,
   ModelDirective,
-
   WpPost,
   WpUser,
   WpEndpoint,

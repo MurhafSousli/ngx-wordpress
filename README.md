@@ -1,16 +1,20 @@
-[![npm](https://img.shields.io/npm/v/ng2-wp-api.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/ng2-wp-api) [![Build Status](https://travis-ci.org/MurhafSousli/ng2-wp-api.svg?branch=master)](https://travis-ci.org/MurhafSousli/ng2-wp-api) [![npm](https://img.shields.io/npm/dt/ng2-wp-api.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/ng2-wp-api)
-
 <p align="center">
-  <img height="300px" width="300px" style="text-align: center;" src="https://cdn.rawgit.com/MurhafSousli/ng2-wp-api/1b8cec0a0412eb098545fdb3df5e85d824e4408b/assets/logo.svg">
+  <img height="200px" width="200px" style="text-align: center;" src="https://cdn.rawgit.com/MurhafSousli/ngx-wordpress/1b8cec0a0412eb098545fdb3df5e85d824e4408b/assets/logo.svg">
   <h1 align="center">Angular WordPress Module</h1>
 </p>
 
 This library is designed to make it easy for your Angular application to request specific resources from a WordPress install.
 
+___
+
+[![npm](https://img.shields.io/npm/v/ngx-wordpress.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/ngx-wordpress)
+[![Build Status](https://travis-ci.org/MurhafSousli/ngx-wordpress.svg?branch=master)](https://travis-ci.org/MurhafSousli/ngx-wordpress)
+[![npm](https://img.shields.io/npm/dt/ngx-wordpress.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/ngx-wordpress)
+
 
 ## Table of Contents
  
- - [Live example that uses ng2-wp-api](https://ontrava.com)
+ - [Live example that uses ngx-wordpress](https://ontrava.com)
  - [Requirments](#requirments)
  - [Installation](#installation)
  - [Usage](#usage)
@@ -42,34 +46,23 @@ This library is designed to make it easy for your Angular application to request
 
 Install it with npm
 
-`npm install ng2-wp-api --save`
+`npm install ngx-wordpress --save`
  
 
 <a name="usage"/>
 
 ## Usage
 
-Import **ShareButtonsModule** in root module
+Import **WordpressModule** in root module
 
 ```ts
-import { WordPressModule } from 'ng2-wp-api';
+import { WordPressModule } from 'ngx-wordpress';
 
 @NgModule({
 imports: [
     WordPressModule.forRoot('https://example.com')
   ]
 })
-
-```
-Also add it in the child module that uses it (without forRoot)
-
-```ts
-@NgModule({
-  imports: [
-      WordPressModule
-  ]
-})
-export class BlogModule { }
 
 ```
     
@@ -361,7 +354,7 @@ imports: [
 
 ## Issues
 
-If you identify any errors in the library, or have an idea for an improvement, please open an [issue](https://github.com/MurhafSousli/ng2-wp-api/issues). I am excited to see what the community thinks of this project, and I would love your input!
+If you identify any errors in the library, or have an idea for an improvement, please open an [issue](https://github.com/MurhafSousli/ngx-wordpress/issues). I am excited to see what the community thinks of this project, and I would love your input!
 
 <a name="author"/>
 
