@@ -18,10 +18,10 @@ export class ModelDirective {
     this.model = <ModelService>this.wpService.model().endpoint(endpoint);
   }
 
-  /** Model QueryArgs */
+  /** Model query args */
   @Input() wpArgs;
 
-  /** Model Id, the component will refresh the request on id changes */
+  /** Model id, new request on id changes */
   @Input() set wpId(id: number) {
     this.get(id, this.wpArgs);
   }

@@ -81,7 +81,7 @@ export class CollectionService implements CollectionInterface {
 
   /**
    * Get next page of the collection
-   * @returns {any}
+   * @returns {CollectionResponse}
    */
   next(): Observable<CollectionResponse> {
     if (this.pagination && this.pagination.hasMore) {
@@ -107,7 +107,7 @@ export class CollectionService implements CollectionInterface {
 
   /**
    * Get prev page of the collection
-   * @returns {any}
+   * @returns {CollectionResponse}
    */
   prev(): Observable<CollectionResponse> {
     if (this.pagination && this.pagination.hasPrev) {
@@ -152,11 +152,11 @@ export class CollectionService implements CollectionInterface {
   /**
    * Set the pagination from collection response headers
    * @param headers
-   * @returns {Pagination}
+   * @returns {WpPagination}
    */
   private setPagination = (headers: Headers): WpPagination => {
 
-    /** Fix issue of different property names in response headers */
+    /** Fix issue of getting different property names in response's headers */
     this.pagination.totalPages =
       +headers.get('x-wp-totalpages') || +headers.get('X-WP-TotalPages') || +headers.get('X-Wp-TotalPages')
        || +headers.get('X-Wp-Totalpages') || 0;

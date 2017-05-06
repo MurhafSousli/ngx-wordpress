@@ -18,17 +18,17 @@ export class CollectionDirective {
     this.collection = <CollectionService>this.wpService.collection().endpoint(endpoint);
   }
 
-  /** Query args */
+  /** Collection query args */
   @Input() set wpArgs(query) {
     if (query && this.collection) {
       this.get(query);
     }
   }
 
-  /** Collection wpResponse */
+  /** Collection response */
   @Output() wpResponse = new EventEmitter<CollectionResponse>();
 
-  /** Loading state */
+  /** Collection loading state */
   @Output() wpLoading = new EventEmitter<boolean>(false);
 
   constructor(private wpService: WpService) {
@@ -38,56 +38,43 @@ export class CollectionDirective {
   /** Get collection of items */
   get(args) {
     if (!this.loading) {
-      this.loading = true;
-      this.wpLoading.emit(this.loading);
-
-      this.collection.get(args).subscribe((res) => {
-        this.wpResponse.emit(res);
-        this.loading = false;
-        this.wpLoading.emit(this.loading);
-      });
+      this.beforeResponse();
+      this.collection.get(args).subscribe(res => this.afterResponse(res));
     }
   }
 
   /** Get more collection (concat current with next page) */
   more() {
     if (!this.loading) {
-      this.loading = true;
-      this.wpLoading.emit(this.loading);
-
-      this.collection.more().subscribe((res) => {
-        this.wpResponse.emit(res);
-        this.loading = false;
-        this.wpLoading.emit(this.loading);
-      });
+      this.beforeResponse();
+      this.collection.more().subscribe(res => this.afterResponse(res));
     }
   }
 
   /** Get next collection (next page) */
   next() {
     if (!this.loading) {
-      this.loading = true;
-      this.wpLoading.emit(this.loading);
-
-      this.collection.next().subscribe((res) => {
-        this.wpResponse.emit(res);
-        this.loading = false;
-        this.wpLoading.emit(this.loading);
-      });
+      this.beforeResponse();
+      this.collection.next().subscribe(res => this.afterResponse(res));
     }
   }
 
   /** Get previous collection (prev page) */
   prev() {
     if (!this.loading) {
-      this.loading = true;
-      this.wpLoading.emit(this.loading);
-
-      this.collection.prev().subscribe((res) => {
-        this.wpResponse.emit(res);
-        this.loading = false;
-        this.wpLoading.emit(this.loading);
-      });
+      this.beforeResponse();
+      this.collection.prev().subscribe(res => this.afterResponse(res));
     }
+  }
+
+  beforeResponse() {
+    this.loading = true;
+    this.wpLoading.emit(this.loading);
+  }
+
+  afterResponse(res) {
+    this.wpResponse.emit(res);
+    this.loading = false;
+    this.wpLoading.emit(this.loading);
   }
 }

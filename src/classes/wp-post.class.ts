@@ -94,10 +94,10 @@ export class WpPost {
   }
 
   /**
-   * get post featured image url
+   * get post featured image
    * @params {string} size -
    */
-  featuredImageUrl(size?: string): string {
+  featuredImage(size?: string): string {
     if (this.featuredMedia() && this.post._embedded) {
 
       let featuredImage: WpMedia = this.post._embedded['wp:featuredmedia'][0];

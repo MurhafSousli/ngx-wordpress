@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
+import { PhotonInterface } from './photon.interface';
 import { ConfigService } from '../config/config.service';
 import { WpPost } from '../../classes/wp-post.class';
 import { Helper } from '../../classes/helper.functions';
 
 @Injectable()
-export class PhotonService {
+export class PhotonService implements PhotonInterface {
 
     constructor(private config: ConfigService) {
     }
 
+  /**
+   * get image using photon cdn
+   * @params {WpPost, string, any}
+   */
     getImage(post: WpPost, photonKey: string) {
         if (!post) {
             console.warn('[Photon]: post is undefined');
@@ -33,7 +38,7 @@ export class PhotonService {
     }
 
     /**
-     * get image using photon
+     * get image using photon cdn
      * @params {WpPost, string, any}
      */
     getByArgs(post: WpPost, photonArgs) {
