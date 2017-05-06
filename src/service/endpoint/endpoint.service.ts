@@ -4,10 +4,23 @@ import { EndpointInterface } from './endpoint.interface';
 import { CollectionService } from '../collection/collection.service';
 import { ModelService } from '../model/model.service';
 import { WpHttp } from '../../classes/wp-http.class';
-import { WpEndpoint } from '../../classes/wp-endpoints';
 
 @Injectable()
 export class EndpointService implements EndpointInterface {
+
+  endpoints = {
+    posts: '/wp-json/wp/v2/posts/',
+    revisions: '/wp-json/wp/v2/revisions/',
+    users: '/wp-json/wp/v2/users/',
+    categories: '/wp-json/wp/v2/categories/',
+    tags: '/wp-json/wp/v2/tags',
+    pages: '/wp-json/wp/v2/pages/',
+    comments: '/wp-json/wp/v2/comments/',
+    media: '/wp-json/wp/v2/media/',
+    statuses: '/wp-json/wp/v2/statuses/',
+    taxonomies: '/wp-json/wp/v2/taxonomies/',
+    types: '/wp-json/wp/v2/types/'
+  };
 
   constructor(private http: WpHttp, private type: string) {
   }
@@ -24,47 +37,48 @@ export class EndpointService implements EndpointInterface {
     return new ModelService(this.http, endpoint);
   }
 
+  /** Get the endpoint address */
   endpoint(endpoint: string) {
-    return this.switcher(endpoint);
+    return this.switcher(this.endpoints[endpoint] || endpoint);
   }
 
   posts() {
-    return this.switcher(WpEndpoint.posts);
+    return this.switcher(this.endpoints.posts);
   }
 
   users() {
-    return this.switcher(WpEndpoint.users);
+    return this.switcher(this.endpoints.users);
   }
 
   categories() {
-    return this.switcher(WpEndpoint.categories);
+    return this.switcher(this.endpoints.categories);
   }
 
   pages() {
-    return this.switcher(WpEndpoint.pages);
+    return this.switcher(this.endpoints.pages);
   }
 
   tags() {
-    return this.switcher(WpEndpoint.tags);
+    return this.switcher(this.endpoints.tags);
   }
 
   comments() {
-    return this.switcher(WpEndpoint.comments);
+    return this.switcher(this.endpoints.comments);
   }
 
   media() {
-    return this.switcher(WpEndpoint.media);
+    return this.switcher(this.endpoints.media);
   }
 
   taxonomies() {
-    return this.switcher(WpEndpoint.taxonomies);
+    return this.switcher(this.endpoints.taxonomies);
   }
 
   statuses() {
-    return this.switcher(WpEndpoint.statuses);
+    return this.switcher(this.endpoints.statuses);
   };
 
   types() {
-    return this.switcher(WpEndpoint.types);
+    return this.switcher(this.endpoints.types);
   }
 }

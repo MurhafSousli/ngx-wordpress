@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { AuthInterface } from './auth.interface';
-import { WpEndpoint } from '../../classes/wp-endpoints';
 import { WpHttp } from '../../classes/wp-http.class';
 import { ConfigService } from '../config/config.service';
 
@@ -45,7 +44,7 @@ export class AuthService implements AuthInterface {
 
   private login(keys: string, type: string): Observable<any> {
 
-    return this.http.get(WpEndpoint.authentication).map(
+    return this.http.get(this.config.baseUrl + '/wp-json/wp/v2/users/me?_envelope').map(
       (res) => {
         /** if login fail, send error message */
         if (res && res.message) {

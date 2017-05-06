@@ -1,8 +1,20 @@
-#Changelog
+# Changelog
+
+## 4.1.0
+
+ - update and move documentation to the wiki page.
+ - fix(AuthService): fix login URL.
+ - refactor(CollectionDirective).
+
+ **Breaking changes**:
+
+ - `WpEndpoint` is deprecated, use the name of the inputs directly, [read more](https://github.com/MurhafSousli/ngx-wordpress/wiki/endpoints)
+ - `WpPost.featuredImageUrl(size)` is renamed to `WpPost.featuredImage(size)`
 
 ## 4.0.0
 
- - Rename npm package to `ngx-wordpress`
+ - update peerDependencies.
+ - rename npm package to `ngx-wordpress`.
 
 ## 3.0.1
 

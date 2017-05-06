@@ -19,13 +19,12 @@ import { ModelDirective } from './directives/model.directive';
 import { WpHttp } from './classes/wp-http.class';
 import { WpPost } from './classes/wp-post.class';
 import { WpUser } from './classes/wp-user.interface';
-import { WpEndpoint } from './classes/wp-endpoints';
 import { WpPagination } from './classes/wp-pagination.class';
 import { CollectionResponse } from './service/collection/collection.interface';
 import { ModelResponse } from './service/model/model.interface';
 
 /** Provide ConfigService parameters providers */
-export const CONFIG = new InjectionToken<string>('url');
+export const URL = new InjectionToken<string>('url');
 export const PHOTON = new InjectionToken<any>('photon');
 export const DEBUG = new InjectionToken<boolean>('debug');
 
@@ -86,7 +85,6 @@ export {
   ModelDirective,
   WpPost,
   WpUser,
-  WpEndpoint,
   WpPagination,
   CollectionResponse,
   ModelResponse
