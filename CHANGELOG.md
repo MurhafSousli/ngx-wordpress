@@ -8,8 +8,8 @@
 
  **Breaking changes**:
 
- - `WpEndpoint` is deprecated, use the name of the inputs directly, [read more](https://github.com/MurhafSousli/ngx-wordpress/wiki/endpoints)
- - `WpPost.featuredImageUrl(size)` is renamed to `WpPost.featuredImage(size)`
+ - `WpEndpoint` is deprecated, use the name or the address of the endpoint directly, [read more](https://github.com/MurhafSousli/ngx-wordpress/wiki/endpoints)
+ - In **WpPost** class the function `WpPost.featuredImageUrl(size)` is renamed to `WpPost.featuredImage(size)`
 
 ## 4.0.0
 
