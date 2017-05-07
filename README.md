@@ -11,7 +11,7 @@ ___
 [![Build Status](https://travis-ci.org/MurhafSousli/ngx-wordpress.svg?branch=master)](https://travis-ci.org/MurhafSousli/ngx-wordpress)
 [![npm](https://img.shields.io/npm/l/express.svg?maxAge=2592000)](/LICENSE)
 
-**Documenation has moved to the [wiki page](https://github.com/MurhafSousli/ngx-wordpress/wiki)**
+**Documentation has moved to the [wiki page](https://github.com/MurhafSousli/ngx-wordpress/wiki)**
 
 ## Author
 
