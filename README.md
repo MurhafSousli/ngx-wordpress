@@ -33,7 +33,7 @@ This library is designed to make it easy for your Angular application to request
   - 🗝 Basic authentication `wpService.auth().basic(username, password, remember?)`   
   - 🍪 Cookies authentication `wpService.auth().cookies()`
   
-- 🍦 **Helper functions to access data in post responses** ✔
+- 🍦 **Helper functions to access data in post responses**
 - ⚡ **Photon CDN**
  
 - 🛠 **Blog assests**:
