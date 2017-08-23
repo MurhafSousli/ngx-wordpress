@@ -48,10 +48,10 @@ export class ConfigService implements ConfigInterface {
   /** Get authentication key for HTTP Headers {cookies | basic auth} */
   getAuth(): Headers {
     if (this.authKeys) {
-      if (this.authKeys.toLowerCase() === 'cookies') {
+      if (this.authType.toLowerCase() === 'cookies') {
         return Helper.cookiesHeaders(this.authKeys);
       }
-      if (this.authKeys.toLowerCase() === 'basic') {
+      if (this.authType.toLowerCase() === 'basic') {
         return Helper.basicHeaders(this.authKeys);
       }
     }
