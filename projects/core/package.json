@@ -4,7 +4,7 @@
   "description": "The best WordPress module for Angular",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/MurhafSousli/ngx-wordpress.git"
+    "url": "git://github.com/murhafsousli/ngx-wordpress.git"
   },
   "homepage": "https://github.com/MurhafSousli/ngx-wordpress#readme",
   "bugs": {
@@ -20,6 +20,7 @@
   ],
   "author": "Murhaf Sousli <murhafsousi@gmail.com>",
   "license": "MIT",
+  "private": false,
   "peerDependencies": {
     "@angular/common": "^6.0.0",
     "@angular/core": "^6.0.0",
