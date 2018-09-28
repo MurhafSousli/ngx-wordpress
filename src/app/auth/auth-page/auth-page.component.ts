@@ -13,7 +13,7 @@ export class AuthPageComponent {
   auth: WpAuthRef;
 
   username = 'admin';
-  password = 'maxis2005';
+  password = 'xxxxxxxx';
 
   validateLoading: ClrLoadingState = ClrLoadingState.DEFAULT;
   signInLoading: ClrLoadingState = ClrLoadingState.DEFAULT;

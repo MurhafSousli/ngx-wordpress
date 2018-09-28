@@ -16,14 +16,6 @@ import { AlertsComponent } from './alerts/alerts.component';
 import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
-export function jwtOptionsFactory(tokenService) {
-  return {
-    tokenGetter: () => localStorage.getItem('token'),
-    tokenSetter: (token: string) => localStorage.setItem('token', token),
-    tokenRemover: () => localStorage.removeItem('token')
-  };
-}
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,13 +30,13 @@ export function jwtOptionsFactory(tokenService) {
     ClarityModule,
     ClrFormsNextModule,
     BrowserAnimationsModule,
-    WordPressModule.forRoot({
-      baseUrl: 'https://codespell.io',
-    }),
     HighlightModule.forRoot(),
     NgProgressModule.forRoot(),
     NgProgressHttpModule.forRoot(),
-    NgProgressRouterModule.forRoot()
+    NgProgressRouterModule.forRoot(),
+    WordPressModule.forRoot({
+      baseUrl: 'https://wordpress-site.com',
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
