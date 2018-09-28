@@ -8,6 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "build-all": "ng build core --prod",
     "build-core": "ng build core",
     "link-core": "npm link dist/core && npm link @ngx-wordpress/core"
   },
