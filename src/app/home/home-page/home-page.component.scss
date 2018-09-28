@@ -1,0 +1,60 @@
+clr-icon {
+  color: #48960c;
+}
+section {
+  position: relative;
+  margin-top: 0;
+  padding-top: 60px;
+  padding-bottom: 72px;
+  max-width: 1248px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 60px;
+  padding-bottom: 72px;
+}
+.jumbo {
+  height: 596px;
+  h1 {
+    font-size: 64px;
+    margin-top: -6px;
+    font-weight: 200;
+    letter-spacing: -0.02em;
+    line-height: 72px;
+    font-size: 64px;
+    margin-bottom: 12px;
+  }
+  clr-icon {
+    position: absolute;
+    right: 1em;
+    bottom: 0;
+  }
+}
+.card {
+  background-color: #fff;
+  width: 100%;
+  text-align: center;
+  padding: 0 0 24px;
+  border-radius: 3px;
+  margin-top: -168px;
+  border: 1px solid #d7d7d7;
+  box-shadow: 0 3px 0 0 #d7d7d7;
+}
+.head {
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 36px;
+  margin: 6px 5px;
+  color: #000;
+  max-width: 624px;
+}
+.btn {
+  width: 168px;
+  height: 48px;
+  line-height: 47px;
+  margin: 0 18px 0 0;
+  font-weight: 400;
+}
+.home-hero-btn {
+  margin: 36px 0 24px;
+  padding-left: 5px;
+}

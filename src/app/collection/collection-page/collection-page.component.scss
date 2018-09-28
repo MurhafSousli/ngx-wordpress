@@ -1,0 +1,13 @@
+:host {
+  ::ng-deep {
+    .clr-form-control {
+      margin-top: 0;
+    }
+    .clr-control-container {
+      width: 100%;
+      input {
+        width: 100%;
+      }
+    }
+  }
+}
