@@ -1,8 +1,9 @@
 import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
-import { catchError, distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { WpModelState } from './wp-model.interface';
 import { WpModelClient } from './wp-model.client';
-import { WpPost, WpConfig } from '../interfaces';
+import { WpConfig } from '../interfaces';
+import { filterModel } from '../utilities';
 
 const DefaultState: WpModelState = {
   data: null,
@@ -63,7 +64,7 @@ export class WpModelRef {
     this._updateState({loading: true});
 
     return this.model.get(this._url, id).pipe(
-      map((res: WpModelState) => this._onSuccess(res)),
+      switchMap((res: any) => this._onSuccess(res)),
       catchError((err: Error) => this._onError(err))
     );
   }
@@ -75,7 +76,7 @@ export class WpModelRef {
     this._updateState({loading: true});
 
     return this.model.create(this._url, body).pipe(
-      map((res: WpModelState) => this._onSuccess(res)),
+      switchMap((res: any) => this._onSuccess(res)),
       catchError((err: Error) => this._onError(err))
     );
   }
@@ -87,7 +88,7 @@ export class WpModelRef {
     this._updateState({loading: true});
 
     return this.model.update(this._url, id, body).pipe(
-      map((res: WpModelState) => this._onSuccess(res)),
+      switchMap((res: any) => this._onSuccess(res)),
       catchError((err: Error) => this._onError(err))
     );
   }
@@ -99,7 +100,7 @@ export class WpModelRef {
     this._updateState({loading: true});
 
     return this.model.delete(this._url, id).pipe(
-      map((res: WpModelState) => this._onSuccess(res)),
+      switchMap((res: any) => this._onSuccess(res)),
       catchError((err: Error) => this._onError(err))
     );
   }
@@ -114,7 +115,7 @@ export class WpModelRef {
   /**
    * Data fetch error
    */
-  private _onError(err): Observable<WpModelState> {
+  private _onError(err: Error): Observable<WpModelState> {
     const state = this._updateState({
       loading: false,
       error: err
@@ -126,13 +127,19 @@ export class WpModelRef {
   /**
    * Data fetch success
    */
-  private _onSuccess(res: any): WpModelState {
-    const state = this._updateState({
-      data: this.endpoint === 'posts' ? new WpPost(res, this.config.postFilters) : res,
-      loading: false,
-      error: null
-    });
-    return state;
+  private _onSuccess(res: any): Observable<WpModelState> {
+    // Get the filters of the selected endpoint
+    const filters = this.config.filters[this.endpoint];
+    return of(res).pipe(
+      switchMap((data: any) => filterModel({...data}, filters)),
+      map((data: any) =>
+        this._updateState({
+          data: data,
+          loading: false,
+          error: null
+        })
+      )
+    );
   }
 
   /**

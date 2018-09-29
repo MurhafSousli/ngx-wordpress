@@ -1,5 +1,5 @@
 import { WordPress } from '../wordpress.service';
-import { WpQuery } from '../collection/wp-collection.interface';
+import { WpQuery } from '../collection';
 
 export function WpCollection(endpoint: string, query?: WpQuery) {
   return function (target: any, name: string) {
@@ -11,8 +11,6 @@ export function WpCollection(endpoint: string, query?: WpQuery) {
       if (!wp) {
         throw new Error('CollectionFactory not connected to WordPress!');
       }
-
-      console.log(res, endpoint);
 
       return wp.collection(res.endpoint, res.query);
       // Extend component's destroy event

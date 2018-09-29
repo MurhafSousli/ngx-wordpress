@@ -1,18 +1,21 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Post } from '../interfaces';
+import { WpConfig } from '../interfaces';
+import { mapAuthor, mapCategories, mapFeaturedMedia, mapRemoveLinks, mapRendered, mapTags } from './filters';
 
-export const getDefaultWpConfig = (platform: Object) => {
+export const getDefaultWpConfig = (platform: Object): WpConfig => {
   return {
     restUrl: '/wp-json/wp/v2/',
     authUrl: '/wp-json/jwt-auth/v1/',
-    postFilters: {
-      title: mapRendered,
-      content: mapRendered,
-      excerpt: mapRendered,
-      categories: mapCategories,
-      tags: mapTags,
-      author: mapAuthor,
-      featuredMedia: mapFeaturedMedia
+    filters: {
+      posts: {
+        title: [mapRendered],
+        content: [mapRendered],
+        excerpt: [mapRendered, mapRemoveLinks],
+        categories: [mapCategories],
+        tags: [mapTags],
+        author: [mapAuthor],
+        featured_media: [mapFeaturedMedia]
+      }
     },
     jwtOptions: {
       tokenGetter: () => isPlatformBrowser(platform) ? localStorage.getItem('token') : null,
@@ -21,26 +24,6 @@ export const getDefaultWpConfig = (platform: Object) => {
     }
   };
 };
-
-export const mapRendered = (post: Post, key: string) => post[key].rendered;
-// .replace(/<a\b[^>]*>(.*?)<\/a>/i, '')
-
-export const mapCategories = (post: Post) => (post._embedded && post._embedded['wp:term'])
-  ? post._embedded['wp:term'][0]
-  : post.categories;
-
-export const mapTags = (post: Post) => (post._embedded && post._embedded['wp:term'])
-  ? post._embedded['wp:term'][1]
-  : post.tags;
-
-export const mapAuthor = (post: Post) => post._embedded
-  ? post._embedded.author
-  : post.author;
-
-export const mapFeaturedMedia = (post: Post) => (post.featured_media && post._embedded && post._embedded['wp:featuredmedia'][0])
-  ? post._embedded['wp:featuredmedia'][0]
-  : post.featured_media;
-
 
 /**
  * Simple object check.

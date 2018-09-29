@@ -1,6 +1,6 @@
 {
   "name": "@ngx-wordpress/core",
-  "version": "5.0.0-beta.0",
+  "version": "5.0.0-beta.1",
   "description": "The best WordPress module for Angular",
   "repository": {
     "type": "git",

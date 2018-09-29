@@ -1,9 +1,9 @@
-import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, of, forkJoin } from 'rxjs';
 import { catchError, distinctUntilChanged, filter, map, switchMap, take } from 'rxjs/operators';
 import { WpCollectionState, WpPagination, WpQuery } from './wp-collection.interface';
-import { WpPost, WpConfig } from '../interfaces';
 import { WpCollectionClient } from './wp-collection.client';
-import { mergeDeep } from '../utilities/helper';
+import { WpConfig } from '../interfaces';
+import { mergeDeep, filterModel } from '../utilities';
 
 const DefaultState: WpCollectionState = {
   data: [],
@@ -85,7 +85,7 @@ export class WpCollectionRef {
   /**
    * Get a collection of items
    */
-  get<T = any>(args?: WpQuery): Observable<WpCollectionState<T>> {
+  get(args?: WpQuery): Observable<WpCollectionState> {
     this._args = {...this._args, ...{page: 1}, ...args};
     return this._fetch();
   }
@@ -152,7 +152,7 @@ export class WpCollectionRef {
     this._updateState({loading: true});
 
     return this.collection.get(this._url, this._args).pipe(
-      map((res: WpCollectionState) => this._onSuccess(res, mergeData)),
+      switchMap((res: WpCollectionState) => this._onSuccess(res, mergeData)),
       catchError((err: Error) => this._onError(err))
     );
   }
@@ -172,14 +172,23 @@ export class WpCollectionRef {
   /**
    * Data fetch success
    */
-  private _onSuccess(res: WpCollectionState, mergeData?: any[]): WpCollectionState {
-    const newData = this.endpoint === 'posts' ? res.data.map(post => new WpPost(post, this.config.postFilters)) : res.data;
-    return this._updateState({
-      pagination: res.pagination,
-      data: [...mergeData, ...newData],
-      loading: false,
-      error: null
-    });
+  private _onSuccess(res: WpCollectionState, currDataArr?: any[]): Observable<WpCollectionState> {
+    // Get the filters of the selected endpoint
+    const filters = this.config.filters[this.endpoint];
+    return of(res.data).pipe(
+      // Filter data values in parallel
+      switchMap((dataArr: any[]) =>
+        forkJoin(dataArr.map((data: any) => filterModel({...data}, filters)))
+      ),
+      map((dataArr: any[]) =>
+        this._updateState({
+          pagination: res.pagination,
+          data: [...currDataArr, ...dataArr],
+          loading: false,
+          error: null
+        })
+      )
+    );
   }
 
   /**
@@ -191,9 +200,3 @@ export class WpCollectionRef {
   }
 
 }
-
-export const domain = (url: string) => {
-  const matches = url.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i);
-  return matches && matches[1];
-};
-
