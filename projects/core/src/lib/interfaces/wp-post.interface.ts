@@ -1,7 +1,7 @@
 import { WpUser } from './wp-user.interface';
 import { WpTerm } from './wp-term.interface';
 
-export class Post {
+export interface WpPost {
   id?: number;
   slug?: string;
   name?: string;

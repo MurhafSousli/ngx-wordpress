@@ -1,6 +1,5 @@
 import { InjectionToken } from '@angular/core';
 import { Observable, OperatorFunction } from 'rxjs';
-import { DataFilter } from '../utilities';
 
 export const WP_CONFIG = new InjectionToken<WpConfig>('WP_CONFIG');
 
@@ -22,4 +21,9 @@ export interface WpObjectFilter {
   [key: string]: WpPropertyFilter;
 }
 
-export type WpPropertyFilter = OperatorFunction<DataFilter<any>, DataFilter<any>>[];
+export type WpPropertyFilter = OperatorFunction<WpFilterRes<any>, WpFilterRes<any>>[];
+
+export interface WpFilterRes<T> {
+  key?: string;
+  value: T;
+}

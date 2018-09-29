@@ -3,6 +3,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { WpCollectionState } from './wp-collection.interface';
+import { serializeQuery } from '../utilities';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class WpCollectionClient {
    * Fetch data from wp api
    */
   get(endpoint, args): Observable<WpCollectionState> {
-    const url = endpoint + '?' + serialize(args);
+    const url = endpoint + '?' + serializeQuery(args);
     return this.http.get(url, {observe: 'response'}).pipe(
       map((res: HttpResponse<any>) => this._onPaginate(res, args.page))
     );
@@ -44,17 +45,3 @@ export class WpCollectionClient {
     };
   }
 }
-
-/** Serialize query arguments */
-export const serialize = (obj, prefix?): string => {
-  const str = [];
-  for (const p in obj) {
-    if (obj.hasOwnProperty(p) && obj[p]) {
-      const k = prefix ? prefix + '[' + p + ']' : p, v = obj[p];
-      str.push(typeof v === 'object' ?
-        serialize(v, k) :
-        encodeURIComponent(k) + '=' + encodeURIComponent(v));
-    }
-  }
-  return str.join('&');
-};

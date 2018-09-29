@@ -5,7 +5,7 @@ import { WpCollectionClient } from './wp-collection.client';
 import { WpConfig } from '../interfaces';
 import { mergeDeep, filterModel } from '../utilities';
 
-const DefaultState: WpCollectionState = {
+const defaultState: WpCollectionState = {
   data: [],
   loading: false,
   error: null,
@@ -20,16 +20,23 @@ const DefaultState: WpCollectionState = {
 
 export class WpCollectionRef {
 
+  /**
+   * Request URL
+   */
+  private _url: string;
+
+  /**
+   * WpCollection query
+   */
   private _args: WpQuery = {
     page: 1,
     per_page: 6
   };
 
-  private _url: string;
   /**
    * Stream that emits WpCollection state
    */
-  private _state = new BehaviorSubject<WpCollectionState>(DefaultState);
+  private _state = new BehaviorSubject<WpCollectionState>(defaultState);
   state = this._state.asObservable();
 
   /**
@@ -76,8 +83,9 @@ export class WpCollectionRef {
 
   constructor(private collection: WpCollectionClient,
               private config: WpConfig,
-              private endpoint: string, args: WpQuery,
-              private errorEmitter: Subject<Error>) {
+              private endpoint: string,
+              private errorEmitter: Subject<Error>,
+              args: WpQuery) {
     this._url = config.baseUrl + config.restUrl + endpoint;
     this._args = {...this._args, ...args};
   }
@@ -158,18 +166,6 @@ export class WpCollectionRef {
   }
 
   /**
-   * Error handling
-   */
-  private _onError(err): Observable<WpCollectionState> {
-    const state = this._updateState({
-      error: err,
-      loading: false
-    });
-    this.errorEmitter.next(err);
-    return of(state);
-  }
-
-  /**
    * Data fetch success
    */
   private _onSuccess(res: WpCollectionState, currDataArr?: any[]): Observable<WpCollectionState> {
@@ -189,6 +185,18 @@ export class WpCollectionRef {
         })
       )
     );
+  }
+
+  /**
+   * Error handling
+   */
+  private _onError(err): Observable<WpCollectionState> {
+    const state = this._updateState({
+      error: err,
+      loading: false
+    });
+    this.errorEmitter.next(err);
+    return of(state);
   }
 
   /**

@@ -15,26 +15,41 @@ const defaultState: WpAuthState = {
 
 export class WpAuthRef {
 
+  /**
+   * Stream that emits WpAuth state
+   */
   private _state = new BehaviorSubject<WpAuthState>(defaultState);
   state: Observable<any> = this._state.asObservable();
 
+  /**
+   * Stream that emits logged in state
+   */
   loggedIn: Observable<boolean> = this._state.pipe(
     map((state: WpAuthState) => state.loggedIn),
     distinctUntilChanged()
   );
 
+  /**
+   * Stream that emits logged in user
+   */
   user: Observable<WpUser> = this._state.pipe(
     map((state: WpAuthState) => state.user),
     distinctUntilChanged()
   );
 
-  error: Observable<Error> = this._state.pipe(
-    map((state: WpAuthState) => state.error),
+  /**
+   * Stream that emits loading state
+   */
+  loading: Observable<boolean> = this.state.pipe(
+    map((state: WpAuthState) => state.loading),
     distinctUntilChanged()
   );
 
-  loading: Observable<boolean> = this.state.pipe(
-    map((state: WpAuthState) => state.loading),
+  /**
+   * Stream that emits auth errors
+   */
+  error: Observable<Error> = this._state.pipe(
+    map((state: WpAuthState) => state.error),
     distinctUntilChanged()
   );
 
@@ -95,6 +110,9 @@ export class WpAuthRef {
     );
   }
 
+  /**
+   * Sign in success
+   */
   private _onSignInSuccess(user: WpUser) {
     return this._updateState({
       user: user,
@@ -104,6 +122,9 @@ export class WpAuthRef {
     });
   }
 
+  /**
+   * Validate token success
+   */
   private _onValidateTokenSuccess() {
     return this._updateState({
       loading: false,
@@ -112,6 +133,9 @@ export class WpAuthRef {
     });
   }
 
+  /**
+   * Error handling
+   */
   private _onError(err: Error): Observable<WpAuthState> {
     return this.removeToken().pipe(
       map(() => {
@@ -127,6 +151,9 @@ export class WpAuthRef {
     );
   }
 
+  /**
+   * Store token in storage
+   */
   private storeToken(token: string): Observable<any> {
     return of(this.config.jwtOptions.tokenSetter).pipe(
       switchMap((tokenSetter: Promise<void> | Function) => (tokenSetter instanceof Promise)
@@ -134,6 +161,9 @@ export class WpAuthRef {
     );
   }
 
+  /**
+   * Remove token from storage
+   */
   private removeToken(): Observable<any> {
     return of(this.config.jwtOptions.tokenRemover).pipe(
       switchMap((tokenRemover: Promise<void> | Function) => (tokenRemover instanceof Promise)
@@ -141,6 +171,9 @@ export class WpAuthRef {
     );
   }
 
+  /**
+   * Update local state
+   */
   private _updateState(state: WpAuthState): WpAuthState {
     this._state.next({...this._state.value, ...state});
     return this._state.value;

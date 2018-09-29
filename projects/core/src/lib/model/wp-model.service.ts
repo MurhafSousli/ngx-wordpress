@@ -13,8 +13,14 @@ const DefaultState: WpModelState = {
 
 export class WpModelRef {
 
+  /**
+   * Request URL
+   */
   private _url = '';
-  // Stream that emits WpModel state
+
+  /**
+   * Stream that emits WpModel state
+   */
   private _state = new BehaviorSubject<WpModelState>(DefaultState);
   state = this._state.asObservable();
 
@@ -113,18 +119,6 @@ export class WpModelRef {
   }
 
   /**
-   * Data fetch error
-   */
-  private _onError(err: Error): Observable<WpModelState> {
-    const state = this._updateState({
-      loading: false,
-      error: err
-    });
-    this.errorEmitter.next(err);
-    return of(state);
-  }
-
-  /**
    * Data fetch success
    */
   private _onSuccess(res: any): Observable<WpModelState> {
@@ -140,6 +134,18 @@ export class WpModelRef {
         })
       )
     );
+  }
+
+  /**
+   * Error handling
+   */
+  private _onError(err: Error): Observable<WpModelState> {
+    const state = this._updateState({
+      loading: false,
+      error: err
+    });
+    this.errorEmitter.next(err);
+    return of(state);
   }
 
   /**

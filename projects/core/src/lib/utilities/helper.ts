@@ -56,3 +56,19 @@ export function mergeDeep(target, ...sources) {
 
   return mergeDeep(target, ...sources);
 }
+
+/**
+ * Serialize WpCollection query
+ */
+export const serializeQuery = (obj: any, prefix?: string): string => {
+  const str = [];
+  for (const p in obj) {
+    if (obj.hasOwnProperty(p) && obj[p]) {
+      const k = prefix ? prefix + '[' + p + ']' : p, v = obj[p];
+      str.push(typeof v === 'object' ?
+        serializeQuery(v, k) :
+        encodeURIComponent(k) + '=' + encodeURIComponent(v));
+    }
+  }
+  return str.join('&');
+};

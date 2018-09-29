@@ -1,12 +1,10 @@
 import { from, of, Observable } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import { Post, WpObjectFilter, WpPropertyFilter, WpTerm, WpUser } from '../interfaces';
+import { WpPost, WpObjectFilter, WpPropertyFilter, WpTerm, WpUser, WpFilterRes } from '../interfaces';
 
-export interface DataFilter<T> {
-  key?: string;
-  value: T;
-}
-
+/**
+ * Filter WordPress model
+ */
 export function filterModel(obj: any, filters: WpObjectFilter): Observable<any> {
   // Loop over object filters
   return from(Object.keys(filters)).pipe(
@@ -14,11 +12,14 @@ export function filterModel(obj: any, filters: WpObjectFilter): Observable<any> 
   );
 }
 
+/**
+ * Filter WordPress model property
+ */
 export function filterProperty(key: string, obj: any, filters: WpPropertyFilter): Observable<any> {
   // Loop over property filters
   return of({key: key, value: obj}).pipe(
     ...filters,
-    map((res: DataFilter<any>) => {
+    map((res: WpFilterRes<any>) => {
       obj[key] = res.value;
       return obj;
     })
@@ -28,7 +29,7 @@ export function filterProperty(key: string, obj: any, filters: WpPropertyFilter)
 /**
  * Flatten post property by setting it to its rendered property
  */
-export const mapRendered = map(({key, value}: DataFilter<Post>): DataFilter<string> => {
+export const mapRendered = map(({key, value}: WpFilterRes<WpPost>): WpFilterRes<string> => {
   return {
     key,
     value: value[key].rendered
@@ -38,7 +39,7 @@ export const mapRendered = map(({key, value}: DataFilter<Post>): DataFilter<stri
 /**
  * Remove links from text
  */
-export const mapRemoveLinks = map(({key, value}: DataFilter<string>): DataFilter<string> => {
+export const mapRemoveLinks = map(({key, value}: WpFilterRes<string>): WpFilterRes<string> => {
   return {
     key,
     value: value.replace(/<a\b[^>]*>(.*?)<\/a>/i, '')
@@ -48,7 +49,7 @@ export const mapRemoveLinks = map(({key, value}: DataFilter<string>): DataFilter
 /**
  * Return post categories
  */
-export const mapCategories = map(({key, value}: DataFilter<Post>): DataFilter<WpTerm[] | number[]> => {
+export const mapCategories = map(({key, value}: WpFilterRes<WpPost>): WpFilterRes<WpTerm[] | number[]> => {
   return {
     key,
     value: (value._embedded && value._embedded['wp:term'])
@@ -60,7 +61,7 @@ export const mapCategories = map(({key, value}: DataFilter<Post>): DataFilter<Wp
 /**
  * Return post tags
  */
-export const mapTags = map(({key, value}: DataFilter<Post>): DataFilter<WpTerm[] | number[]> => {
+export const mapTags = map(({key, value}: WpFilterRes<WpPost>): WpFilterRes<WpTerm[] | number[]> => {
   return {
     key,
     value: (value._embedded && value._embedded['wp:term'])
@@ -72,7 +73,7 @@ export const mapTags = map(({key, value}: DataFilter<Post>): DataFilter<WpTerm[]
 /**
  * Return post author
  */
-export const mapAuthor = map(({key, value}: DataFilter<Post>): DataFilter<WpUser | number> => {
+export const mapAuthor = map(({key, value}: WpFilterRes<WpPost>): WpFilterRes<WpUser | number> => {
   return {
     key,
     value: value._embedded
@@ -84,7 +85,7 @@ export const mapAuthor = map(({key, value}: DataFilter<Post>): DataFilter<WpUser
 /**
  * Return post featured image
  */
-export const mapFeaturedMedia = map(({key, value}: DataFilter<Post>): DataFilter<any> => {
+export const mapFeaturedMedia = map(({key, value}: WpFilterRes<WpPost>): WpFilterRes<any> => {
   return {
     key,
     value: (value.featured_media && value._embedded && value._embedded['wp:featuredmedia'][0])

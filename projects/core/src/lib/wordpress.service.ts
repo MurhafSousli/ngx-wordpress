@@ -7,21 +7,32 @@ import { WP_CONFIG, WpConfig } from './interfaces';
 import { WpAuthRef } from './auth';
 import { WpModelRef, WpModelClient } from './model';
 import { WpCollectionClient, WpCollectionRef, WpQuery } from './collection';
-
-import { getDefaultWpConfig, mergeDeep } from './utilities/helper';
+import { getDefaultWpConfig, mergeDeep } from './utilities';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WordPress {
 
+  /**
+   * Global access WP in decorators
+   */
   static wp: WordPress = undefined;
 
+  /**
+   * Auth service
+   */
+  auth: WpAuthRef;
+
+  /**
+   * Stream that emits WP errors
+   */
   private _errorEmitter = new Subject<Error>();
   error = this._errorEmitter.asObservable();
 
-  auth: WpAuthRef;
-
+  /**
+   * WP global config
+   */
   private _config: WpConfig = getDefaultWpConfig(this.platform);
   get config(): WpConfig {
     return this._config;
@@ -54,7 +65,7 @@ export class WordPress {
    * Create a WpCollectionRef for lists and pagination
    */
   collection(endpoint: string, args: WpQuery): WpCollectionRef {
-    return new WpCollectionRef(this.collectionHttp, this.config, endpoint, args, this._errorEmitter);
+    return new WpCollectionRef(this.collectionHttp, this.config, endpoint, this._errorEmitter, args);
   }
 
   /**
@@ -71,6 +82,9 @@ export class WordPress {
     this._config = mergeDeep(this.config, config);
   }
 
+  /**
+   * Set JWT config
+   */
   private setJwtConfig() {
     // Get the domain by removing the 'http://' from baseUrl
     const domain = this.config.baseUrl.replace(/(^\w+:|^)\/\//, '');
