@@ -54,7 +54,7 @@ export class WpAuthRef {
 
   constructor(private config: WpConfig, private http: HttpClient, private errorEmitter: Subject<Error>, jwt: JwtService) {
     jwt.isTokenExpired().pipe(
-      filter((isTokenExpired: boolean) => isTokenExpired),
+      filter((isTokenExpired: boolean) => !isTokenExpired),
       switchMap(() => this.getLoggedInUser())
     ).subscribe();
   }

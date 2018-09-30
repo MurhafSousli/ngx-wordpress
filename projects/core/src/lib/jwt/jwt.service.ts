@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, from, Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { first, map, switchMap } from 'rxjs/operators';
 import { JwtConfig } from './jwt.interface';
 
 @Injectable({
@@ -126,6 +126,7 @@ export class JwtService {
 
   isTokenExpired(tokenValue?: string, offsetSeconds?: number): Observable<boolean> {
     return of({}).pipe(
+      first(),
       switchMap(() => tokenValue ? of(tokenValue) : this.tokenGetter),
       map((token: string) => {
         if (token === null || token === '') {
