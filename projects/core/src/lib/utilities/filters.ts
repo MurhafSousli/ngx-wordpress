@@ -89,7 +89,19 @@ export const mapFeaturedMedia = map(({key, value}: WpFilterRes<WpPost>): WpFilte
   return {
     key,
     value: (value.featured_media && value._embedded && value._embedded['wp:featuredmedia'][0])
-      ? value._embedded['wp:featuredmedia'][0]
+      ? value._embedded['wp:featuredmedia'][0].media_details.sizes
       : value.featured_media
+  };
+});
+
+/**
+ * Flatten post featured image by setting it to its source_url
+ */
+export const mapImageSizesSrcUrls = map(({key, value}: WpFilterRes<WpPost>): WpFilterRes<any> => {
+  return {
+    key,
+    value: Object.entries(value).reduce((total: any, [entryKey, entryValue]: any[]) =>
+        ({...total, ...{[entryKey]: entryValue.source_url}})
+      , {})
   };
 });

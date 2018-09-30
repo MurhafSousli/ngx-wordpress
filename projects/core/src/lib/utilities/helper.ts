@@ -1,6 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { of } from 'rxjs';
-import { mapAuthor, mapCategories, mapFeaturedMedia, mapRemoveLinks, mapRendered, mapTags } from './filters';
+import { mapAuthor, mapCategories, mapFeaturedMedia, mapImageSizesSrcUrls, mapRemoveLinks, mapRendered, mapTags } from './filters';
 import { WpConfig } from '../interfaces';
 
 export function getDefaultWpConfig(platform: Object): WpConfig {
@@ -15,7 +15,7 @@ export function getDefaultWpConfig(platform: Object): WpConfig {
         categories: [mapCategories],
         tags: [mapTags],
         author: [mapAuthor],
-        featured_media: [mapFeaturedMedia]
+        featured_media: [mapFeaturedMedia, mapImageSizesSrcUrls]
       }
     },
     jwtOptions: {
