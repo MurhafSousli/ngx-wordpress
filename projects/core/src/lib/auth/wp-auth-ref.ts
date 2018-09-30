@@ -1,10 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, from, Subject } from 'rxjs';
-import { catchError, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
-
+import { catchError, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { WpAuthState, WpAuthToken } from './wp-auth.interface';
 import { WpUser, WpConfig } from '../interfaces';
-import { JwtHelperService } from '../jwt';
+import { JwtService } from '../jwt';
 
 const defaultState: WpAuthState = {
   user: null,
@@ -53,20 +52,24 @@ export class WpAuthRef {
     distinctUntilChanged()
   );
 
-  constructor(private config: WpConfig, private http: HttpClient, private errorEmitter: Subject<Error>, jwt: JwtHelperService) {
-    if (!jwt.isTokenExpired()) {
-      this.getLoggedInUser().subscribe();
-    }
+  constructor(private config: WpConfig, private http: HttpClient, private errorEmitter: Subject<Error>, jwt: JwtService) {
+    jwt.isTokenExpired().pipe(
+      filter((isTokenExpired: boolean) => isTokenExpired),
+      switchMap(() => this.getLoggedInUser())
+    ).subscribe();
   }
 
   /**
    * Sign in
    */
   signIn(username: string, password: string): Observable<WpAuthState> {
-    this._updateState({loading: true});
+    this._updateState({
+      loading: true,
+      error: null
+    });
     const tokenUrl = this.config.baseUrl + this.config.authUrl + 'token';
     return this.http.post(tokenUrl, {username, password}).pipe(
-      switchMap((res: WpAuthToken) => this._onCreateTokenSuccess(res.token)),
+      switchMap((res: WpAuthToken) => this.storeToken(res.token)),
       switchMap(() => this.getLoggedInUser()),
       catchError((res: HttpErrorResponse) => this._onError(res.error))
     );
@@ -101,12 +104,6 @@ export class WpAuthRef {
   signOut(): Observable<WpAuthState> {
     return this.removeToken().pipe(
       map(() => this._updateState(defaultState))
-    );
-  }
-
-  private _onCreateTokenSuccess(token: string): Observable<WpAuthState> {
-    return this.storeToken(token).pipe(
-      map(() => this._updateState({error: null}))
     );
   }
 
@@ -156,8 +153,8 @@ export class WpAuthRef {
    */
   private storeToken(token: string): Observable<any> {
     return of(this.config.jwtOptions.tokenSetter).pipe(
-      switchMap((tokenSetter: Promise<void> | Function) => (tokenSetter instanceof Promise)
-        ? from(tokenSetter) : of({}).pipe(tap(() => tokenSetter(token))))
+      switchMap((tokenSetter: Promise<void | null> | any) => (tokenSetter instanceof Promise)
+        ? from(tokenSetter) : tokenSetter(token))
     );
   }
 
@@ -166,8 +163,8 @@ export class WpAuthRef {
    */
   private removeToken(): Observable<any> {
     return of(this.config.jwtOptions.tokenRemover).pipe(
-      switchMap((tokenRemover: Promise<void> | Function) => (tokenRemover instanceof Promise)
-        ? from(tokenRemover) : of({}).pipe(tap(() => tokenRemover())))
+      switchMap((tokenRemover: Promise<void | null> | any) => (tokenRemover instanceof Promise)
+        ? from(tokenRemover) : tokenRemover())
     );
   }
 

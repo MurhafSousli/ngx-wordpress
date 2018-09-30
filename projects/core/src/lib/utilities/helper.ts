@@ -1,8 +1,9 @@
 import { isPlatformBrowser } from '@angular/common';
-import { WpConfig } from '../interfaces';
+import { of } from 'rxjs';
 import { mapAuthor, mapCategories, mapFeaturedMedia, mapRemoveLinks, mapRendered, mapTags } from './filters';
+import { WpConfig } from '../interfaces';
 
-export const getDefaultWpConfig = (platform: Object): WpConfig => {
+export function getDefaultWpConfig(platform: Object): WpConfig {
   return {
     restUrl: '/wp-json/wp/v2/',
     authUrl: '/wp-json/jwt-auth/v1/',
@@ -18,12 +19,12 @@ export const getDefaultWpConfig = (platform: Object): WpConfig => {
       }
     },
     jwtOptions: {
-      tokenGetter: () => isPlatformBrowser(platform) ? localStorage.getItem('token') : null,
-      tokenSetter: (token: string) => isPlatformBrowser(platform) ? localStorage.setItem('token', token) : null,
-      tokenRemover: () => isPlatformBrowser(platform) ? localStorage.removeItem('token') : null
+      tokenGetter: () => of(isPlatformBrowser(platform) ? localStorage.getItem('token') : null),
+      tokenSetter: (token: string) => of(isPlatformBrowser(platform) ? localStorage.setItem('token', token) : null),
+      tokenRemover: () => of(isPlatformBrowser(platform) ? localStorage.removeItem('token') : null)
     }
   };
-};
+}
 
 /**
  * Simple object check.

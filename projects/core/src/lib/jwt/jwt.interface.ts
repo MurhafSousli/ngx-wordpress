@@ -1,9 +1,10 @@
+import { Observable } from 'rxjs';
+
 export interface JwtConfig {
-  tokenGetter?: () => any;
+  tokenGetter?: () => Promise<string | null> | Observable<string | null>;
   headerName?: string;
   authScheme?: string;
   whitelistedDomains?: Array<string | RegExp>;
   blacklistedRoutes?: Array<string | RegExp>;
-  throwNoTokenError?: boolean;
   skipWhenExpired?: boolean;
 }

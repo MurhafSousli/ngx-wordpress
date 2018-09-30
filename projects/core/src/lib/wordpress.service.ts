@@ -2,12 +2,15 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
-import { JwtHelperService } from './jwt';
-import { WP_CONFIG, WpConfig } from './interfaces';
 import { WpAuthRef } from './auth';
-import { WpModelRef, WpModelClient } from './model';
-import { WpCollectionClient, WpCollectionRef, WpQuery } from './collection';
+import { WpModelRef } from './model';
+import { WpQuery, WpCollectionRef } from './collection';
 import { getDefaultWpConfig, mergeDeep } from './utilities';
+// Avoid circular dependency error by NOT using barrel imports.
+import { JwtService } from './jwt/jwt.service';
+import { WpModelService } from './model/wp-model.service';
+import { WpCollectionService } from './collection/wp-collection.service';
+import { WP_CONFIG, WpConfig } from './interfaces/wp-config.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -39,11 +42,11 @@ export class WordPress {
   }
 
   constructor(private http: HttpClient,
-              private modelHttp: WpModelClient,
-              private collectionHttp: WpCollectionClient,
+              private modelHttp: WpModelService,
+              private collectionHttp: WpCollectionService,
               @Inject(PLATFORM_ID) private platform: Object,
               @Inject(WP_CONFIG) config: WpConfig,
-              private jwt: JwtHelperService
+              private jwt: JwtService
   ) {
     // Make WordPress available for decorators
     WordPress.wp = this;

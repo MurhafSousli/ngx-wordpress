@@ -1,30 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable, from } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { Observable, from, of } from 'rxjs';
+import { mergeMap, switchMap } from 'rxjs/operators';
 import { parse } from 'url';
-import { JwtHelperService } from './jwt-helper.service';
+import { JwtService } from './jwt.service';
 import { JwtConfig } from './jwt.interface';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  tokenGetter: () => string | null | Promise<string | null>;
+  tokenGetter: () => Promise<string | null> | Observable<string | null>;
   headerName: string;
   authScheme: string;
   whitelistedDomains: Array<string | RegExp>;
   blacklistedRoutes: Array<string | RegExp>;
-  throwNoTokenError: boolean;
   skipWhenExpired: boolean;
 
-  constructor(private jwtHelper: JwtHelperService) {
+  constructor(private jwt: JwtService) {
     // Update options when the Jwt config is changed
-    jwtHelper.config.subscribe((config: JwtConfig) => {
+    jwt.config.subscribe((config: JwtConfig) => {
       this.tokenGetter = config.tokenGetter;
       this.headerName = config.headerName || 'Authorization';
       this.authScheme = config.authScheme || config.authScheme === '' ? config.authScheme : 'Bearer ';
       this.whitelistedDomains = config.whitelistedDomains || [];
       this.blacklistedRoutes = config.blacklistedRoutes || [];
-      this.throwNoTokenError = config.throwNoTokenError || false;
       this.skipWhenExpired = config.skipWhenExpired;
     });
   }
@@ -60,39 +58,36 @@ export class JwtInterceptor implements HttpInterceptor {
     );
   }
 
-  handleInterception(token: string | null, request: HttpRequest<any>, next: HttpHandler) {
-    let tokenIsExpired = false;
-
-    if (!token && this.throwNoTokenError) {
-      throw new Error('Could not get token from tokenGetter function.');
-    }
-
-    if (this.skipWhenExpired) {
-      tokenIsExpired = token ? this.jwtHelper.isTokenExpired(token) : true;
-    }
-
-    if (token && tokenIsExpired && this.skipWhenExpired) {
-      request = request.clone();
-    } else if (token) {
-      request = request.clone({
-        setHeaders: {
-          [this.headerName]: `${this.authScheme}${token}`
+  handleInterception(token: string | null, request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return of({}).pipe(
+      // allow the token to be sent if it is expired when skipWhenExpired is true
+      switchMap(() => this.skipWhenExpired
+        ? token
+          ? this.jwt.isTokenExpired(token)
+          : of(true)
+        : of(false)
+      ),
+      switchMap((tokenIsExpired: boolean) => {
+        if (token && tokenIsExpired && this.skipWhenExpired) {
+          request = request.clone();
+        } else if (token) {
+          request = request.clone({
+            setHeaders: {
+              [this.headerName]: `${this.authScheme}${token}`
+            }
+          });
         }
-      });
-    }
-    return next.handle(request);
+        return next.handle(request);
+      })
+    );
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (!this.isWhitelistedDomain(request) || this.isBlacklistedRoute(request)) {
-      return next.handle(request);
-    }
     const token = this.tokenGetter();
-    if (token instanceof Promise) {
-      return from(token).pipe(
+    return (!this.isWhitelistedDomain(request) || this.isBlacklistedRoute(request))
+      ? next.handle(request)
+      : (token instanceof Promise ? from(token) : token).pipe(
         mergeMap((asyncToken: string | null) => this.handleInterception(asyncToken, request, next))
       );
-    }
-    return this.handleInterception(token, request, next);
   }
 }

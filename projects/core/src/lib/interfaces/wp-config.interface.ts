@@ -8,9 +8,9 @@ export interface WpConfig {
   restUrl?: string;
   authUrl?: string;
   jwtOptions?: {
-    tokenGetter?: () => string;
-    tokenSetter?: (token: string) => void | null | Promise<void | null> | Observable<void | null>;
-    tokenRemover?: () => void | null | Promise<void | null> | Observable<void | null>;
+    tokenGetter?: () => Promise<string | null> | Observable<string | null>;
+    tokenSetter?: (token: string) => Promise<void | null> | Observable<void | null>;
+    tokenRemover?: () => Promise<void | null> | Observable<void | null>;
   };
   filters?: {
     [key: string]: WpObjectFilter;
