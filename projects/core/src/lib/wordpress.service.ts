@@ -93,6 +93,9 @@ export class WordPress {
     const domain = this.config.baseUrl.replace(/(^\w+:|^)\/\//, '');
     this.jwt.setConfig({
       tokenGetter: this.config.jwtOptions.tokenGetter,
+      headerName: this.config.jwtOptions.headerName,
+      authScheme: this.config.jwtOptions.authScheme,
+      skipWhenExpired: this.config.jwtOptions.skipWhenExpired,
       whitelistedDomains: [domain],
       blacklistedRoutes: [domain + this.config.authUrl]
     });

@@ -8,6 +8,9 @@ export interface WpConfig {
   restUrl?: string;
   authUrl?: string;
   jwtOptions?: {
+    headerName?: string;
+    authScheme?: string;
+    skipWhenExpired?: boolean;
     tokenGetter?: () => Promise<string | null> | Observable<string | null>;
     tokenSetter?: (token: string) => Promise<void | null> | Observable<void | null>;
     tokenRemover?: () => Promise<void | null> | Observable<void | null>;
