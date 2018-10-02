@@ -23,6 +23,18 @@
       ],
       "core/*": [
         "dist/core/*"
+      ],
+      "mock": [
+        "dist/mock"
+      ],
+      "mock/*": [
+        "dist/mock/*"
+      ],
+      "ngxs": [
+        "dist/ngxs"
+      ],
+      "ngxs/*": [
+        "dist/ngxs/*"
       ]
     }
   }

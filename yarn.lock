@@ -326,6 +326,18 @@
   dependencies:
     tslib "^1.9.0"
 
+"@ngxs/devtools-plugin@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@ngxs/devtools-plugin/-/devtools-plugin-3.2.0.tgz#4cca564022b91e7f84c86671f078092441bcd0f5"
+  dependencies:
+    tslib "^1.9.0"
+
+"@ngxs/store@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@ngxs/store/-/store-3.2.0.tgz#533939acb41a948a34886943314d2a0d866045c9"
+  dependencies:
+    tslib "^1.9.0"
+
 "@schematics/angular@0.8.3":
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-0.8.3.tgz#f4b661c5a196a06c050c0ae56809e6dbcfbf9f98"

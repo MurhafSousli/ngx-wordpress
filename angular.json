@@ -169,6 +169,76 @@
           }
         }
       }
+    },
+    "mock": {
+      "root": "projects/mock",
+      "sourceRoot": "projects/mock/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/mock/tsconfig.lib.json",
+            "project": "projects/mock/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/mock/src/test.ts",
+            "tsConfig": "projects/mock/tsconfig.spec.json",
+            "karmaConfig": "projects/mock/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/mock/tsconfig.lib.json",
+              "projects/mock/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ngxs": {
+      "root": "projects/ngxs",
+      "sourceRoot": "projects/ngxs/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngxs/tsconfig.lib.json",
+            "project": "projects/ngxs/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngxs/src/test.ts",
+            "tsConfig": "projects/ngxs/tsconfig.spec.json",
+            "karmaConfig": "projects/ngxs/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngxs/tsconfig.lib.json",
+              "projects/ngxs/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-wordpress"

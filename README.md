@@ -7,16 +7,16 @@ This library is designed to make it easy for your Angular application to request
 
 [![npm](https://img.shields.io/npm/v/@ngx-wordpress/core.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/@ngx-wordpress/core)
 [![Build Status](https://travis-ci.org/MurhafSousli/ngx-wordpress.svg?branch=master)](https://travis-ci.org/MurhafSousli/ngx-wordpress)
+[![npm](https://img.shields.io/npm/dt/@ngx-wordpress/core.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/@ngx-wordpress/core)
 [![npm](https://img.shields.io/npm/l/express.svg?maxAge=2592000)](/LICENSE)
 
 **[Wiki Documentation](https://github.com/MurhafSousli/ngx-wordpress/wiki)**
 
-## Decorators
+## Packages
 
- - `@WpCollection()` For lists and pagination
- - `@WpModel()` For CRUD operations
- - `@WpAuth()` For authentication
- - `@WpError()` For error handling
+ - `@ngx-wordpress/core` WordPress module Beta
+ - `@ngx-wordpress/ngxs` NGXS integration (under development)
+ - `@ngx-wordpress/mock` WordPress mock data interceptor (under development)
 
 ## Author
 
