@@ -16,10 +16,10 @@ export class WpCollectionService {
   /**
    * Fetch data from wp api
    */
-  get(endpoint, args): Observable<WpCollectionState> {
-    const url = endpoint + '?' + serializeQuery(args);
+  get(endpoint, query): Observable<WpCollectionState> {
+    const url = endpoint + '?' + serializeQuery(query);
     return this.http.get(url, {observe: 'response'}).pipe(
-      map((res: HttpResponse<any>) => this._onPaginate(res, args.page))
+      map((res: HttpResponse<any>) => this._onPaginate(res, query.page))
     );
   }
 

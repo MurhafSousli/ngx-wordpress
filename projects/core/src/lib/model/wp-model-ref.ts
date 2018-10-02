@@ -5,7 +5,7 @@ import { WpModelService } from './wp-model.service';
 import { WpConfig } from '../interfaces';
 import { filterModel } from '../utilities';
 
-const DefaultState: WpModelState = {
+export const defaultModelState: WpModelState = {
   data: null,
   loading: false,
   error: null
@@ -21,7 +21,7 @@ export class WpModelRef {
   /**
    * Stream that emits WpModel state
    */
-  private _state = new BehaviorSubject<WpModelState>(DefaultState);
+  private _state = new BehaviorSubject<WpModelState>(defaultModelState);
   state = this._state.asObservable();
 
   /**

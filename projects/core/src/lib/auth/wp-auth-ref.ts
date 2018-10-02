@@ -5,7 +5,7 @@ import { WpAuthState, WpAuthToken } from './wp-auth.interface';
 import { WpUser, WpConfig } from '../interfaces';
 import { JwtService } from '../jwt';
 
-const defaultState: WpAuthState = {
+export const defaultAuthState: WpAuthState = {
   user: null,
   loading: false,
   loggedIn: false,
@@ -17,7 +17,7 @@ export class WpAuthRef {
   /**
    * Stream that emits WpAuth state
    */
-  private _state = new BehaviorSubject<WpAuthState>(defaultState);
+  private _state = new BehaviorSubject<WpAuthState>(defaultAuthState);
   state: Observable<any> = this._state.asObservable();
 
   /**
@@ -103,7 +103,7 @@ export class WpAuthRef {
    */
   signOut(): Observable<WpAuthState> {
     return this.removeToken().pipe(
-      map(() => this._updateState(defaultState))
+      map(() => this._updateState(defaultAuthState))
     );
   }
 

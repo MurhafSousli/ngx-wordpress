@@ -67,8 +67,8 @@ export class WordPress {
   /**
    * Create a WpCollectionRef for lists and pagination
    */
-  collection(endpoint: string, args: WpQuery): WpCollectionRef {
-    return new WpCollectionRef(this.collectionHttp, this.config, endpoint, this._errorEmitter, args);
+  collection(endpoint: string, query?: WpQuery): WpCollectionRef {
+    return new WpCollectionRef(this.collectionHttp, this.config, endpoint, this._errorEmitter, query);
   }
 
   /**

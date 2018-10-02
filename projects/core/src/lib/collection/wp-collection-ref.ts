@@ -5,7 +5,7 @@ import { WpCollectionService } from './wp-collection.service';
 import { WpConfig } from '../interfaces';
 import { mergeDeep, filterModel } from '../utilities';
 
-const defaultState: WpCollectionState = {
+export const defaultCollectionState: WpCollectionState = {
   data: [],
   loading: false,
   error: null,
@@ -28,15 +28,16 @@ export class WpCollectionRef {
   /**
    * WpCollection query
    */
-  private _args: WpQuery = {
+  private _query: WpQuery = {
     page: 1,
-    per_page: 6
+    per_page: 6,
+    _embed: true
   };
 
   /**
    * Stream that emits WpCollection state
    */
-  private _state = new BehaviorSubject<WpCollectionState>(defaultState);
+  private _state = new BehaviorSubject<WpCollectionState>(defaultCollectionState);
   state = this._state.asObservable();
 
   /**
@@ -85,16 +86,16 @@ export class WpCollectionRef {
               private config: WpConfig,
               private endpoint: string,
               private errorEmitter: Subject<Error>,
-              args: WpQuery) {
+              query: WpQuery) {
     this._url = config.baseUrl + config.restUrl + endpoint;
-    this._args = {...this._args, ...args};
+    this._query = {...this._query, ...query};
   }
 
   /**
    * Get a collection of items
    */
-  get(args?: WpQuery): Observable<WpCollectionState> {
-    this._args = {...this._args, ...{page: 1}, ...args};
+  get(query?: WpQuery): Observable<WpCollectionState> {
+    this._query = {...this._query, ...{page: 1}, ...query};
     return this._fetch();
   }
 
@@ -108,7 +109,7 @@ export class WpCollectionRef {
       switchMap((state: WpCollectionState) => {
         /** increment currentPage then set page argument */
         const page = state.pagination.currentPage + 1;
-        this._args = {...this._args, ...{page}};
+        this._query = {...this._query, ...{page}};
         return this._fetch(state.data);
       }),
     );
@@ -124,7 +125,7 @@ export class WpCollectionRef {
       switchMap((state: WpCollectionState) => {
         /** increment currentPage then set page argument */
         const page = state.pagination.currentPage + 1;
-        this._args = {...this._args, ...{page}};
+        this._query = {...this._query, ...{page}};
         return this._fetch();
       }),
     );
@@ -140,7 +141,7 @@ export class WpCollectionRef {
       switchMap((state: WpCollectionState) => {
         /** decrement currentPage then set page argument */
         const page = state.pagination.currentPage - 1;
-        this._args = {...this._args, ...{page}};
+        this._query = {...this._query, ...{page}};
         return this._fetch();
       }),
     );
@@ -159,7 +160,7 @@ export class WpCollectionRef {
   private _fetch(mergeData = []): Observable<WpCollectionState> {
     this._updateState({loading: true});
 
-    return this.collection.get(this._url, this._args).pipe(
+    return this.collection.get(this._url, this._query).pipe(
       switchMap((res: WpCollectionState) => this._onSuccess(res, mergeData)),
       catchError((err: Error) => this._onError(err))
     );
