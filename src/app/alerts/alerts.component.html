@@ -1,0 +1,17 @@
+<clr-alerts *ngIf="error | async; let error">
+  <clr-alert clrAlertType="danger" [clrAlertAppLevel]="true">
+    <div class="alert-item">
+      <span class="alert-text" [innerHTML]="error.message"></span>
+    </div>
+  </clr-alert>
+</clr-alerts>
+
+<clr-alerts *ngIf="auth.loggedIn | async">
+  <clr-alert clrAlertType="success" [clrAlertAppLevel]="true">
+    <div class="alert-item">
+      <span class="alert-text">
+        You are logged in!
+      </span>
+    </div>
+  </clr-alert>
+</clr-alerts>

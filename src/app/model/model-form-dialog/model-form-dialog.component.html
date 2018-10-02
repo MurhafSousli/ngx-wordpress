@@ -1,0 +1,13 @@
+<clr-modal [(clrModalOpen)]="open">
+  <h3 class="modal-title">Create new post</h3>
+  <div class="modal-body">
+    <form clrForm>
+      <input clrInput placeholder="Post title" name="title" [(ngModel)]="data.title"/>
+      <textarea clrTextarea placeholder="Post content" name="content" [(ngModel)]="data.content"></textarea>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="close.next()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="create.next(data)">Ok</button>
+  </div>
+</clr-modal>

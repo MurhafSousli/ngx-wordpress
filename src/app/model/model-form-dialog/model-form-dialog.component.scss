@@ -1,0 +1,17 @@
+:host {
+  ::ng-deep {
+    .clr-control-container {
+      width: 100%;
+      input, textarea {
+        width: 100%;
+      }
+      textarea {
+        height: 200px;
+      }
+    }
+    clr-input-container {
+      margin-bottom: 2em;
+    }
+  }
+}
+

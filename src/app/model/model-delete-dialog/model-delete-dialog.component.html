@@ -1,0 +1,7 @@
+<clr-modal [(clrModalOpen)]="open">
+  <h3 class="modal-title">Are you sure you want to delete post #{{id}}</h3>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="close.emit()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="delete.emit()">Ok</button>
+  </div>
+</clr-modal>

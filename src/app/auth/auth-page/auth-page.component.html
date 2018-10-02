@@ -1,0 +1,55 @@
+<h1>Authentication</h1>
+
+<div>
+  <p>To get the authentication to work, you must install and activate the following plugins:</p>
+
+  <ul class="list">
+    <li>
+      <a href="https://github.com/WP-API/Basic-AuthJWT">Basic Authentication Plugin for WP REST API</a>
+    </li>
+    <li>
+      <a href="https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api">JWT Authentication Plugin for WP REST
+        API</a>
+    </li>
+  </ul>
+</div>
+
+<ng-container *ngIf="auth.state | async; let state">
+
+  <div class="card">
+    <div class="card-block">
+      <div class="card-text">
+        <form clrForm>
+
+          <clr-input-container>
+            <label>Username</label>
+            <input clrInput type="text" name="username" [(ngModel)]="username" />
+          </clr-input-container>
+
+          <clr-input-container>
+            <label>Password</label>
+            <input clrInput type="password" name="password" [(ngModel)]="password" />
+          </clr-input-container>
+
+        </form>
+
+      </div>
+    </div>
+    <div class="card-footer">
+
+      <div class="btn-group btn-outline-primary">
+        <button class="btn btn-success-outline" (click)="signIn()" [disabled]="state.loggedIn" [clrLoading]="signInLoading">Sign
+          In</button>
+        <button class="btn" (click)="validate()" [clrLoading]="validateLoading">Validate Token</button>
+        <button class="btn btn-danger-outline" (click)="signOut()" [disabled]="!state.loggedIn">Sign Out</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="state-viewer">
+    <h6>State</h6>
+    <pre>
+      <code highlight [code]="state | json"></code>
+    </pre>
+  </div>
+</ng-container>

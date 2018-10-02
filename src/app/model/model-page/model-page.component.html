@@ -1,0 +1,75 @@
+<h1>Model</h1>
+
+<div *ngIf="posts.state | async; let state" class="clr-row">
+  <div class="clr-col-6">
+
+    <app-model-form-dialog [open]="createDialog"
+                           [id]="id"
+                           (create)="create($event)"
+                           (close)="createDialog = false">
+    </app-model-form-dialog>
+
+    <app-model-form-dialog *ngIf="state.data"
+                           [open]="updateDialog"
+                           [id]="id"
+                           [data]="state.data"
+                           (create)="update($event)"
+                           (close)="updateDialog = false">
+    </app-model-form-dialog>
+
+    <app-model-delete-dialog *ngIf="state.data"
+                             [open]="deleteDialog"
+                             [id]="id"
+                             (delete)="delete()"
+                             (close)="deleteDialog = false">
+    </app-model-delete-dialog>
+
+    <div class="card">
+      <div class="card-block">
+        <div class="clr-row">
+          <div class="clr-col modal-controls">
+            <form clrForm>
+              <input clrInput placeholder="Search collection" name="input" [(ngModel)]="id"/>
+            </form>
+          </div>
+
+          <div class="clr-col-auto">
+            <div class="btn-group btn-outline-primary">
+              <button class="btn" (click)="get()" [clrLoading]="getLoading">Get({{id}})</button>
+              <button class="btn" (click)="createDialog = true" [clrLoading]="createLoading">Create</button>
+              <button class="btn" (click)="updateDialog = true" [clrLoading]="updateLoading" [disabled]="!state.data">Update</button>
+              <button class="btn" (click)="deleteDialog = true" [clrLoading]="deleteLoading" [disabled]="!state.data">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="clr-row">
+
+      <div class="clr-col">
+        <!--<span *ngIf="state.loading" class="spinner">Loading...</span>-->
+
+        <div *ngIf="state.data" class="card">
+          <div class="card-block">
+            <div class="card-title" [innerHTML]="state.data?.title"></div>
+            <div class="card-text" [innerHTML]="state.data?.content"></div>
+            <!--<div class="card-labels">-->
+            <!--<span *ngFor="let tag of post.tags" class="label">{{tag}}</span>-->
+            <!--</div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="clr-col-6">
+
+    <div class="state-viewer">
+      <h6>State</h6>
+      <pre>
+      <code highlight [code]="state | json"></code>
+    </pre>
+    </div>
+  </div>
+</div>

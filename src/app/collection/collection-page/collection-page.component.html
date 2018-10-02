@@ -1,0 +1,56 @@
+<h1>Collection</h1>
+
+<div *ngIf="posts.state | async; let state" class="clr-row">
+  <div class="clr-col-6">
+
+    <div class="card">
+      <div class="card-block">
+        <div class="clr-row">
+          <div class="clr-col">
+            <form clrForm>
+              <input clrInput placeholder="Search collection" name="input" [(ngModel)]="searchKey"/>
+            </form>
+          </div>
+
+          <div class="clr-col-auto">
+            <div class="btn-group btn-outline-primary">
+              <button class="btn" (click)="get()" [clrLoading]="getLoading">Get</button>
+              <button class="btn" [disabled]="!state.pagination.hasMore" (click)="more()" [clrLoading]="moreLoading">More</button>
+              <button class="btn" [disabled]="!state.pagination.hasMore" (click)="next()" [clrLoading]="nextLoading">Next</button>
+              <button class="btn" [disabled]="!state.pagination.hasPrev" (click)="prev()" [clrLoading]="prevLoading">Prev</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="clr-row">
+
+      <div class="clr-col">
+        <!--<span *ngIf="state.loading" class="spinner">Loading...</span>-->
+
+        <div *ngFor="let post of state.data" class="card">
+          <div class="card-block">
+            <div class="card-title" [innerHTML]="post.title"></div>
+            <div class="card-categories">
+              <span *ngFor="let category of post.categories" class="label">{{category}}</span>
+            </div>
+            <!--<div class="card-labels">-->
+              <!--<span *ngFor="let tag of post.tags" class="label">{{tag}}</span>-->
+            <!--</div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="clr-col-6">
+
+    <div class="state-viewer">
+      <h6>State</h6>
+      <pre>
+      <code highlight [code]="state | json"></code>
+    </pre>
+    </div>
+  </div>
+</div>
