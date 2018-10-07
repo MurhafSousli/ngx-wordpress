@@ -7,6 +7,7 @@ export interface WpConfig {
   baseUrl?: string;
   restUrl?: string;
   authUrl?: string;
+  validateAuthUrl?: string;
   cdnOptions?: any;
   jwtOptions?: {
     headerName?: string;

@@ -6,7 +6,8 @@ import { WpConfig } from '../interfaces';
 export function getDefaultWpConfig(platform: Object): WpConfig {
   return {
     restUrl: '/wp-json/wp/v2/',
-    authUrl: '/wp-json/jwt-auth/v1/',
+    authUrl: '/wp-json/jwt-auth/v1/token',
+    validateAuthUrl: '/wp-json/jwt-auth/v1/token/validate',
     filters: {
       posts: {
         title: [mapRendered],
