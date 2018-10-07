@@ -44,9 +44,9 @@ export class WordPress {
   constructor(private http: HttpClient,
               private modelHttp: WpModelService,
               private collectionHttp: WpCollectionService,
-              @Inject(PLATFORM_ID) private platform: Object,
+              private jwt: JwtService,
               @Inject(WP_CONFIG) config: WpConfig,
-              private jwt: JwtService
+              @Inject(PLATFORM_ID) private platform: Object
   ) {
     // Make WordPress available for decorators
     WordPress.wp = this;

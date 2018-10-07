@@ -1,20 +1,19 @@
 import { WordPress } from '../wordpress.service';
 
 export function WpModel(endpoint?: string) {
-
   return function (target: any, name: string) {
     const selectorFnName = '__' + name + '__selector';
 
-    const createSelect = x => {
+    const createSelect = (res: { endpoint: string }) => {
       const wp = WordPress.wp;
       if (!wp) {
         throw new Error('ModelFactory not connected to WordPress!');
       }
-      return wp.model(x);
+      return wp.model(res.endpoint);
     };
 
     const createSelector = () => {
-      return endpoint;
+      return {endpoint};
     };
 
     if (delete target[name]) {
