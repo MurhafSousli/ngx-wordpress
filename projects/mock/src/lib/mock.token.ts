@@ -1,3 +1,10 @@
 import { InjectionToken } from '@angular/core';
 
-export const WP_MOCK_CONFIG = new InjectionToken<any>('WP_MOCK_CONFIG');
+export interface WpMockConfig {
+  delay?: number;
+  postsData?: any[];
+  usersData?: any[];
+  usersAuthData?: any[];
+}
+
+export const MOCK_CONFIG = new InjectionToken<WpMockConfig>('CONFIG');
