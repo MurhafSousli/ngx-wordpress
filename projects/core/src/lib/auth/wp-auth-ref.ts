@@ -17,7 +17,7 @@ export class WpAuthRef {
   /**
    * Stream that emits WpAuth state
    */
-  private _state = new BehaviorSubject<WpAuthState>(defaultAuthState);
+  private _state = new BehaviorSubject<WpAuthState>({...defaultAuthState});
   state: Observable<any> = this._state.asObservable();
 
   /**
