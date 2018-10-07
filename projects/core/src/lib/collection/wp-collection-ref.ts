@@ -1,5 +1,5 @@
 import { BehaviorSubject, Observable, Subject, of, forkJoin } from 'rxjs';
-import { catchError, distinctUntilChanged, filter, map, switchMap, take } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, filter, first, map, switchMap } from 'rxjs/operators';
 import { WpCollectionState, WpPagination, WpQuery } from './wp-collection.interface';
 import { WpCollectionService } from './wp-collection.service';
 import { WpConfig } from '../interfaces';
@@ -37,7 +37,7 @@ export class WpCollectionRef {
   /**
    * Stream that emits WpCollection state
    */
-  private _state = new BehaviorSubject<WpCollectionState>(defaultCollectionState);
+  private _state = new BehaviorSubject<WpCollectionState>({ ...defaultCollectionState});
   state = this._state.asObservable();
 
   /**
@@ -104,7 +104,7 @@ export class WpCollectionRef {
    */
   more(): Observable<WpCollectionState> {
     return this.state.pipe(
-      take(1),
+      first(),
       filter((state: WpCollectionState) => state.pagination.hasMore),
       switchMap((state: WpCollectionState) => {
         /** increment currentPage then set page argument */
@@ -120,7 +120,7 @@ export class WpCollectionRef {
    */
   next(): Observable<WpCollectionState> {
     return this.state.pipe(
-      take(1),
+      first(),
       filter((state: WpCollectionState) => state.pagination.hasMore),
       switchMap((state: WpCollectionState) => {
         /** increment currentPage then set page argument */
@@ -136,7 +136,7 @@ export class WpCollectionRef {
    */
   prev(): Observable<WpCollectionState> {
     return this.state.pipe(
-      take(1),
+      first(),
       filter((state: WpCollectionState) => state.pagination.hasPrev),
       switchMap((state: WpCollectionState) => {
         /** decrement currentPage then set page argument */

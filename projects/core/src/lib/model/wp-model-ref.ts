@@ -21,7 +21,7 @@ export class WpModelRef {
   /**
    * Stream that emits WpModel state
    */
-  private _state = new BehaviorSubject<WpModelState>(defaultModelState);
+  private _state = new BehaviorSubject<WpModelState>({...defaultModelState});
   state = this._state.asObservable();
 
   /**

@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { serializeQuery } from '../utilities';
-import { WpCollectionState } from './wp-collection.interface';
+import { WpCollectionState, WpQuery } from './wp-collection.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class WpCollectionService {
   /**
    * Fetch data from wp api
    */
-  get(endpoint, query): Observable<WpCollectionState> {
+  get(endpoint: string, query: WpQuery): Observable<WpCollectionState> {
     const url = endpoint + '?' + serializeQuery(query);
     return this.http.get(url, {observe: 'response'}).pipe(
       map((res: HttpResponse<any>) => this._onPaginate(res, query.page))
