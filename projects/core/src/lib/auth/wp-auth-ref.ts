@@ -67,8 +67,8 @@ export class WpAuthRef {
       loading: true,
       error: null
     });
-    const tokenUrl = this.config.baseUrl + this.config.authUrl + 'token';
-    return this.http.post(tokenUrl, {username, password}).pipe(
+    const url = this.config.baseUrl + this.config.authUrl;
+    return this.http.post(url, {username, password}).pipe(
       switchMap((res: WpAuthToken) => this.storeToken(res.token)),
       switchMap(() => this.getLoggedInUser()),
       catchError((res: HttpErrorResponse) => this._onError(res.error))
@@ -80,8 +80,8 @@ export class WpAuthRef {
    */
   validateToken(): Observable<WpAuthState> {
     this._updateState({loading: true});
-    const tokenUrl = this.config.baseUrl + this.config.authUrl + 'token/validate';
-    return this.http.post(tokenUrl, {}).pipe(
+    const url = this.config.baseUrl + this.config.validateAuthUrl;
+    return this.http.post(url, {}).pipe(
       map(() => this._onValidateTokenSuccess()),
       catchError((res: HttpErrorResponse) => this._onError(res.error))
     );

@@ -2,6 +2,7 @@ import { WordPress } from '../wordpress.service';
 
 export function WpModel(endpoint?: string) {
   return function (target: any, name: string) {
+
     const selectorFnName = '__' + name + '__selector';
 
     const createSelect = (res: { endpoint: string }) => {
