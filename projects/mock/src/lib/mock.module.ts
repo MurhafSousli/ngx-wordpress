@@ -6,12 +6,15 @@ import { MOCK_CONFIG, WpMockConfig } from './mock.token';
 @NgModule({
   imports: [HttpClientModule]
 })
-export class WordpressMockModule {
+export class WordPressMockModule {
   static forRoot(config: WpMockConfig): ModuleWithProviders {
     return {
-      ngModule: WordpressMockModule,
+      ngModule: WordPressMockModule,
       providers: [
-        {provide: MOCK_CONFIG, useValue: config},
+        {
+          provide: MOCK_CONFIG,
+          useValue: config
+        },
         fakeBackendProvider
       ]
     };
